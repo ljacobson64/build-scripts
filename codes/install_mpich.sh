@@ -26,6 +26,7 @@ else
 fi
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC} LIBS=${LIBS}"
+config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
 
 ../src/configure ${config_string}
 make -j${jobs}

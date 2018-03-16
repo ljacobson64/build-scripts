@@ -28,22 +28,26 @@ if [ "${compiler}" == "native" ]; then
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
   export FC=/usr/bin/gfortran
+  export compiler_lib_dirs=
 
   export install_fludag=false
 elif [ "${compiler}" == "gcc-7" ]; then
   export CC=${gcc_dir}/bin/gcc
   export CXX=${gcc_dir}/bin/g++
   export FC=${gcc_dir}/bin/gfortran
+  export compiler_lib_dirs=${gcc_dir}/lib64
 elif [ "${compiler}" == "intel-18" ]; then
   export CC=${intel_dir}/bin/intel64/icc
   export CXX=${intel_dir}/bin/intel64/icpc
   export FC=${intel_dir}/bin/intel64/ifort
+  export compiler_lib_dirs=${intel_dir}/compiler/lib/intel64
 
   export install_fludag=false
 elif [ "${compiler}" == "custom" ]; then
   export CC=${gcc_dir}/bin/gcc
   export CXX=${gcc_dir}/bin/g++
   export FC=${intel_dir}/bin/intel64/ifort
+  export compiler_lib_dirs=${gcc_dir}/lib64:${intel_dir}/compiler/lib/intel64
 
   export install_fludag=false
   export install_daggeant4=false

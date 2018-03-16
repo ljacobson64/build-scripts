@@ -18,6 +18,7 @@ cd bld
 config_string=
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
+config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
 
 if [ "${geany_needs_intltool}" == "true" ]; then
   PATH=${install_dir}/intltool-${intltool_version}/bin:${PATH}

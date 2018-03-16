@@ -32,12 +32,14 @@ elif [ "${compiler}" == "intel-18" ]; then
   export CC=${intel_dir}/bin/intel64/icc
   export CXX=${intel_dir}/bin/intel64/icpc
   export FC=${intel_dir}/bin/intel64/ifort
+  export compiler_lib_dirs=${intel_dir}/compiler/lib/intel64
 
   export install_fludag=false
 elif [ "${compiler}" == "custom" ]; then
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
   export FC=${intel_dir}/bin/intel64/ifort
+  export compiler_lib_dirs=${intel_dir}/compiler/lib/intel64
 
   export install_fludag=false
   export install_daggeant4=false

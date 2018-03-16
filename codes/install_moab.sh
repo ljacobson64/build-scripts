@@ -30,7 +30,7 @@ config_string+=" --disable-debug"
 config_string+=" --with-hdf5=${hdf5_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-config_string+=" LDFLAGS=-Wl,-rpath,${hdf5_dir}/lib"
+config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${hdf5_dir}/lib"
 
 ../src/configure ${config_string}
 make -j${jobs}
