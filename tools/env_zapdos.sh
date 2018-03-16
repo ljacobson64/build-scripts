@@ -6,6 +6,8 @@ export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/home/lucas/opt/${compiler}
 export native_dir=/home/lucas/opt/native
+export gcc_dir=
+export intel_dir=/opt/intel/compilers_and_libraries_2018.1.163/linux
 export python_dir=/home/lucas/local
 export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/opt/MCNP/MCNP_DATA
@@ -17,12 +19,6 @@ export geany_needs_intltool=false
 
 export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
-
-if [ "${compiler}" == "intel-18" ] || [ "${compiler}" == "custom" ]; then
-  export intel_dir=/opt/intel/compilers_and_libraries_2018.1.163/linux
-  export PATH=${intel_dir}/bin/intel64:${PATH}
-  export LD_LIBRARY_PATH=${intel_dir}/compiler/lib/intel64:${LD_LIBRARY_PATH}
-fi
 
 export install_mcnpx27=true
 export install_fludag=true
