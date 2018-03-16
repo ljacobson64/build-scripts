@@ -24,7 +24,9 @@ cmake_string=
 cmake_string+=" -DBUILD_MCNP514=ON"
 cmake_string+=" -DBUILD_MCNP515=ON"
 cmake_string+=" -DBUILD_MCNP516=ON"
-cmake_string+=" -DBUILD_MCNPX27=ON"
+if [ "${install_mcnpx27}" == "true" ]; then
+  cmake_string+=" -DBUILD_MCNPX27=ON"
+fi
 cmake_string+=" -DBUILD_MCNP602=ON"
 cmake_string+=" -DBUILD_MCNP610=ON"
 cmake_string+=" -DBUILD_MCNP611=ON"

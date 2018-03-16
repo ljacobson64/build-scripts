@@ -20,8 +20,6 @@ FC=${openmpi_dir}/bin/mpifort
 
 install_dagmcnp5=true
 install_dagmcnp6=true
-install_fludag=true
-install_daggeant4=true
 
 rm -rf ${build_prefix}
 mkdir -p ${build_prefix}/bld
