@@ -19,6 +19,7 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
 cmake_string_static=${cmake_string}
 cmake_string_shared=${cmake_string}
 cmake_string_static+=" -DBUILD_SHARED_LIBS=OFF"

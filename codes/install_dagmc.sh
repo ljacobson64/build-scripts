@@ -46,8 +46,19 @@ if [ "${install_fludag}" == "true" ]; then
 fi
 cd ../bld
 
+rpath_dirs=${compiler_lib_dirs}
+rpath_dirs+=:${install_prefix}/lib
+rpath_dirs+=:${openmpi_dir}/lib
+rpath_dirs+=:${hdf5_dir}/lib
+rpath_dirs+=:${moab_dir}/lib
+if [ "${install_fludag}" == "true" ]; then
+  rpath_dirs+=:${fluka_dir}/lib
+fi
+if [ "${install_daggeant4}" == "true" ]; then
+  rpath_dirs+=:${geant4_dir}/lib
+fi
+
 cmake_string=
-rpath_string="${install_prefix}/lib;${openmpi_dir}/lib;${hdf5_dir}/lib;${moab_dir}/lib"
 if [ "${install_dagmcnp5}" == "true" ]; then
   cmake_string+=" -DBUILD_MCNP5=ON"
   cmake_string+=" -DMCNP5_PLOT=ON"
@@ -59,21 +70,19 @@ fi
 if [ "${install_fludag}" == "true" ]; then
   cmake_string+=" -DBUILD_FLUKA=ON"
   cmake_string+=" -DFLUKA_DIR=${fluka_dir}/bin"
-  rpath_string+=";${fluka_dir}/lib"
 fi
 if [ "${install_daggeant4}" == "true" ]; then
   cmake_string+=" -DBUILD_GEANT4=ON"
   cmake_string+=" -DGEANT4_DIR=${geant4_dir}"
-  rpath_string+=";${geant4_dir}/lib"
 fi
 cmake_string+=" -DMPI_BUILD=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_string}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 cmake ../src ${cmake_string}
 make -j${jobs}

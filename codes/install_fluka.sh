@@ -10,7 +10,8 @@ cd ${install_prefix}/bin
 tarball=fluka${fluka_version}-linux-gfor64bitAA.tar.gz
 ${sudo_cmd} tar -xzvf ${dist_dir}/misc/${tarball}
 
-export FLUFOR=gfortran
+if [ -z "${gcc_dir}" ]; then PATH=${gcc_dir}/bin:${PATH}; fi
+export FLUFOR=$(basename $FC)
 export FLUPRO=${PWD}
 
 ${sudo_cmd} make
