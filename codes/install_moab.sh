@@ -34,4 +34,4 @@ config_string+=" LDFLAGS=-Wl,-rpath,${hdf5_dir}/lib"
 
 ../src/configure ${config_string}
 make -j${jobs}
-${SUDO} make install
+${sudo_cmd} make install

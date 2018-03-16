@@ -10,7 +10,7 @@ export mcnp_exe=/groupspace/cnerg/users/jacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/groupspace/cnerg/users/jacobson/MCNP/MCNP_DATA
 
 export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=
+export sudo_cmd=
 export slurm_support=false
 export geany_needs_intltool=true
 

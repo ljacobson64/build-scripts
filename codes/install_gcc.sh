@@ -44,4 +44,4 @@ config_string+=" --prefix=${install_prefix}"
 
 ../src/configure ${config_string}
 make -j${jobs}
-${SUDO} make install
+${sudo_cmd} make install

@@ -23,4 +23,4 @@ config_string+=" LDFLAGS=-Wl,-rpath,${install_prefix}/lib"
 
 ../src/configure ${config_string}
 make -j${jobs}
-${SUDO} make install
+${sudo_cmd} make install

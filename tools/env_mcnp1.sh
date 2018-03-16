@@ -10,7 +10,7 @@ export mcnp_exe=/compute_dir/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/compute_dir/MCNP/MCNP_DATA
 
 export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=sudo
+export sudo_cmd=sudo_cmd
 export slurm_support=true
 export geany_needs_intltool=false
 

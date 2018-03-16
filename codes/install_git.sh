@@ -20,4 +20,4 @@ config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 
 ./configure ${config_string}
 make -j${jobs}
-${SUDO} make install
+${sudo_cmd} make install

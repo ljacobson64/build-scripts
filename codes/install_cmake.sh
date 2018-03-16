@@ -27,4 +27,4 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 cmake ../src ${cmake_string}
 make -j${jobs}
-${SUDO} make install
+${sudo_cmd} make install
