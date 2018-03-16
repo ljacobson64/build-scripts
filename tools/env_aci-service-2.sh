@@ -4,13 +4,13 @@ source versions.sh
 
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
-export install_dir=/home/ljjacobson/opt/${compiler}
-export native_dir=/home/ljjacobson/opt/native
+export install_dir=/home/group/dagmc/opt/${compiler}
+export native_dir=/home/group/dagmc/opt/native
 export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=/opt/intel-2016/compilers_and_libraries_2016.2.181/linux
-export python_dir=/home/ljjacobson/local
-export mcnp_exe=/home/ljjacobson/MCNP/MCNP_CODE/bin/mcnp5
-export DATAPATH=/home/ljjacobson/MCNP/MCNP_DATA
+export python_dir=/home/group/dagmc/local
+export mcnp_exe=/home/group/dagmc/MCNP/MCNP_CODE/bin/mcnp5
+export DATAPATH=/home/group/dagmc/MCNP/MCNP_DATA
 
 export jobs=`grep -c processor /proc/cpuinfo`
 export sudo_cmd=
