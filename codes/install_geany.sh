@@ -19,6 +19,10 @@ config_string=
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 
+if [ "${geany_needs_intltool}" == "true" ]; then
+  PATH=${install_dir}/intltool-${intltool_version}/bin:${PATH}
+fi
+
 ../src/configure ${config_string}
 make -j${jobs}
 ${SUDO} make install

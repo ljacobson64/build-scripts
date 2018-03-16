@@ -47,3 +47,5 @@ elif [ "${compiler}" == "custom" ]; then
   export CXX=${gcc_dir}/bin/g++
   export FC=${intel_dir}/bin/intel64/ifort
 fi
+
+export geany_needs_intltool=true
