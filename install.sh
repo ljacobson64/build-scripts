@@ -15,7 +15,6 @@ echo "install_dir: ${install_dir}"
 echo "CC:          ${CC}"
 echo "CXX:         ${CXX}"
 echo "FC:          ${FC}"
-echo "LDFLAGS:     ${LDFLAGS}"
 echo "jobs:        ${jobs}"
 echo
 sleep 2

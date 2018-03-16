@@ -40,6 +40,7 @@ cd ../bld
 
 config_string=
 config_string+=" --enable-languages=c,c++,fortran"
+config_string+=" --with-pkgversion=CNERG"
 config_string+=" --prefix=${install_prefix}"
 
 ../src/configure ${config_string}
