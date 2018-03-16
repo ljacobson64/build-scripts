@@ -2,15 +2,17 @@
 
 source versions.sh
 
-export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=
-
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
 export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
 export python_dir=/groupspace/cnerg/users/jacobson/local
 export mcnp_exe=/groupspace/cnerg/users/jacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/groupspace/cnerg/users/jacobson/MCNP/MCNP_DATA
+
+export jobs=`grep -c processor /proc/cpuinfo`
+export SUDO=
+export slurm_support=false
+export geany_needs_intltool=true
 
 export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
@@ -47,5 +49,3 @@ elif [ "${compiler}" == "custom" ]; then
   export CXX=${gcc_dir}/bin/g++
   export FC=${intel_dir}/bin/intel64/ifort
 fi
-
-export geany_needs_intltool=true

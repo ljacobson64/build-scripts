@@ -16,13 +16,16 @@ ln -s mpich-${mpich_version} src
 cd bld
 
 config_string=
-config_string+=" --with-slurm=/usr"
-config_string+=" --with-pmi=pmi2"
-config_string+=" --with-pm=no"
+if [ "${slurm_support}" == "true" ]; then
+  config_string+=" --with-slurm=/usr"
+  config_string+=" --with-pmi=pmi2"
+  config_string+=" --with-pm=no"
+  LIBS=-lpmi2
+else
+  LIBS=
+fi
 config_string+=" --prefix=${install_prefix}"
-config_string+=" CC=${CC} CXX=${CXX} FC=${FC} LIBS=-lpmi2"
-
-echo $config_string
+config_string+=" CC=${CC} CXX=${CXX} FC=${FC} LIBS=${LIBS}"
 
 ../src/configure ${config_string}
 make -j${jobs}

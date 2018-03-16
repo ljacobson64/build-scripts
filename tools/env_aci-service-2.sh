@@ -2,15 +2,17 @@
 
 source versions.sh
 
-export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=
-
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/home/ljjacobson/opt/${compiler}
 export python_dir=/home/ljjacobson/local
 export mcnp_exe=/home/ljjacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/home/ljjacobson/MCNP/MCNP_DATA
+
+export jobs=`grep -c processor /proc/cpuinfo`
+export SUDO=
+export slurm_support=true
+export geany_needs_intltool=true
 
 export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages

@@ -19,8 +19,10 @@ ln -s openmpi-${openmpi_version} src
 cd bld
 
 config_string=
-config_string+=" --with-slurm"
-config_string+=" --with-pmi"
+if [ "${slurm_support}" == "true" ]; then
+  config_string+=" --with-slurm"
+  config_string+=" --with-pmi"
+fi
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 

@@ -2,15 +2,17 @@
 
 source versions.sh
 
-export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=sudo
-
 export dist_dir=/NV/jacobson/dist
 export build_dir=/home/jacobson/build/${compiler}
 export install_dir=/compute_dir/opt/${compiler}
 export python_dir=/compute_dir/local
 export mcnp_exe=/compute_dir/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/compute_dir/MCNP/MCNP_DATA
+
+export jobs=`grep -c processor /proc/cpuinfo`
+export SUDO=sudo
+export slurm_support=true
+export geany_needs_intltool=false
 
 export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
@@ -36,3 +38,4 @@ elif [ "${compiler}" == "custom" ]; then
   export CXX=/usr/bin/g++
   export FC=${intel_dir}/bin/intel64/ifort
 fi
+

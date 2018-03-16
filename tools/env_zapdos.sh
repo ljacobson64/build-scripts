@@ -2,15 +2,17 @@
 
 source versions.sh
 
-export jobs=`grep -c processor /proc/cpuinfo`
-export SUDO=
-
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/home/lucas/opt/${compiler}
 export python_dir=/home/lucas/local
 export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/opt/MCNP/MCNP_DATA
+
+export jobs=`grep -c processor /proc/cpuinfo`
+export SUDO=
+export slurm_support=true
+export geany_needs_intltool=false
 
 export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
