@@ -5,6 +5,7 @@ source versions.sh
 export dist_dir=/NV/jacobson/dist
 export build_dir=/home/jacobson/build/${compiler}
 export install_dir=/compute_dir/opt/${compiler}
+export native_dir=/compute_dir/opt/native
 export python_dir=/compute_dir/local
 export mcnp_exe=/compute_dir/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/compute_dir/MCNP/MCNP_DATA

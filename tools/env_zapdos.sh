@@ -5,6 +5,7 @@ source versions.sh
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/home/lucas/opt/${compiler}
+export native_dir=/home/lucas/opt/native
 export python_dir=/home/lucas/local
 export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/opt/MCNP/MCNP_DATA

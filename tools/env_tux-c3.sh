@@ -5,6 +5,7 @@ source versions.sh
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
 export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
+export native_dir=/groupspace/cnerg/users/jacobson/opt/native
 export python_dir=/groupspace/cnerg/users/jacobson/local
 export mcnp_exe=/groupspace/cnerg/users/jacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/groupspace/cnerg/users/jacobson/MCNP/MCNP_DATA
@@ -18,7 +19,7 @@ export LD_LIBRARY_PATH=
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
 
 if [ "${compiler}" == "gcc-7" ] || [ "${compiler}" == "custom" ]; then
-  export gcc_dir=${install_dir}/native/gcc-${gcc_version}
+  export gcc_dir=${native_dir}/gcc-${gcc_version}
   export PATH=${gcc_dir}/bin:${PATH}
   export LD_LIBRARY_PATH=${gcc_dir}/lib64:${LD_LIBRARY_PATH}
 fi
