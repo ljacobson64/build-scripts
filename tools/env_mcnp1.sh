@@ -28,6 +28,7 @@ if [ "${compiler}" == "native" ]; then
   export CC=/usr/bin/gcc
   export CXX=/usr/bin/g++
   export FC=/usr/bin/gfortran
+  export compiler_lib_dirs=
 elif [ "${compiler}" == "intel-18" ]; then
   export CC=${intel_dir}/bin/intel64/icc
   export CXX=${intel_dir}/bin/intel64/icpc
@@ -44,3 +45,5 @@ elif [ "${compiler}" == "custom" ]; then
   export install_fludag=false
   export install_daggeant4=false
 fi
+
+export LIBRARY_PATH=${compiler_lib_dirs}

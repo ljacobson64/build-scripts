@@ -28,6 +28,7 @@ if [ "${compiler}" == "native" ]; then
   export CC=/usr/lib64/ccache/gcc
   export CXX=/usr/lib64/ccache/g++
   export FC=/usr/bin/gfortran
+  export compiler_lib_dirs=
 
   export install_fludag=false
   export install_daggeant4=false
@@ -54,3 +55,5 @@ elif [ "${compiler}" == "custom" ]; then
   export install_fludag=false
   export install_daggeant4=false
 fi
+
+export LIBRARY_PATH=${compiler_lib_dirs}

@@ -53,3 +53,5 @@ elif [ "${compiler}" == "custom" ]; then
   export install_fludag=false
   export install_daggeant4=false
 fi
+
+export LIBRARY_PATH=${compiler_lib_dirs}
