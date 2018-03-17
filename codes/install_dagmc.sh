@@ -11,6 +11,7 @@ moab_dir=${install_dir}/moab-${moab_version}
 fluka_dir=${install_dir}/fluka-${fluka_version}
 geant4_dir=${install_dir}/geant4-${geant4_version}
 
+LD_LIBRARY_PATH=${compiler_lib_dirs}:${LD_LIBRARY_PATH}
 PATH=${hdf5_dir}:${PATH}
 LD_LIBRARY_PATH=${moab_dir}/lib:${LD_LIBRARY_PATH}
 
