@@ -43,6 +43,7 @@ elif [ "${compiler}" == "intel-18" ]; then
   export compiler_lib_dirs=${intel_dir}/compiler/lib/intel64
 
   export install_fludag=false
+  export install_daggeant4=false
 elif [ "${compiler}" == "custom" ]; then
   export CC=${gcc_dir}/bin/gcc
   export CXX=${gcc_dir}/bin/g++
