@@ -19,7 +19,12 @@ echo "FC:          ${FC}"
 echo "CMAKE:       ${CMAKE}"
 echo "jobs:        ${jobs}"
 echo
-sleep 2
+${CC}    --version
+${CXX}   --version
+${FC}    --version
+${CMAKE} --version
+echo
+sleep 3
 
 for package in "$@"; do
   if [[ ${package} == *"-"* ]]; then
