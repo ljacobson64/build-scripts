@@ -20,7 +20,9 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_lib_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+fi
 cmake_string_static=${cmake_string}
 cmake_string_shared=${cmake_string}
 cmake_string_static+=" -DBUILD_SHARED_LIBS=OFF"
