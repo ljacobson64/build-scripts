@@ -5,9 +5,10 @@ compiler=$1
 shift
 source tools/env_`hostname -s`.sh
 
-if [ ! -e "${CC}" ];  then echo "Error: C compiler not found at ${CC}"       && exit 1; fi
-if [ ! -e "${CXX}" ]; then echo "Error: C++ compiler not found at ${CXX}"    && exit 1; fi
-if [ ! -e "${FC}" ];  then echo "Error: Fortran compiler not found at ${FC}" && exit 1; fi
+if [ ! -e "${CC}"    ]; then echo "Error: C compiler not found at ${CC}"       && exit 1; fi
+if [ ! -e "${CXX}"   ]; then echo "Error: C++ compiler not found at ${CXX}"    && exit 1; fi
+if [ ! -e "${FC}"    ]; then echo "Error: Fortran compiler not found at ${FC}" && exit 1; fi
+if [ ! -e "${CMAKE}" ]; then echo "Error: CMake not found at ${CMAKE}"         && exit 1; fi
 
 echo "dist_dir:    ${dist_dir}"
 echo "build_dir:   ${build_dir}"
@@ -15,6 +16,7 @@ echo "install_dir: ${install_dir}"
 echo "CC:          ${CC}"
 echo "CXX:         ${CXX}"
 echo "FC:          ${FC}"
+echo "CMAKE:       ${CMAKE}"
 echo "jobs:        ${jobs}"
 echo
 sleep 2

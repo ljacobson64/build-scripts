@@ -55,3 +55,6 @@ elif [ "${compiler}" == "custom" ]; then
 fi
 
 export LIBRARY_PATH=${compiler_lib_dirs}
+
+export PATH=${native_dir}/cmake-current/bin:${PATH}
+export CMAKE=${native_dir}/cmake-current/bin/cmake
