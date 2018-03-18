@@ -49,7 +49,7 @@ if [ "${compiler}" == "native" ]; then
 elif [ "${compiler}" == "intel-18" ]; then
   export install_mcnpx27=true
   export install_fludag=false
-  export install_daggeant4=true
+  export install_daggeant4=false
 elif [ "${compiler}" == "custom" ]; then
   export install_mcnpx27=true
   export install_fludag=false
