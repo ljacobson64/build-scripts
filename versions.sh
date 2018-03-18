@@ -27,3 +27,4 @@ export python_version=2.7.14
 export setuptools_version=38.6.0
 export silo_version=4.10.2
 export swig_version=3.0.12
+export talys_version=1.8

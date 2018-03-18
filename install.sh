@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-compiler=$1
+export compiler=$1
 shift
 source tools/env_`hostname -s`.sh
 
