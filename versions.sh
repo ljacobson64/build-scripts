@@ -3,6 +3,7 @@
 export advantg_version=3.0.3
 export armadillo_version=8.400.0
 export binutils_version=2.30
+export cgm_version=14.0
 export cmake_version=3.8.2
 export exnihilo_version=5.4.0
 export fluka_version=2011.2x
