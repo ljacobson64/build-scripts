@@ -37,5 +37,5 @@ for package in "$@"; do
     eval version=${!temp}
   fi
   echo "Building ${name} version ${version}"
-  source codes/install_${name}.sh
+  codes/install_${name}.sh
 done
