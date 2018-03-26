@@ -27,7 +27,7 @@ echo
 sleep 3
 
 for package in "$@"; do
-  if [[ ${package} == *"-"* ]]; then
+  if [[ "${package}" == *"-"* ]]; then
     name=$(cut -d '-' -f1  <<< "${package}")
     version=$(cut -d '-' -f2- <<< "${package}")
     eval ${name}_version=${version}
@@ -37,5 +37,5 @@ for package in "$@"; do
     eval version=${!temp}
   fi
   echo "Building ${name} version ${version}"
-  codes/install_${name}.sh
+  source codes/install_${name}.sh
 done
