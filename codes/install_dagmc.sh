@@ -52,11 +52,8 @@ rpath_dirs+=:${install_prefix}/lib
 rpath_dirs+=:${openmpi_dir}/lib
 rpath_dirs+=:${hdf5_dir}/lib
 rpath_dirs+=:${moab_dir}/lib
-if [ "${install_fludag}" == "true" ]; then
-  rpath_dirs+=:${fluka_dir}/lib
-fi
 if [ "${install_daggeant4}" == "true" ]; then
-  rpath_dirs+=:${geant4_dir}/lib
+  rpath_dirs+=:${geant4_dir}/${geant4_libdir}
 fi
 
 cmake_string=

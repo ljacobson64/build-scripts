@@ -18,6 +18,7 @@ export jobs=`grep -c processor /proc/cpuinfo`
 export sudo_cmd=
 export slurm_support=true
 export geany_needs_intltool=true
+export geant4_libdir=lib64
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake-current/bin:${PATH}
@@ -66,6 +67,7 @@ elif [ "${compiler}" == "custom" ]; then
 fi
 
 # Set additional path environment variables
+export PATH=${native_dir}/binutils-current/bin:${PATH}
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=${compiler_lib_dirs}
 export PYTHONPATH=${python_dir}/lib/python2.7/site-packages

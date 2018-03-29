@@ -18,6 +18,7 @@ export jobs=`grep -c processor /proc/cpuinfo`
 export sudo_cmd=
 export slurm_support=false
 export geany_needs_intltool=true
+export geant4_libdir=lib
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake-current/bin:${PATH}
