@@ -2,8 +2,22 @@
 
 set -e
 
-build_prefix=${build_dir}/moab-${moab_version}
-install_prefix=${install_dir}/moab-${moab_version}
+if [[ ${moab_version} == *"-cgm-"* ]]; then
+  with_cgm=true
+  cgm_version=$(cut -d '-' -f3  <<< "${moab_version}")
+  moab_version=$(cut -d '-' -f1  <<< "${moab_version}")
+else
+  with_cgm=false
+fi
+
+if [ ${with_cgm} == "true" ]; then
+  build_prefix=${build_dir}/moab-${moab_version}-cgm-${cgm_version}
+  install_prefix=${install_dir}/moab-${moab_version}-cgm-${cgm_version}
+  cgm_dir=${install_dir}/cgm-${cgm_version}
+else
+  build_prefix=${build_dir}/moab-${moab_version}
+  install_prefix=${install_dir}/moab-${moab_version}
+fi
 
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 
@@ -22,7 +36,20 @@ cd moab
 autoreconf -fi
 cd ../bld
 
+rpath_dirs=${compiler_lib_dirs}
+rpath_dirs+=:${hdf5_dir}/lib
+if [ "${with_cgm}" == "true" ]; then
+  rpath_dirs+=:${cgm_dir}/lib
+fi
+
 config_string=
+if [[ "${moab_version}" == "4"* ]]; then
+  config_string+=" --enable-dagmc"
+fi
+if [ "${with_cgm}" == "true" ]; then
+  config_string+=" --enable-irel"
+  config_string+=" --with-cgm=${cgm_dir}"
+fi
 config_string+=" --disable-ahf"
 config_string+=" --enable-shared"
 config_string+=" --enable-optimize"
@@ -30,7 +57,7 @@ config_string+=" --disable-debug"
 config_string+=" --with-hdf5=${hdf5_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${hdf5_dir}/lib"
+config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 ../src/configure ${config_string}
 make -j${jobs}
