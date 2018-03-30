@@ -31,9 +31,7 @@ config_string+=" --disable-debug"
 config_string+=" --with-cubit=${cubit_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
-fi
+config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${cubit_dir}/bin"
 
 ../src/configure ${config_string}
 make -j${jobs}
