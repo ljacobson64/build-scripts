@@ -18,6 +18,8 @@ export sudo_cmd=
 export slurm_support=true
 export geany_needs_intltool=false
 export geant4_libdir=lib
+export native_python=true
+export native_setuptools=true
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake-current/bin:${PATH}
