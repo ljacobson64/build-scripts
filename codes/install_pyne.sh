@@ -2,17 +2,14 @@
 
 set -e
 
-pip_version=9.0.3
-setuptools_version=39.0.1
-
 build_prefix=${build_dir}/pyne
 install_prefix=${install_dir}/pyne
 
-if [ ! "${compiler}" == "native" ]; then
+if [ "${compiler}" != "native" ]; then
   PATH=${gcc_dir}/bin:${PATH}
 fi
 
-if [ ! "${native_python}" == "true" ]; then
+if [ "${native_python}" != "true" ]; then
   python_dir=${install_dir}/python-${python_version}
   PATH=${python_dir}/bin:${PATH}
 fi
@@ -20,10 +17,13 @@ fi
 rm -rf ${build_prefix}
 mkdir -p ${build_prefix}
 ${sudo_cmd} mkdir -p ${install_prefix}/lib/python2.7/site-packages
+
+PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
 # Setuptools
-if [ ! "${native_setuptools}" == "true" ]; then
+if [ "${native_setuptools}" != "true" ]; then
+  setuptools_version=39.0.1
   cd ${build_prefix}
   tarball=setuptools-${setuptools_version}.tar.gz
   url=https://codeload.github.com/pypa/setuptools/tar.gz/v${setuptools_version}
@@ -38,33 +38,42 @@ if [ ! "${native_setuptools}" == "true" ]; then
 fi
 
 # Pip
-cd ${build_prefix}
-tarball=pip-${pip_version}.tar.gz
-url=https://codeload.github.com/pypa/pip/tar.gz/${pip_version}
-if [ ! -f ${dist_dir}/misc/${tarball} ]; then
-  wget ${url} -P ${dist_dir}/misc/
-  mv ${dist_dir}/misc/${pip_version} ${dist_dir}/misc/${tarball}
+if [ "${native_pythonpacks}" != "true" ]; then
+  pip_version=9.0.3
+  cd ${build_prefix}
+  tarball=pip-${pip_version}.tar.gz
+  url=https://codeload.github.com/pypa/pip/tar.gz/${pip_version}
+  if [ ! -f ${dist_dir}/misc/${tarball} ]; then
+    wget ${url} -P ${dist_dir}/misc/
+    mv ${dist_dir}/misc/${pip_version} ${dist_dir}/misc/${tarball}
+  fi
+  tar -xzvf ${dist_dir}/misc/${tarball}
+  cd pip-${pip_version}
+  ${sudo_cmd} python setup.py install --prefix=${install_prefix}
 fi
-tar -xzvf ${dist_dir}/misc/${tarball}
-cd pip-${pip_version}
-${sudo_cmd} python setup.py install --prefix=${install_prefix}
-PATH=${install_prefix}/bin:${PATH}
 
 # Other python packages
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade numpy
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade scipy
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade cython
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade tables
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
+if [ "${native_pythonpacks}" != "true" ]; then
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade numpy
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade scipy
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade cython
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade tables
+  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
+fi
+
+# On Ubuntu, ~/.config/pip/pip.conf should contain:
+#
+#   [install]
+#   user = false
 
 # PyTAPS
 HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
 MOAB_DIR=${install_dir}/moab-4.9.1  # Must use version 4.9.1
 PATH=${HDF5_DIR}/bin:${PATH}
 PATH=${MOAB_DIR}/bin:${PATH}
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade pytaps
+${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --no-deps --upgrade pytaps
 
 # pyne
 cd ${build_prefix}
@@ -86,4 +95,5 @@ setup_string_2+=" -j${jobs}"
 
 ${sudo_cmd} python setup.py ${setup_string_1} install ${setup_string_2}
 cd ..
+LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
 ${sudo_cmd} nuc_data_make

@@ -20,6 +20,7 @@ export geany_needs_intltool=true
 export geant4_libdir=lib
 export native_python=true
 export native_setuptools=true
+export native_pythonpacks=false
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake-current/bin:${PATH}
