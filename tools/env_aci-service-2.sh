@@ -9,7 +9,6 @@ export install_dir=/home/group/dagmc/opt/${compiler}
 export native_dir=/home/group/dagmc/opt/native
 export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=/opt/intel-2016/compilers_and_libraries_2016.2.181/linux
-export python_dir=/home/group/dagmc/local
 export mcnp_exe=/home/group/dagmc/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/home/group/dagmc/MCNP/MCNP_DATA
 
@@ -70,4 +69,3 @@ fi
 export PATH=${native_dir}/binutils-current/bin:${PATH}
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=${compiler_lib_dirs}
-export PYTHONPATH=${python_dir}/lib/python2.7/site-packages

@@ -9,7 +9,6 @@ export install_dir=/home/lucas/opt/${compiler}
 export native_dir=/home/lucas/opt/native
 export gcc_dir=
 export intel_dir=/opt/intel/compilers_and_libraries_2018.2.199/linux
-export python_dir=/home/lucas/local
 export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/opt/MCNP/MCNP_DATA
 
@@ -60,4 +59,3 @@ fi
 # Set additional path environment variables
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=${compiler_lib_dirs}
-export PYTHONPATH=${python_dir}/lib/python2.7/site-packages

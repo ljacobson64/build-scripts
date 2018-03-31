@@ -9,7 +9,6 @@ export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
 export native_dir=/groupspace/cnerg/users/jacobson/opt/native
 export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=/groupspace/cnerg/users/jacobson/intel/compilers_and_libraries_2018.2.199/linux
-export python_dir=/groupspace/cnerg/users/jacobson/local
 export mcnp_exe=/groupspace/cnerg/users/jacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/groupspace/cnerg/users/jacobson/MCNP/MCNP_DATA
 
@@ -69,4 +68,3 @@ fi
 # Set additional path environment variables
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=${compiler_lib_dirs}
-export PYTHONPATH=${python_dir}/lib/python2.7/site-packages
