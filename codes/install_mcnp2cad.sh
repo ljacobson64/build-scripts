@@ -20,8 +20,8 @@ else
   branch=master
 fi
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}
 cd ${build_prefix}
 git clone https://github.com/svalinn/mcnp2cad -b ${branch} --single-branch
 cd mcnp2cad
@@ -36,5 +36,5 @@ make_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${cubit_dir}/bin:${cgm_dir}/lib"
 
 eval ${make_string_pre} make -j${jobs} ${make_string}
-${sudo_cmd} mkdir -p ${install_prefix}/bin
-${sudo_cmd} cp -p mcnp2cad ${install_prefix}/bin
+${sudo_cmd} mkdir -pv ${install_prefix}/bin
+${sudo_cmd} cp -pv mcnp2cad ${install_prefix}/bin

@@ -5,14 +5,14 @@ set -e
 build_prefix=${build_dir}/intltool-${intltool_version}
 install_prefix=${install_dir}/intltool-${intltool_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=intltool-${intltool_version}.tar.gz
 url=https://launchpad.net/intltool/trunk/${version}/+download/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
-ln -s intltool-${intltool_version} src
+ln -sv intltool-${intltool_version} src
 cd bld
 
 config_string=

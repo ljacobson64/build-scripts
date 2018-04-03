@@ -27,11 +27,11 @@ else
   branch=Version${moab_version}
 fi
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone https://bitbucket.org/fathomteam/moab -b ${branch} --single-branch
-ln -s moab src
+ln -sv moab src
 cd moab
 autoreconf -fi
 cd ../bld

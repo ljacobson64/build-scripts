@@ -15,11 +15,11 @@ else
   branch=cgm${cgm_version}
 fi
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone ${repo} -b ${branch} --single-branch
-ln -s cgm src
+ln -sv cgm src
 cd cgm
 autoreconf -fi
 cd ../bld

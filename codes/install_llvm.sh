@@ -2,13 +2,13 @@
 
 function setup_project() {
   cd ${build_prefix}
-  mkdir -p $1
+  mkdir -pv $1
   cd $1
   tarball=$2-${llvm_version}.src.tar.xz
   url=http://releases.llvm.org/${llvm_version}/${tarball}
   if [ ! -f ${dist_dir}/llvm/${tarball} ]; then wget ${url} -P ${dist_dir}/llvm/; fi
   tar -xJvf ${dist_dir}/llvm/${tarball}
-  mv $2-${llvm_version}.src $3
+  mv -v $2-${llvm_version}.src $3
 }
 
 set -e
@@ -16,8 +16,8 @@ set -e
 build_prefix=${build_dir}/llvm-${llvm_version}
 install_prefix=${install_dir}/llvm-${llvm_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 
 setup_project .                      llvm              llvm
 setup_project llvm/tools             cfe               clang
@@ -32,7 +32,7 @@ setup_project llvm/projects          openmp            openmp
 setup_project llvm/projects          test-suite        test-suite
 
 cd ${build_prefix}
-ln -s llvm src
+ln -sv llvm src
 cd bld
 
 cmake_string=

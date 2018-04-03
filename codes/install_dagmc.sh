@@ -22,11 +22,11 @@ FC=${openmpi_dir}/bin/mpifort
 install_dagmcnp5=true
 install_dagmcnp6=true
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone https://github.com/svalinn/DAGMC -b develop --single-branch
-ln -s DAGMC src
+ln -sv DAGMC src
 cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then
   cd mcnp/mcnp5

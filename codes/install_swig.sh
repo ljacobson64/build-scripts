@@ -7,14 +7,14 @@ install_prefix=${install_dir}/swig-${swig_version}
 
 pcre_dir=${install_dir}/pcre-${pcre_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=swig-${swig_version}.tar.gz
 url=https://sourceforge.net/projects/swig/files/swig/swig-${version}/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
-ln -s swig-${swig_version} src
+ln -sv swig-${swig_version} src
 cd bld
 
 config_string=

@@ -5,13 +5,13 @@ set -e
 build_prefix=${build_dir}/talys-${talys_version}
 install_prefix=${install_dir}/talys-${talys_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball_code=talys${talys_version}_code.tar.gz
 tarball_data=talys${talys_version}_data.tar.gz
 tar -xzvf ${dist_dir}/talys/${tarball_code}
-ln -s talys/source src
+ln -sv talys/source src
 
 talyspath=`echo ${install_prefix}/ | sed 's/\//\\\\\//g'`
 cd talys/source
@@ -43,5 +43,5 @@ cd ${install_prefix}
 if [ "${compiler}" == "native" ]; then
   ${sudo_cmd} tar -xzvf ${dist_dir}/talys/${tarball_data}
 else
-  ${sudo_cmd} ln -snf ${native_dir}/talys-${talys_version}/talys .
+  ${sudo_cmd} ln -snfv ${native_dir}/talys-${talys_version}/talys .
 fi

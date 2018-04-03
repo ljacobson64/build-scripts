@@ -11,11 +11,11 @@ CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++
 FC=${openmpi_dir}/bin/mpifort
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone https://github.com/ljacobson64/MCNP_CMake
-ln -s MCNP_CMake src
+ln -sv MCNP_CMake src
 cd MCNP_CMake
 ./mcnp_source.sh
 cd ../bld

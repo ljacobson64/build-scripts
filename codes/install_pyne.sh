@@ -14,9 +14,9 @@ if [ "${native_python}" != "true" ]; then
   PATH=${python_dir}/bin:${PATH}
 fi
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}
-${sudo_cmd} mkdir -p ${install_prefix}/lib/python2.7/site-packages
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}
+${sudo_cmd} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 
 PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
@@ -29,7 +29,7 @@ if [ "${native_setuptools}" != "true" ]; then
   url=https://codeload.github.com/pypa/setuptools/tar.gz/v${setuptools_version}
   if [ ! -f ${dist_dir}/misc/${tarball} ]; then
     wget ${url} -P ${dist_dir}/misc/
-    mv ${dist_dir}/misc/v${setuptools_version} ${dist_dir}/misc/${tarball}
+    mv -v ${dist_dir}/misc/v${setuptools_version} ${dist_dir}/misc/${tarball}
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd setuptools-${setuptools_version}
@@ -45,7 +45,7 @@ if [ "${native_pythonpacks}" != "true" ]; then
   url=https://codeload.github.com/pypa/pip/tar.gz/${pip_version}
   if [ ! -f ${dist_dir}/misc/${tarball} ]; then
     wget ${url} -P ${dist_dir}/misc/
-    mv ${dist_dir}/misc/${pip_version} ${dist_dir}/misc/${tarball}
+    mv -v ${dist_dir}/misc/${pip_version} ${dist_dir}/misc/${tarball}
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd pip-${pip_version}

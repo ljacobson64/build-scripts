@@ -5,11 +5,11 @@ set -e
 build_prefix=${build_dir}/ALARA
 install_prefix=${install_dir}/ALARA
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone https://github.com/svalinn/ALARA -b master --single-branch
-ln -s ALARA src
+ln -sv ALARA src
 cd ALARA
 autoreconf -fi
 cd ../bld

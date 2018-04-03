@@ -5,14 +5,14 @@ set -e
 build_prefix=${build_dir}/python-${python_version}
 install_prefix=${install_dir}/python-${python_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=Python-${python_version}.tgz
 url=https://www.python.org/ftp/python/${python_version}/${tarball}
 if [ ! -f ${dist_dir}/python/${tarball} ]; then wget ${url} -P ${dist_dir}/python/; fi
 tar -xzvf ${dist_dir}/python/${tarball}
-ln -s Python-${python_version} src
+ln -sv Python-${python_version} src
 cd bld
 
 config_string=

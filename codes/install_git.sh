@@ -5,8 +5,8 @@ set -e
 build_prefix=${build_dir}/git-${git_version}
 install_prefix=${install_dir}/git-${git_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}
 cd ${build_prefix}
 tarball=git-${git_version}.tar.gz
 url=https://www.kernel.org/pub/software/scm/git/${tarball}

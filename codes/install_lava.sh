@@ -7,12 +7,12 @@ install_prefix=${install_dir}/lava-${lava_version}
 
 LD_LIBRARY_PATH=${compiler_lib_dirs}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=lava-${lava_version}.tar.gz
 tar -xzvf ${dist_dir}/misc/${tarball}
-ln -s lava src
+ln -sv lava src
 cd bld
 
 cmake_string=
@@ -32,7 +32,7 @@ cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
 cmake ../src ${cmake_string_static}
 make -j${jobs}
 ${sudo_cmd} make install
-cd ..; rm -rf bld; mkdir -p bld; cd bld
+cd ..; rm -rfv bld; mkdir -pv bld; cd bld
 cmake ../src ${cmake_string_shared}
 make -j${jobs}
 ${sudo_cmd} make install

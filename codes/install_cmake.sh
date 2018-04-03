@@ -5,8 +5,8 @@ set -e
 build_prefix=${build_dir}/cmake-${cmake_version}
 install_prefix=${install_dir}/cmake-${cmake_version}
 
-rm -rf ${build_prefix}
-mkdir -p ${build_prefix}/bld
+rm -rfv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=cmake-${cmake_version}.tar.gz
 if   [ "${cmake_version:3:1}" == "." ]; then cmake_version_major=${cmake_version::3}
@@ -15,7 +15,7 @@ fi
 url=https://cmake.org/files/v${version_major}/${tarball}
 if [ ! -f ${dist_dir}/cmake/${tarball} ]; then wget ${url} -P ${dist_dir}/cmake/; fi
 tar -xzvf ${dist_dir}/cmake/${tarball}
-ln -s cmake-${cmake_version} src
+ln -sv cmake-${cmake_version} src
 cd bld
 
 cmake_string=
