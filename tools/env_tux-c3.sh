@@ -21,6 +21,7 @@ export geant4_libdir=lib
 export native_python=true
 export native_setuptools=true
 export native_pythonpacks=false
+export native_exnihilo_packs=false
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake-current/bin:${PATH}
