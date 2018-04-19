@@ -36,6 +36,7 @@ for package in "$@"; do
     temp=${name}_version
     eval version=${!temp}
   fi
+  export ${name}_version
   echo "Building ${name} version ${version}"
   codes/install_${name}.sh
 done
