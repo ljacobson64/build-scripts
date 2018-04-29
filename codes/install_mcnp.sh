@@ -31,7 +31,9 @@ cmake_string+=" -DBUILD_MCNP602=ON"
 cmake_string+=" -DBUILD_MCNP610=ON"
 cmake_string+=" -DBUILD_MCNP611=ON"
 cmake_string+=" -DBUILD_PLOT=ON"
-cmake_string+=" -DBUILD_OPENMP=ON"
+if [ "$(basename $FC)" == "ifort" ]; then
+  cmake_string+=" -DBUILD_OPENMP=ON"
+fi
 cmake_string+=" -DBUILD_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
