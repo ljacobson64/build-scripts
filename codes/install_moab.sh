@@ -34,6 +34,8 @@ git clone https://bitbucket.org/fathomteam/moab -b ${branch} --single-branch
 ln -sv moab src
 cd moab
 autoreconf -fi
+sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTet.cpp
+sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTri.cpp
 cd ../bld
 
 rpath_dirs=${compiler_lib_dirs}
