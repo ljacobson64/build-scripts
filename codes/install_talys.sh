@@ -15,9 +15,9 @@ ln -sv talys/source src
 
 talyspath=`echo ${install_prefix}/ | sed 's/\//\\\\\//g'`
 cd talys/source
-sed -i "s/ home='.*'/ home='${talyspath}'/; s/60/80/" machine.f
-sed -i "s/60 path/80 path/" talys.cmb
-sed -i "s/90/110/" fissionpar.f
+sed -i "s/ home='.*'/ home='${talyspath}'/; s/60/132/" machine.f
+sed -i "s/60 path/132 path/" talys.cmb
+sed -i "s/90/162/" fissionpar.f
 echo "project(talys Fortran)"                   >> CMakeLists.txt
 echo "cmake_minimum_required(VERSION 2.8)"      >> CMakeLists.txt
 echo "set(CMAKE_BUILD_TYPE Release)"            >> CMakeLists.txt
