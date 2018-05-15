@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export advantg_version=3.0.3
-export armadillo_version=8.400.0
+export armadillo_version=8.500.1
 export binutils_version=2.30
 export cgm_version=14.0
 export cmake_version=3.8.2
@@ -24,7 +24,7 @@ export mpfr_version=4.0.1
 export mpich_version=3.2.1
 export openmpi_version=2.1.3
 export pcre_version=8.42
-export python_version=2.7.14
+export python_version=2.7.15
 export silo_version=4.10.2
 export swig_version=3.0.12
 export talys_version=1.9
