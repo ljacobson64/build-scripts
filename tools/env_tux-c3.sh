@@ -11,6 +11,8 @@ export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=/groupspace/cnerg/users/jacobson/intel/compilers_and_libraries_2018.2.199/linux
 export mcnp_exe=/groupspace/cnerg/users/jacobson/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/groupspace/cnerg/users/jacobson/MCNP/MCNP_DATA
+export scale_data_dir=/groupspace/cnerg/users/jacobson/SCALE/data
+export lapack_dir=/usr/lib
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`

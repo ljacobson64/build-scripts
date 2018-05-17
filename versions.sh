@@ -25,6 +25,7 @@ export mpich_version=3.2.1
 export openmpi_version=2.1.3
 export pcre_version=8.42
 export python_version=2.7.15
+export scale_version=6.2.3
 export silo_version=4.10.2
 export swig_version=3.0.12
 export talys_version=1.9

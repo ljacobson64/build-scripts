@@ -11,6 +11,8 @@ export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=/opt/intel-2016/compilers_and_libraries_2016.2.181/linux
 export mcnp_exe=/home/group/dagmc/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/home/group/dagmc/MCNP/MCNP_DATA
+export scale_data_dir=/home/group/dagmc/SCALE/data
+export lapack_dir=/usr/lib64/atlas
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`

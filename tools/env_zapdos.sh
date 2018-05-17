@@ -11,6 +11,8 @@ export gcc_dir=
 export intel_dir=/opt/intel/compilers_and_libraries_2018.2.199/linux
 export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
 export DATAPATH=/opt/MCNP/MCNP_DATA
+export scale_data_dir=/opt/SCALE/data
+export lapack_dir=/usr/lib/x86_64-linux-gnu
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
