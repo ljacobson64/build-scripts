@@ -17,17 +17,19 @@ mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 git clone ${repo} -b ${branch} --single-branch
 ln -sv cgm src
-cd bld
+cd cgm
+autoreconf -fi
+cd ../bld
 
-cmake_string=
-cmake_string+=" -DENABLE_OCC=ON"
-cmake_string+=" -DOCC_DIR=${oce_dir}"
-cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
-cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
-cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
-cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${oce_dir}/lib:${install_prefix}/lib"
+config_string=
+config_string+=" --enable-shared"
+config_string+=" --enable-optimize"
+config_string+=" --disable-debug"
+config_string+=" --with-occ=${oce_dir}"
+config_string+=" --prefix=${install_prefix}"
+config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
+config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${oce_dir}/lib"
 
-cmake ../src ${cmake_string}
+../src/configure ${config_string}
 make -j${jobs}
 ${sudo_cmd} make install
