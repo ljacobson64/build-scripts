@@ -23,7 +23,7 @@ PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
 # Setuptools
 if [ "${native_setuptools}" != "true" ]; then
-  setuptools_version=39.0.1
+  setuptools_version=39.2.0
   cd ${build_prefix}
   tarball=setuptools-${setuptools_version}.tar.gz
   url=https://codeload.github.com/pypa/setuptools/tar.gz/v${setuptools_version}
@@ -39,7 +39,7 @@ fi
 
 # Pip
 if [ "${native_pythonpacks}" != "true" ]; then
-  pip_version=9.0.3
+  pip_version=10.0.1
   cd ${build_prefix}
   tarball=pip-${pip_version}.tar.gz
   url=https://codeload.github.com/pypa/pip/tar.gz/${pip_version}
