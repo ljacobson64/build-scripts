@@ -29,20 +29,20 @@ git clone https://github.com/svalinn/DAGMC -b develop --single-branch
 ln -sv DAGMC src
 cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then
-  cd mcnp/mcnp5
+  cd src/mcnp/mcnp5
   tar -xzvf ${dist_dir}/mcnp/mcnp516-source.tar.gz --strip-components=1
   patch -p0 < patch/dagmc.5.1.60.patch
-  cd ../..
+  cd ../../..
 fi
 if [ "${install_dagmcnp6}" == "true" ]; then
-  cd mcnp/mcnp6
+  cd src/mcnp/mcnp6
   tar -xzvf ${dist_dir}/mcnp/mcnp611-source.tar.gz --strip-components=1
   patch -p0 < patch/dagmc.6.1.1beta.patch
-  cd ../..
+  cd ../../..
 fi
 if [ "${install_fludag}" == "true" ]; then
   if [ ! -x ${fluka_dir}/bin/flutil/rfluka.orig ]; then
-    patch -Nb ${fluka_dir}/bin/flutil/rfluka fluka/rfluka.patch
+    patch -Nb ${fluka_dir}/bin/flutil/rfluka src/fluka/rfluka.patch
   fi
 fi
 cd ../bld
