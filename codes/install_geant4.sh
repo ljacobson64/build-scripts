@@ -9,7 +9,7 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=geant4.${geant4_version}.tar.gz
-url=http://geant4.cern.ch/support/source/${tarball}
+url=http://cern.ch/geant4-data/releases/${tarball}
 if [ ! -f ${dist_dir}/geant4/${tarball} ]; then wget ${url} -P ${dist_dir}/geant4/; fi
 tar -xzvf ${dist_dir}/geant4/${tarball}
 ln -sv geant4.${geant4_version} src
