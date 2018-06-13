@@ -31,4 +31,4 @@ chmod +x configure_scale_mpi.sh
 
 ./configure_scale_mpi.sh ../src
 make -j${jobs}
-${sudo_cmd} make install
+${sudo_cmd} make -j${jobs} install

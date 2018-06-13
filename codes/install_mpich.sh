@@ -32,4 +32,4 @@ fi
 
 ../src/configure ${config_string}
 make -j${jobs}
-${sudo_cmd} make install
+${sudo_cmd} make -j${jobs} install

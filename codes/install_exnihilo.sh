@@ -53,4 +53,4 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 cmake -C ${build_prefix}/Exnihilo/install/codes/Exnihilo/for-advantg.cmake ${cmake_string} ../src
 make -j${jobs}
-${sudo_cmd} make install
+${sudo_cmd} make -j${jobs} install

@@ -63,4 +63,4 @@ config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 ../src/configure ${config_string}
 make -j${jobs}
-${sudo_cmd} make install
+${sudo_cmd} make -j${jobs} install
