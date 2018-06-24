@@ -3,15 +3,15 @@
 source versions.sh
 
 # Important directories
-export dist_dir=/NV/jacobson/dist
+export dist_dir=/home/jacobson/dist
 export build_dir=/home/jacobson/build/${compiler}
-export install_dir=/compute_dir/opt/${compiler}
-export native_dir=/compute_dir/opt/native
+export install_dir=/opt/${compiler}
+export native_dir=/opt/native
 export gcc_dir=
-export intel_dir=/compute_dir/intel/compilers_and_libraries_2018.3.222/linux
-export mcnp_exe=/compute_dir/MCNP/MCNP_CODE/bin/mcnp5
-export DATAPATH=/compute_dir/MCNP/MCNP_DATA
-export scale_data_dir=/compute_dir/SCALE/data
+export intel_dir=/opt/intel/compilers_and_libraries_2018.3.222/linux
+export mcnp_exe=/opt/MCNP/MCNP_CODE/bin/mcnp5
+export DATAPATH=/opt/MCNP/MCNP_DATA
+export scale_data_dir=/opt/SCALE/data
 export lapack_dir=/usr/lib/x86_64-linux-gnu
 
 # Miscellaneous environment variables used by install scripts
