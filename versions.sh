@@ -22,6 +22,7 @@ export moab_version=5.0
 export mpc_version=1.1.0
 export mpfr_version=4.0.1
 export mpich_version=3.2.1
+export numpy_version=1.14.5
 export oce_version=0.18.3
 export opencascade_version=7.3.0
 export openmpi_version=3.0.2
