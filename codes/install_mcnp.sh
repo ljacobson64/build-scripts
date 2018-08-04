@@ -7,10 +7,6 @@ install_prefix=${install_dir}/MCNP
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 
-CC=${openmpi_dir}/bin/mpicc
-CXX=${openmpi_dir}/bin/mpic++
-FC=${openmpi_dir}/bin/mpifort
-
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
@@ -30,6 +26,9 @@ fi
 cmake_string+=" -DBUILD_MCNP602=ON"
 cmake_string+=" -DBUILD_MCNP610=ON"
 cmake_string+=" -DBUILD_MCNP611=ON"
+if [ "$(basename $FC)" == "ifort" ]; then
+  cmake_string+=" -DBUILD_MCNP620=ON"
+fi
 cmake_string+=" -DBUILD_PLOT=ON"
 if [ "$(basename $FC)" == "ifort" ]; then
   cmake_string+=" -DBUILD_OPENMP=ON"
@@ -37,6 +36,11 @@ fi
 cmake_string+=" -DBUILD_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
+
+CC=${openmpi_dir}/bin/mpicc
+CXX=${openmpi_dir}/bin/mpic++
+FC=${openmpi_dir}/bin/mpifort
+
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
