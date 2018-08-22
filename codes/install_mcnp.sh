@@ -26,9 +26,7 @@ fi
 cmake_string+=" -DBUILD_MCNP602=ON"
 cmake_string+=" -DBUILD_MCNP610=ON"
 cmake_string+=" -DBUILD_MCNP611=ON"
-if [ "$(basename $FC)" == "ifort" ]; then
-  cmake_string+=" -DBUILD_MCNP620=ON"
-fi
+cmake_string+=" -DBUILD_MCNP620=ON"
 cmake_string+=" -DBUILD_PLOT=ON"
 if [ "$(basename $FC)" == "ifort" ]; then
   cmake_string+=" -DBUILD_OPENMP=ON"
