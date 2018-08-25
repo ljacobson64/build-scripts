@@ -31,13 +31,13 @@ cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then
   cd src/mcnp/mcnp5
   tar -xzvf ${dist_dir}/mcnp/mcnp516-source.tar.gz --strip-components=1
-  patch -p0 < patch/dagmc.5.1.60.patch
+  patch -p0 < patch/mcnp516.patch
   cd ../../..
 fi
 if [ "${install_dagmcnp6}" == "true" ]; then
   cd src/mcnp/mcnp6
   tar -xzvf ${dist_dir}/mcnp/mcnp611-source.tar.gz --strip-components=1
-  patch -p0 < patch/dagmc.6.1.1beta.patch
+  patch -p0 < patch/mcnp611.patch
   cd ../../..
 fi
 if [ "${install_fludag}" == "true" ]; then
