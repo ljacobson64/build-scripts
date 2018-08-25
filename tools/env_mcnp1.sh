@@ -3,8 +3,8 @@
 source versions.sh
 
 # Important directories
-export dist_dir=/home/jacobson/dist
-export build_dir=/home/jacobson/build/${compiler}
+export dist_dir=/home/lucas/dist
+export build_dir=/home/lucas/build/${compiler}
 export install_dir=/opt/${compiler}
 export native_dir=/opt/native
 export gcc_dir=
