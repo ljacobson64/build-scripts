@@ -11,10 +11,6 @@ moab_dir=${install_dir}/moab-${moab_version}
 fluka_dir=${install_dir}/fluka-${fluka_version}
 geant4_dir=${install_dir}/geant4-${geant4_version}
 
-LD_LIBRARY_PATH=${compiler_lib_dirs}:${LD_LIBRARY_PATH}
-PATH=${hdf5_dir}:${PATH}
-LD_LIBRARY_PATH=${moab_dir}/lib:${LD_LIBRARY_PATH}
-
 CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++
 FC=${openmpi_dir}/bin/mpifort
@@ -57,13 +53,12 @@ if [ "${install_daggeant4}" == "true" ]; then
 fi
 
 cmake_string=
+cmake_string+=" -DMOAB_DIR=${moab_dir}"
 if [ "${install_dagmcnp5}" == "true" ]; then
   cmake_string+=" -DBUILD_MCNP5=ON"
-  cmake_string+=" -DMCNP5_PLOT=ON"
 fi
 if [ "${install_dagmcnp6}" == "true" ]; then
   cmake_string+=" -DBUILD_MCNP6=ON"
-  cmake_string+=" -DMCNP6_PLOT=ON"
 fi
 if [ "${install_fludag}" == "true" ]; then
   cmake_string+=" -DBUILD_FLUKA=ON"
@@ -73,7 +68,9 @@ if [ "${install_daggeant4}" == "true" ]; then
   cmake_string+=" -DBUILD_GEANT4=ON"
   cmake_string+=" -DGEANT4_DIR=${geant4_dir}"
 fi
-cmake_string+=" -DMPI_BUILD=ON"
+cmake_string+=" -DBUILD_MCNP_PLOT=ON"
+#cmake_string+=" -DBUILD_MCNP_OPENMP=ON"
+cmake_string+=" -DBUILD_MCNP_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
