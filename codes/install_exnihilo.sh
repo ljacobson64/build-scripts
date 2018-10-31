@@ -30,6 +30,9 @@ mv Exnihilo ..
 ln -sv ../Exnihilo .
 cd ..
 git clone https://github.com/TriBITSPub/TriBITS -b master --single-branch
+cd TriBITS
+git checkout a24cefe7d538cc179111b1abc4279aee03282141
+cd ..
 git clone https://github.com/trilinos/Trilinos  -b master --single-branch
 cd bld
 
