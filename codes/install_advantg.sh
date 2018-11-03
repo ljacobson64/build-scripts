@@ -58,6 +58,6 @@ cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 
-cmake ../src ${cmake_string}
+${CMAKE} ../src ${cmake_string}
 make -j${jobs}
 ${sudo_cmd} make -j${jobs} install

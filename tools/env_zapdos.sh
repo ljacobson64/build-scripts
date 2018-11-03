@@ -26,8 +26,8 @@ export native_pythonpacks=true
 export native_exnihilo_packs=true
 
 # Specify location of CMake
-export PATH=${native_dir}/cmake-current/bin:${PATH}
-export CMAKE=${native_dir}/cmake-current/bin/cmake
+export PATH=/opt/cmake/bin:${PATH}
+export CMAKE=/opt/cmake/bin/cmake
 
 # Specify path to intel compiler
 if   [ "${compiler}" == "intel-13" ]; then intel_dir=${intel_dir}/13.1.3.192
