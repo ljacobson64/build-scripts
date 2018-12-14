@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/advantg-${advantg_version}
-install_prefix=${install_dir}/advantg-${advantg_version}
+build_prefix=${build_dir}/ADVANTG-${advantg_version}
+install_prefix=${install_dir}/ADVANTG-${advantg_version}
 
 if [ "${native_exnihilo_packs}" != "true" ]; then
   pcre_dir=${install_dir}/pcre-${pcre_version}

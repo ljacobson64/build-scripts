@@ -20,7 +20,6 @@ cd bld
 
 config_string=
 config_string+=" --enable-shared"
-config_string+=" --disable-debug"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 if [ -n "${compiler_lib_dirs}" ]; then
