@@ -18,11 +18,6 @@ cd bld
 config_string=
 if [ "${slurm_support}" == "true" ]; then
   config_string+=" --with-slurm=/usr"
-  config_string+=" --with-pmi=pmi2"
-  config_string+=" --with-pm=no"
-  LIBS=-lpmi2
-else
-  LIBS=
 fi
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC} LIBS=${LIBS}"

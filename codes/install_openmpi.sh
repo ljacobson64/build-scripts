@@ -21,8 +21,9 @@ cd bld
 config_string=
 if [ "${slurm_support}" == "true" ]; then
   config_string+=" --with-slurm"
-  config_string+=" --with-pmi"
 fi
+config_string+=" --enable-static"
+config_string+=" --disable-dlopen"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 if [ -n "${compiler_lib_dirs}" ]; then
