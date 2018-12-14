@@ -2,6 +2,9 @@
 
 set -e
 
+export pyne_pip_version=18.1
+export pyne_setuptools_version=40.6.3
+
 build_prefix=${build_dir}/pyne
 install_prefix=${install_dir}/pyne
 
@@ -24,14 +27,14 @@ PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 # Setuptools
 if [ "${native_setuptools}" != "true" ]; then
   cd ${build_prefix}
-  tarball=setuptools-${setuptools_version}.tar.gz
-  url=https://codeload.github.com/pypa/setuptools/tar.gz/v${setuptools_version}
+  tarball=setuptools-${pyne_setuptools_version}.tar.gz
+  url=https://codeload.github.com/pypa/setuptools/tar.gz/v${pyne_setuptools_version}
   if [ ! -f ${dist_dir}/misc/${tarball} ]; then
     wget ${url} -P ${dist_dir}/misc/
-    mv -v ${dist_dir}/misc/v${setuptools_version} ${dist_dir}/misc/${tarball}
+    mv -v ${dist_dir}/misc/v${pyne_setuptools_version} ${dist_dir}/misc/${tarball}
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
-  cd setuptools-${setuptools_version}
+  cd setuptools-${pyne_setuptools_version}
   python bootstrap.py
   ${sudo_cmd} python setup.py install --prefix=${install_prefix}
 fi
@@ -39,14 +42,14 @@ fi
 # Pip
 if [ "${native_pythonpacks}" != "true" ]; then
   cd ${build_prefix}
-  tarball=pip-${pip_version}.tar.gz
-  url=https://codeload.github.com/pypa/pip/tar.gz/${pip_version}
+  tarball=pip-${pyne_pip_version}.tar.gz
+  url=https://codeload.github.com/pypa/pip/tar.gz/${pyne_pip_version}
   if [ ! -f ${dist_dir}/misc/${tarball} ]; then
     wget ${url} -P ${dist_dir}/misc/
-    mv -v ${dist_dir}/misc/${pip_version} ${dist_dir}/misc/${tarball}
+    mv -v ${dist_dir}/misc/${pyne_pip_version} ${dist_dir}/misc/${tarball}
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
-  cd pip-${pip_version}
+  cd pip-${pyne_pip_version}
   ${sudo_cmd} python setup.py install --prefix=${install_prefix}
 fi
 
@@ -61,10 +64,11 @@ if [ "${native_pythonpacks}" != "true" ]; then
   ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
 fi
 
-# On Ubuntu, ~/.config/pip/pip.conf should contain:
-#
-#   [install]
-#   user = false
+# pip.conf
+mkdir -pv ~/.config/pip
+rm -rfv ~/.config/pip/pip.conf
+echo "[install]" > ~/.config/pip/pip.conf
+echo "user = false" >> ~/.config/pip/pip.conf
 
 # PyTAPS
 HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
