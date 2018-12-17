@@ -7,7 +7,7 @@ export cgm_version=16.0
 build_prefix=${build_dir}/cgm-${cgm_version}-oce-${oce_version}
 install_prefix=${install_dir}/cgm-${cgm_version}-oce-${oce_version}
 
-oce_dir=${native_dir}/oce-${oce_version}
+oce_dir=${install_dir}/oce-${oce_version}
 
 repo=https://bitbucket.org/fathomteam/cgm
 branch=master

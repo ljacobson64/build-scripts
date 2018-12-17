@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/geany-${geany_version}
-install_prefix=${install_dir}/geany-${geany_version}
+install_prefix=${native_dir}/geany-${geany_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -23,7 +23,7 @@ if [ -n "${compiler_lib_dirs}" ]; then
 fi
 
 if [ "${geany_needs_intltool}" == "true" ]; then
-  PATH=${install_dir}/intltool-${intltool_version}/bin:${PATH}
+  PATH=${native_dir}/intltool-${intltool_version}/bin:${PATH}
 fi
 
 ../src/configure ${config_string}

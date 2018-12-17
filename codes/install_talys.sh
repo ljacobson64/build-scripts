@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/TALYS-${talys_version}
-install_prefix=${install_dir}/TALYS-${talys_version}
+install_prefix=${native_dir}/TALYS-${talys_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -43,5 +43,5 @@ cd ${install_prefix}
 if [ "${compiler}" == "native" ]; then
   ${sudo_cmd} tar -xzvf ${dist_dir}/talys/${tarball_data}
 else
-  ${sudo_cmd} ln -snfv ${native_dir}/talys-${talys_version}/talys .
+  ${sudo_cmd} ln -snfv $(dirname ${install_dir})/native/TALYS-${talys_version}/talys .
 fi

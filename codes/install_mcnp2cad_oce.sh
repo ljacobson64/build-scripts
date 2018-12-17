@@ -8,7 +8,7 @@ build_prefix=${build_dir}/mcnp2cad-cgm-${cgm_version}-oce-${oce_version}
 install_prefix=${install_dir}/mcnp2cad-cgm-${cgm_version}-oce-${oce_version}
 
 armadillo_dir=${install_dir}/armadillo-${armadillo_version}
-oce_dir=${native_dir}/oce-${oce_version}
+oce_dir=${install_dir}/oce-${oce_version}
 cgm_dir=${install_dir}/cgm-${cgm_version}-oce-${oce_version}
 
 repo=https://github.com/svalinn/mcnp2cad
