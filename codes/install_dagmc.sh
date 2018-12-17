@@ -21,7 +21,7 @@ install_dagmcnp6=true
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/svalinn/DAGMC -b develop --single-branch
+git clone https://github.com/ljacobson64/DAGMC -b no_overwrite_rpath --single-branch
 ln -sv DAGMC src
 cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then
@@ -42,15 +42,6 @@ if [ "${install_fludag}" == "true" ]; then
   fi
 fi
 cd ../bld
-
-rpath_dirs=${compiler_lib_dirs}
-rpath_dirs+=:${install_prefix}/lib
-rpath_dirs+=:${openmpi_dir}/lib
-rpath_dirs+=:${hdf5_dir}/lib
-rpath_dirs+=:${moab_dir}/lib
-if [ "${install_daggeant4}" == "true" ]; then
-  rpath_dirs+=:${geant4_dir}/${geant4_libdir}
-fi
 
 cmake_string=
 cmake_string+=" -DMOAB_DIR=${moab_dir}"
@@ -77,7 +68,9 @@ cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+if [ -n "${compiler_lib_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
