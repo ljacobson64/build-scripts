@@ -7,7 +7,6 @@ export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/home/group/dagmc/opt/${compiler}
 export native_dir=/home/group/dagmc/opt/native
-export gcc_dir=${native_dir}/gcc-${gcc_version}
 export intel_dir=
 export mcnp_exe=/home/group/dagmc/MCNP/bin/mcnp5
 export DATAPATH=/home/group/dagmc/MCNP/MCNP_DATA
@@ -29,6 +28,14 @@ export native_exnihilo_packs=false
 export PATH=/home/group/dagmc/opt/cmake/bin:${PATH}
 export CMAKE=/home/group/dagmc/opt/cmake/bin/cmake
 
+# Specify path to GCC
+if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0
+elif [ "${compiler}" == "gcc-6"  ]; then gcc_dir=${native_dir}/gcc-6.5.0
+elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.4.0
+elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.2.0
+elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-8.2.0
+fi
+
 # Specify path to intel compiler
 if   [ "${compiler}" == "intel-13" ]; then intel_dir=/opt/intel
 elif [ "${compiler}" == "intel-16" ]; then intel_dir=/opt/intel-2016
@@ -41,7 +48,7 @@ if [ "${compiler}" == "native" ]; then
   export CXX=/usr/lib64/ccache/g++
   export FC=/usr/bin/gfortran
   export compiler_lib_dirs=
-elif [ "${compiler}" == "gcc-7" ]; then
+elif [[ "${compiler}" == "gcc-"* ]]; then
   export CC=${gcc_dir}/bin/gcc
   export CXX=${gcc_dir}/bin/g++
   export FC=${gcc_dir}/bin/gfortran
@@ -55,7 +62,7 @@ elif [ "${compiler}" == "custom" ]; then
   export CC=${gcc_dir}/bin/gcc
   export CXX=${gcc_dir}/bin/g++
   export FC=${intel_dir}/bin/ifort
-  export compiler_lib_dirs=${intel_dir}/lib/intel64
+  export compiler_lib_dirs=${gcc_dir}/lib64:${intel_dir}/lib/intel64
 fi
 
 # Control which versions of MCNP/DAGMC are built
@@ -63,7 +70,7 @@ if [ "${compiler}" == "native" ]; then
   export install_mcnpx27=true
   export install_fludag=false
   export install_daggeant4=false
-elif [ "${compiler}" == "gcc-7" ]; then
+elif [[ "${compiler}" == "gcc-"* ]]; then
   export install_mcnpx27=true
   export install_fludag=true
   export install_daggeant4=true
@@ -78,6 +85,6 @@ elif [ "${compiler}" == "custom" ]; then
 fi
 
 # Set additional path environment variables
-export PATH=${native_dir}/binutils-current/bin:${PATH}
+export PATH=${native_dir}/binutils/bin:${PATH}
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=${compiler_lib_dirs}
