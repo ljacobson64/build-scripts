@@ -6,7 +6,7 @@ source versions.sh
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
 export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
-export native_dir=/groupspace/cnerg/users/jacobson/opt
+export native_dir=/groupspace/cnerg/users/jacobson/opt/misc
 export intel_dir=/groupspace/cnerg/users/jacobson/intel
 export lapack_dir=/usr/lib
 
@@ -27,8 +27,8 @@ export native_pythonpacks=false
 export native_exnihilo_packs=false
 
 # Specify location of CMake
-export PATH=/groupspace/cnerg/users/jacobson/opt/cmake/bin:${PATH}
-export CMAKE=/groupspace/cnerg/users/jacobson/opt/cmake/bin/cmake
+export PATH=${native_dir}/cmake/bin:${PATH}
+export CMAKE=${native_dir}/cmake/bin/cmake
 
 # Specify path to GCC
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0

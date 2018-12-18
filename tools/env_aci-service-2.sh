@@ -6,7 +6,7 @@ source versions.sh
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/home/group/dagmc/opt/${compiler}
-export native_dir=/home/group/dagmc/opt
+export native_dir=/home/group/dagmc/opt/misc
 export intel_dir=
 export lapack_dir=/usr/lib64/atlas
 
@@ -27,8 +27,8 @@ export native_pythonpacks=false
 export native_exnihilo_packs=false
 
 # Specify location of CMake
-export PATH=/home/group/dagmc/opt/cmake/bin:${PATH}
-export CMAKE=/home/group/dagmc/opt/cmake/bin/cmake
+export PATH=${native_dir}/cmake/bin:${PATH}
+export CMAKE=${native_dir}/cmake/bin/cmake
 
 # Specify path to GCC
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0

@@ -27,8 +27,8 @@ export native_pythonpacks=true
 export native_exnihilo_packs=true
 
 # Specify location of CMake
-export PATH=/opt/cmake/bin:${PATH}
-export CMAKE=/opt/cmake/bin/cmake
+export PATH=${native_dir}/cmake/bin:${PATH}
+export CMAKE=${native_dir}/cmake/bin/cmake
 
 # Specify path to GCC
 export gcc_dir=
