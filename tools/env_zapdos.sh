@@ -6,13 +6,13 @@ source versions.sh
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/home/lucas/opt/${compiler}
-export native_dir=/home/lucas/opt/native
-export gcc_dir=
+export native_dir=/opt
 export intel_dir=/opt/intel
-export mcnp_exe=/opt/MCNP/bin/mcnp5
-export DATAPATH=/opt/MCNP/MCNP_DATA
-export scale_data_dir=/opt/SCALE/data
 export lapack_dir=/usr/lib/x86_64-linux-gnu
+
+export mcnp_exe=${native_dir}/MCNP/bin/mcnp5
+export DATAPATH=${native_dir}/MCNP/MCNP_DATA
+export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
@@ -28,6 +28,9 @@ export native_exnihilo_packs=true
 # Specify location of CMake
 export PATH=/opt/cmake/bin:${PATH}
 export CMAKE=/opt/cmake/bin/cmake
+
+# Specify path to GCC
+export gcc_dir=
 
 # Specify path to intel compiler
 if   [ "${compiler}" == "intel-13" ]; then intel_dir=${intel_dir}/13.1.3.192

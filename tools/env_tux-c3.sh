@@ -6,12 +6,13 @@ source versions.sh
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
 export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
-export native_dir=/groupspace/cnerg/users/jacobson/opt/misc
+export native_dir=/groupspace/cnerg/users/jacobson/opt
 export intel_dir=/groupspace/cnerg/users/jacobson/intel
-export mcnp_exe=/groupspace/cnerg/users/jacobson/opt/misc/MCNP/bin/mcnp5
-export DATAPATH=/groupspace/cnerg/users/jacobson/opt/misc/MCNP/MCNP_DATA
-export scale_data_dir=/groupspace/cnerg/users/jacobson/opt/misc/SCALE/data
 export lapack_dir=/usr/lib
+
+export mcnp_exe=${native_dir}/MCNP/bin/mcnp5
+export DATAPATH=${native_dir}/MCNP/MCNP_DATA
+export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
@@ -25,8 +26,8 @@ export native_pythonpacks=false
 export native_exnihilo_packs=false
 
 # Specify location of CMake
-export PATH=/groupspace/cnerg/users/jacobson/opt/misc/cmake/bin:${PATH}
-export CMAKE=/groupspace/cnerg/users/jacobson/opt/misc/cmake/bin/cmake
+export PATH=/groupspace/cnerg/users/jacobson/opt/cmake/bin:${PATH}
+export CMAKE=/groupspace/cnerg/users/jacobson/opt/cmake/bin/cmake
 
 # Specify path to GCC
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0

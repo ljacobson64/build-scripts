@@ -6,12 +6,13 @@ source versions.sh
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/home/group/dagmc/opt/${compiler}
-export native_dir=/home/group/dagmc/opt/native
+export native_dir=/home/group/dagmc/opt
 export intel_dir=
-export mcnp_exe=/home/group/dagmc/MCNP/bin/mcnp5
-export DATAPATH=/home/group/dagmc/MCNP/MCNP_DATA
-export scale_data_dir=/home/group/dagmc/SCALE/data
 export lapack_dir=/usr/lib64/atlas
+
+export mcnp_exe=${native_dir}/MCNP/bin/mcnp5
+export DATAPATH=${native_dir}/MCNP/MCNP_DATA
+export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
