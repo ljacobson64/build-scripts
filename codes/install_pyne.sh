@@ -19,7 +19,7 @@ fi
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}
-${sudo_cmd} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 
 PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
@@ -36,7 +36,7 @@ if [ "${native_setuptools}" != "true" ]; then
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd setuptools-${pyne_setuptools_version}
   python bootstrap.py
-  ${sudo_cmd} python setup.py install --prefix=${install_prefix}
+  ${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
 fi
 
 # Pip
@@ -50,18 +50,18 @@ if [ "${native_pythonpacks}" != "true" ]; then
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd pip-${pyne_pip_version}
-  ${sudo_cmd} python setup.py install --prefix=${install_prefix}
+  ${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
 fi
 
 # Other python packages
 if [ "${native_pythonpacks}" != "true" ]; then
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade numpy
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade scipy
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade cython
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade tables
-  ${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade numpy
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade scipy
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade cython
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade tables
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
 fi
 
 # pip.conf
@@ -75,7 +75,7 @@ HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
 MOAB_DIR=${install_dir}/moab-4.9.1  # Must use version 4.9.1
 PATH=${HDF5_DIR}/bin:${PATH}
 PATH=${MOAB_DIR}/bin:${PATH}
-${sudo_cmd} pip install --prefix=${install_prefix} --ignore-installed --no-deps --upgrade pytaps
+${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --no-deps --upgrade pytaps
 
 # pyne
 cd ${build_prefix}
@@ -95,7 +95,7 @@ setup_string_2+=" --moab=${MOAB_DIR}"
 setup_string_2+=" --prefix=${install_prefix}"
 setup_string_2+=" -j${jobs}"
 
-${sudo_cmd} python setup.py ${setup_string_1} install ${setup_string_2}
+${sudo_cmd_install} python setup.py ${setup_string_1} install ${setup_string_2}
 cd ..
 LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
-${sudo_cmd} nuc_data_make
+${sudo_cmd_install} nuc_data_make

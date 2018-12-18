@@ -29,8 +29,8 @@ cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
 
 ${CMAKE} ../src ${cmake_string_static}
 make -j${jobs}
-${sudo_cmd} make -j${jobs} install
+${sudo_cmd_install} make -j${jobs} install
 cd ..; rm -rfv bld; mkdir -pv bld; cd bld
 ${CMAKE} ../src ${cmake_string_shared}
 make -j${jobs}
-${sudo_cmd} make -j${jobs} install
+${sudo_cmd_install} make -j${jobs} install

@@ -37,11 +37,7 @@ fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
-${sudo_cmd} make -j${jobs} install
+${sudo_cmd_native} make -j${jobs} install
 
 cd ${install_prefix}
-if [ "${compiler}" == "native" ]; then
-  ${sudo_cmd} tar -xzvf ${dist_dir}/talys/${tarball_data}
-else
-  ${sudo_cmd} ln -snfv $(dirname ${install_dir})/native/TALYS-${talys_version}/talys .
-fi
+${sudo_cmd_native} tar -xzvf ${dist_dir}/talys/${tarball_data}

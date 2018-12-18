@@ -24,4 +24,4 @@ fi
 
 ../src/configure ${config_string}
 make -j${jobs}
-${sudo_cmd} make -j${jobs} install
+${sudo_cmd_install} make -j${jobs} install

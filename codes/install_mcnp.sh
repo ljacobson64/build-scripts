@@ -47,4 +47,4 @@ cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${openmpi_dir}/lib"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
-${sudo_cmd} make -j${jobs} install
+${sudo_cmd_install} make -j${jobs} install

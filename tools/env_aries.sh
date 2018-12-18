@@ -16,7 +16,8 @@ export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
-export sudo_cmd=sudo
+export sudo_cmd_install=sudo
+export sudo_cmd_native=sudo
 export slurm_support=true
 export geany_needs_intltool=false
 export geant4_libdir=lib

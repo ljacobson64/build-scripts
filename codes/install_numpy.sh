@@ -14,7 +14,7 @@ if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; 
 unzip ${dist_dir}/misc/${tarball}
 cd numpy-${numpy_version}
 
-${sudo_cmd} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
 setup_string_1=
@@ -22,4 +22,4 @@ setup_string_1+=" -j${jobs}"
 setup_string_2=
 setup_string_2+=" --prefix=${install_prefix}"
 
-${sudo_cmd} python setup.py build ${setup_string_1} install ${setup_string_2}
+${sudo_cmd_install} python setup.py build ${setup_string_1} install ${setup_string_2}
