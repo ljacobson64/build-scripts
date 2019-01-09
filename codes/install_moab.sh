@@ -52,7 +52,9 @@ if [ "${with_cgm}" == "true" ]; then
   config_string+=" --enable-irel"
   config_string+=" --with-cgm=${cgm_dir}"
 fi
-config_string+=" --disable-ahf"
+if [[ "${moab_version}" == "5"* ]]; then
+  config_string+=" --enable-pymoab"
+fi
 config_string+=" --enable-shared"
 config_string+=" --enable-optimize"
 config_string+=" --disable-debug"

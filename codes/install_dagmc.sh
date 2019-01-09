@@ -21,7 +21,7 @@ install_dagmcnp6=true
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/ljacobson64/DAGMC -b no_overwrite_rpath --single-branch
+git clone https://github.com/ljacobson64/DAGMC -b latest --single-branch
 ln -sv DAGMC src
 cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then
@@ -32,8 +32,8 @@ if [ "${install_dagmcnp5}" == "true" ]; then
 fi
 if [ "${install_dagmcnp6}" == "true" ]; then
   cd src/mcnp/mcnp6
-  tar -xzvf ${dist_dir}/mcnp/mcnp611-source.tar.gz --strip-components=1
-  patch -p0 < patch/mcnp611.patch
+  tar -xzvf ${dist_dir}/mcnp/mcnp620-source.tar.gz --strip-components=1
+  patch -p0 < patch/mcnp620.patch
   cd ../../..
 fi
 if [ "${install_fludag}" == "true" ]; then
@@ -63,6 +63,7 @@ cmake_string+=" -DBUILD_MCNP_PLOT=ON"
 #cmake_string+=" -DBUILD_MCNP_OPENMP=ON"
 cmake_string+=" -DBUILD_MCNP_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
+cmake_string+=" -DBUILD_MCNP_PYNE_SOURCE=ON"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"

@@ -8,6 +8,10 @@ export pyne_setuptools_version=40.6.3
 build_prefix=${build_dir}/pyne
 install_prefix=${install_dir}/pyne
 
+hdf5_dir=${install_dir}/hdf5-${hdf5_version}
+moab_dir=${install_dir}/moab-${moab_version}
+dagmc_dir=${install_dir}/DAGMC-moab-${moab_version}
+
 if [ "${compiler}" != "native" ]; then
   PATH=${gcc_dir}/bin:${PATH}
 fi
@@ -21,6 +25,8 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}
 ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 
+PATH=${hdf5_dir}/bin:${PATH}
+PATH=${moab_dir}/bin:${PATH}
 PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
@@ -64,22 +70,9 @@ if [ "${native_pythonpacks}" != "true" ]; then
   ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
 fi
 
-# pip.conf
-mkdir -pv ~/.config/pip
-rm -rfv ~/.config/pip/pip.conf
-echo "[install]" > ~/.config/pip/pip.conf
-echo "user = false" >> ~/.config/pip/pip.conf
-
-# PyTAPS
-HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
-MOAB_DIR=${install_dir}/moab-4.9.1  # Must use version 4.9.1
-PATH=${HDF5_DIR}/bin:${PATH}
-PATH=${MOAB_DIR}/bin:${PATH}
-${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --no-deps --upgrade pytaps
-
 # pyne
 cd ${build_prefix}
-git clone https://github.com/pyne/pyne -b develop --single-branch
+git clone https://github.com/ljacobson64/pyne -b pymoab_cleanup --single-branch
 cd pyne
 sed -i "s/pyne_configure_rpath()/#pyne_configure_rpath()/" CMakeLists.txt
 
@@ -88,10 +81,11 @@ setup_string_1+=" -DCMAKE_BUILD_TYPE=Release"
 setup_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 setup_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
 setup_string_1+=" -DCMAKE_Fortran_COMPILER=${FC}"
-setup_string_1+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${HDF5_DIR}/lib:${MOAB_DIR}/lib"
+setup_string_1+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${hdf5_dir}/lib:${moab_dir}/lib:${dagmc_dir}/lib"
 setup_string_2=
-setup_string_2+=" --hdf5=${HDF5_DIR}"
-setup_string_2+=" --moab=${MOAB_DIR}"
+setup_string_2+=" --hdf5=${hdf5_dir}"
+setup_string_2+=" --moab=${moab_dir}"
+setup_string_2+=" --dagmc=${dagmc_dir}"
 setup_string_2+=" --prefix=${install_prefix}"
 setup_string_2+=" -j${jobs}"
 
