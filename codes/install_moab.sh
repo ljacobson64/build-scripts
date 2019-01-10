@@ -38,6 +38,12 @@ sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTet.cpp
 sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTri.cpp
 cd ../bld
 
+if [[ "${moab_version}" == "5"* ]] && [ "$(basename $FC)" != "ifort" ]; then
+  install_pymoab=true
+else
+  install_pymoab=false
+fi
+
 rpath_dirs=${compiler_lib_dirs}
 rpath_dirs+=:${hdf5_dir}/lib
 if [ "${with_cgm}" == "true" ]; then
@@ -52,7 +58,7 @@ if [ "${with_cgm}" == "true" ]; then
   config_string+=" --enable-irel"
   config_string+=" --with-cgm=${cgm_dir}"
 fi
-if [[ "${moab_version}" == "5"* ]]; then
+if [ "${install_pymoab}" == "true" ]; then
   config_string+=" --enable-pymoab"
 fi
 config_string+=" --enable-shared"
@@ -66,7 +72,7 @@ config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 if [ "${moab_needs_ldpath}" == "true" ]; then
   LD_LIBRARY_PATH=${compiler_lib_dirs}
 fi
-if [ "${native_python}" != "true" ]; then
+if [ "${install_pymoab}" == "true" ] && [ "${native_python}" != "true" ]; then
   PATH=${install_dir}/python-${python_version}/bin:${PATH}
 fi
 
