@@ -46,8 +46,8 @@ fi
 
 # Specify paths to compilers
 if [ "${compiler}" == "native" ]; then
-  export CC=/usr/lib64/ccache/gcc
-  export CXX=/usr/lib64/ccache/g++
+  export CC=/usr/bin/gcc
+  export CXX=/usr/bin/g++
   export FC=/usr/bin/gfortran
   export compiler_lib_dirs=
 elif [[ "${compiler}" == "gcc-"* ]]; then
