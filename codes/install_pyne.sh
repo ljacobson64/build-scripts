@@ -60,6 +60,7 @@ if [ "${native_pythonpacks}" != "true" ]; then
 fi
 
 # Other python packages
+HDF5_DIR=${hdf5_dir}
 if [ "${native_pythonpacks}" != "true" ]; then
   ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
   ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
