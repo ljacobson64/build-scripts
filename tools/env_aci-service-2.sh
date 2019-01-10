@@ -25,6 +25,8 @@ export native_python=false
 export native_setuptools=false
 export native_pythonpacks=false
 export native_exnihilo_packs=false
+export moab_needs_ldpath=true
+export mcnp_needs_omp_name=true
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake/bin:${PATH}
