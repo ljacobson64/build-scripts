@@ -42,7 +42,7 @@ if [ "${native_setuptools}" != "true" ]; then
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd setuptools-${pyne_setuptools_version}
   python bootstrap.py
-  ${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+  ${sudo_cmd_install} python setup.py install --prefix=${python_dir}
 fi
 
 # Pip
@@ -56,19 +56,19 @@ if [ "${native_pythonpacks}" != "true" ]; then
   fi
   tar -xzvf ${dist_dir}/misc/${tarball}
   cd pip-${pyne_pip_version}
-  ${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+  ${sudo_cmd_install} python setup.py install --prefix=${python_dir}
 fi
 
 # Other python packages
 HDF5_DIR=${hdf5_dir}
 if [ "${native_pythonpacks}" != "true" ]; then
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade pip
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade setuptools
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade numpy
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade scipy
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade cython
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade tables
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade nose
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade pip
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade setuptools
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade numpy
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade scipy
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade cython
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade tables
+  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade nose
 fi
 
 # pyne
