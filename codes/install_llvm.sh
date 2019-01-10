@@ -44,6 +44,8 @@ if [ -n "${compiler_lib_dirs}" ]; then
   cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
 fi
 
+LD_LIBRARY_PATH=${compiler_lib_dirs}
+
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
 ${sudo_cmd_install} make -j${jobs} install
