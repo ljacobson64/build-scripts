@@ -2,9 +2,6 @@
 
 set -e
 
-export pyne_pip_version=18.1
-export pyne_setuptools_version=40.6.3
-
 build_prefix=${build_dir}/pyne
 install_prefix=${install_dir}/pyne
 
@@ -19,6 +16,7 @@ fi
 if [ "${native_python}" != "true" ]; then
   python_dir=${install_dir}/python-${python_version}
   PATH=${python_dir}/bin:${PATH}
+  PYTHONPATH=${python_dir}/lib/python2.7/site-packages
 fi
 
 rm -rfv ${build_prefix}
@@ -28,50 +26,8 @@ ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 PATH=${hdf5_dir}/bin:${PATH}
 PATH=${moab_dir}/bin:${PATH}
 PATH=${install_prefix}/bin:${PATH}
-PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
+PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
 
-# Setuptools
-if [ "${native_python}" != "true" ]; then
-  cd ${build_prefix}
-  tarball=setuptools-${pyne_setuptools_version}.tar.gz
-  url=https://codeload.github.com/pypa/setuptools/tar.gz/v${pyne_setuptools_version}
-  if [ ! -f ${dist_dir}/misc/${tarball} ]; then
-    wget ${url} -P ${dist_dir}/misc/
-    mv -v ${dist_dir}/misc/v${pyne_setuptools_version} ${dist_dir}/misc/${tarball}
-  fi
-  tar -xzvf ${dist_dir}/misc/${tarball}
-  cd setuptools-${pyne_setuptools_version}
-  python bootstrap.py
-  ${sudo_cmd_install} python setup.py install --prefix=${python_dir}
-fi
-
-# Pip
-if [ "${native_python}" != "true" ]; then
-  cd ${build_prefix}
-  tarball=pip-${pyne_pip_version}.tar.gz
-  url=https://codeload.github.com/pypa/pip/tar.gz/${pyne_pip_version}
-  if [ ! -f ${dist_dir}/misc/${tarball} ]; then
-    wget ${url} -P ${dist_dir}/misc/
-    mv -v ${dist_dir}/misc/${pyne_pip_version} ${dist_dir}/misc/${tarball}
-  fi
-  tar -xzvf ${dist_dir}/misc/${tarball}
-  cd pip-${pyne_pip_version}
-  ${sudo_cmd_install} python setup.py install --prefix=${python_dir}
-fi
-
-# Other python packages
-HDF5_DIR=${hdf5_dir}
-if [ "${native_python}" != "true" ]; then
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade pip
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade setuptools
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade numpy
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade scipy
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade cython
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade tables
-  ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade nose
-fi
-
-# pyne
 cd ${build_prefix}
 git clone https://github.com/ljacobson64/pyne -b pymoab_cleanup --single-branch
 cd pyne

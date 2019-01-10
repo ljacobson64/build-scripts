@@ -24,3 +24,49 @@ config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${install_prefix}/lib"
 ../src/configure ${config_string}
 make -j${jobs}
 ${sudo_cmd_install} make -j${jobs} install
+
+if [ "${native_python}" == "true" ]; then
+  quit()
+fi
+
+export python_pip_version=18.1
+export python_setuptools_version=40.6.3
+
+if [ "${compiler}" != "native" ]; then
+  PATH=${gcc_dir}/bin:${PATH}
+fi
+
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
+PATH=${install_prefix}/bin:${PATH}
+PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
+
+HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
+
+cd ${build_prefix}
+tarball=setuptools-${python_setuptools_version}.tar.gz
+url=https://codeload.github.com/pypa/setuptools/tar.gz/v${python_setuptools_version}
+if [ ! -f ${dist_dir}/misc/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/misc/
+  mv -v ${dist_dir}/misc/v${python_setuptools_version} ${dist_dir}/misc/${tarball}
+fi
+tar -xzvf ${dist_dir}/misc/${tarball}
+cd setuptools-${python_setuptools_version}
+python bootstrap.py
+${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+
+cd ${build_prefix}
+tarball=pip-${python_pip_version}.tar.gz
+url=https://codeload.github.com/pypa/pip/tar.gz/${python_pip_version}
+if [ ! -f ${dist_dir}/misc/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/misc/
+  mv -v ${dist_dir}/misc/${python_pip_version} ${dist_dir}/misc/${tarball}
+fi
+tar -xzvf ${dist_dir}/misc/${tarball}
+cd pip-${python_pip_version}
+${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+
+cd ${build_prefix}
+python_packs="pip setuptools numpy scipy cython tables nose"
+for pack in ${python_packs}; do
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade ${pack}
+done
