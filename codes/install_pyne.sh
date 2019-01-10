@@ -31,7 +31,7 @@ PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
 # Setuptools
-if [ "${native_setuptools}" != "true" ]; then
+if [ "${native_python}" != "true" ]; then
   cd ${build_prefix}
   tarball=setuptools-${pyne_setuptools_version}.tar.gz
   url=https://codeload.github.com/pypa/setuptools/tar.gz/v${pyne_setuptools_version}
@@ -46,7 +46,7 @@ if [ "${native_setuptools}" != "true" ]; then
 fi
 
 # Pip
-if [ "${native_pythonpacks}" != "true" ]; then
+if [ "${native_python}" != "true" ]; then
   cd ${build_prefix}
   tarball=pip-${pyne_pip_version}.tar.gz
   url=https://codeload.github.com/pypa/pip/tar.gz/${pyne_pip_version}
@@ -61,7 +61,7 @@ fi
 
 # Other python packages
 HDF5_DIR=${hdf5_dir}
-if [ "${native_pythonpacks}" != "true" ]; then
+if [ "${native_python}" != "true" ]; then
   ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade pip
   ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade setuptools
   ${sudo_cmd_install} pip install --prefix=${python_dir} --ignore-installed --upgrade numpy

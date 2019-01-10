@@ -66,6 +66,9 @@ config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 if [ "${moab_needs_ldpath}" == "true" ]; then
   LD_LIBRARY_PATH=${compiler_lib_dirs}
 fi
+if [ "${native_python}" != "true" ]; then
+  PATH=${install_dir}/python-${python_version}/bin:${PATH}
+fi
 
 ../src/configure ${config_string}
 make -j${jobs}
