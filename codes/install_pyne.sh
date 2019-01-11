@@ -29,7 +29,7 @@ PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
 
 cd ${build_prefix}
-git clone https://github.com/ljacobson64/pyne -b pymoab_cleanup --single-branch
+git clone https://github.com/ljacobson64/pyne -b latest --single-branch
 cd pyne
 sed -i "s/pyne_configure_rpath()/#pyne_configure_rpath()/" CMakeLists.txt
 
