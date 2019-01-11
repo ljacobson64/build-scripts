@@ -37,7 +37,7 @@ if [ "${install_dagmcnp6}" == "true" ]; then
   cd ../../..
 fi
 if [ "${install_fludag}" == "true" ]; then
-  if [ ! -x ${fluka_dir}/bin/flutil/rfluka.orig ]; then
+  if [ ! -f ${fluka_dir}/bin/flutil/rfluka.orig ]; then
     patch -Nb ${fluka_dir}/bin/flutil/rfluka src/fluka/rfluka.patch
   fi
 fi
