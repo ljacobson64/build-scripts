@@ -7,6 +7,7 @@ export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/home/lucas/opt/${compiler}
 export native_dir=/opt
+export gcc_dir=
 export intel_dir=/opt/intel
 export lapack_dir=/usr/lib/x86_64-linux-gnu
 
@@ -29,9 +30,6 @@ export mcnp_needs_omp_name=false
 # Specify location of CMake
 export PATH=${native_dir}/cmake/bin:${PATH}
 export CMAKE=${native_dir}/cmake/bin/cmake
-
-# Specify path to GCC
-export gcc_dir=
 
 # Specify path to intel compiler
 if   [ "${compiler}" == "intel-13" ]; then intel_dir=${intel_dir}/13.1.3.192

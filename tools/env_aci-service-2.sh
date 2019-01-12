@@ -7,6 +7,7 @@ export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/home/group/dagmc/opt/${compiler}
 export native_dir=/home/group/dagmc/opt/misc
+export gcc_dir=
 export intel_dir=
 export lapack_dir=/usr/lib64/atlas
 
