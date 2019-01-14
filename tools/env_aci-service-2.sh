@@ -2,6 +2,7 @@
 
 source versions.sh
 export binutils_version=2.30
+export geany_version=1.27
 export openmpi_version=3.1.3
 
 # Important directories
@@ -23,7 +24,7 @@ export sudo_cmd_install=
 export sudo_cmd_native=
 export slurm_support=true
 export pmi_support=true
-export geany_needs_intltool=true
+export geany_needs_intltool=false
 export geant4_libdir=lib64
 export native_python=false
 export native_exnihilo_packs=false
