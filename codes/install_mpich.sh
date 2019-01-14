@@ -9,13 +9,14 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=mpich-${mpich_version}.tar.gz
-url=http://www.mpich.org/static/downloads/${version}/${tarball}
+url=http://www.mpich.org/static/downloads/${mpich_version}/${tarball}
 if [ ! -f ${dist_dir}/mpich/${tarball} ]; then wget ${url} -P ${dist_dir}/mpich/; fi
 tar -xzvf ${dist_dir}/mpich/${tarball}
 ln -sv mpich-${mpich_version} src
 cd bld
 
 config_string=
+LIBS=
 if [ "${slurm_support}" == "true" ]; then
   config_string+=" --with-slurm=/usr"
 fi

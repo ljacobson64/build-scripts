@@ -21,6 +21,9 @@ cd bld
 config_string=
 if [ "${slurm_support}" == "true" ]; then
   config_string+=" --with-slurm"
+  if [ "${pmi_support}" == "true" ]; then
+    config_string+=" --with-pmi"
+  fi
 fi
 config_string+=" --enable-static"
 config_string+=" --disable-dlopen"

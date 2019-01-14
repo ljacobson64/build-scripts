@@ -20,6 +20,7 @@ export jobs=`grep -c processor /proc/cpuinfo`
 export sudo_cmd_install=
 export sudo_cmd_native=sudo
 export slurm_support=true
+export pmi_support=false
 export geany_needs_intltool=false
 export geant4_libdir=lib
 export native_python=true
