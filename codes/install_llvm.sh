@@ -14,7 +14,7 @@ function setup_project() {
 set -e
 
 build_prefix=${build_dir}/llvm-${llvm_version}
-install_prefix=${install_dir}/llvm-${llvm_version}
+install_prefix=${native_dir}/llvm-${llvm_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
