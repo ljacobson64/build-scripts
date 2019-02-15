@@ -26,7 +26,7 @@ export geant4_libdir=lib
 export native_python=true
 export native_exnihilo_packs=true
 export moab_needs_ldpath=false
-export mcnp_needs_omp_name=false
+export mcnp_needs_omp_name=true
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake/bin:${PATH}
