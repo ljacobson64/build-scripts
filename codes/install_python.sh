@@ -40,8 +40,6 @@ ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
 PATH=${install_prefix}/bin:${PATH}
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 
-HDF5_DIR=${install_dir}/hdf5-${hdf5_version}
-
 cd ${build_prefix}
 tarball=setuptools-${python_setuptools_version}.tar.gz
 url=https://codeload.github.com/pypa/setuptools/tar.gz/v${python_setuptools_version}
