@@ -66,5 +66,5 @@ ${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"
 for pack in ${python_packs}; do
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --ignore-installed --upgrade ${pack}
+  ${sudo_cmd_install} pip install --prefix=${install_prefix} --upgrade ${pack}
 done

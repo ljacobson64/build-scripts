@@ -21,7 +21,7 @@ install_dagmcnp6=true
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/ljacobson64/DAGMC -b latest --single-branch
+git clone https://github.com/svalinn/DAGMC -b develop --single-branch
 ln -sv DAGMC src
 cd DAGMC
 if [ "${install_dagmcnp5}" == "true" ]; then

@@ -39,5 +39,5 @@ PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"
 for pack in ${python_packs}; do
-  ${sudo_cmd_install} pip3 install --prefix=${install_prefix} --ignore-installed --upgrade ${pack}
+  ${sudo_cmd_install} pip3 install --prefix=${install_prefix} --upgrade ${pack}
 done
