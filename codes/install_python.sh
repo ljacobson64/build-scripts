@@ -26,7 +26,7 @@ make -j${jobs}
 ${sudo_cmd_install} make -j${jobs} install
 
 if [ "${native_python}" == "true" ]; then
-  quit()
+  exit 0
 fi
 
 export python_pip_version=18.1
