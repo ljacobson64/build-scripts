@@ -2,14 +2,14 @@
 
 set -e
 
-build_prefix=${build_dir}/MCNPTOOLS
-install_prefix=${native_dir}/MCNPTOOLS
+build_prefix=${build_dir}/MCNPTOOLS-${mcnptools_version}
+install_prefix=${native_dir}/MCNPTOOLS-${mcnptools_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-tar -xzvf ${dist_dir}/mcnp/mcnp620-tools.tar.gz
-ln -sv MCNPTOOLS/Source/libmcnptools src
+unzip ${dist_dir}/mcnp/mcnptools-${mcnptools_version}.zip
+ln -sv Source/libmcnptools src
 cd bld
 
 cmake_string=
@@ -21,7 +21,7 @@ ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
 ${sudo_cmd_native} make -j${jobs} install
 
-cd ../MCNPTOOLS/Source/python
+cd ../Source/python
 
 python setup.py build
 ${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
