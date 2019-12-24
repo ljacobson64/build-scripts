@@ -5,8 +5,8 @@ source versions.sh
 # Important directories
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
-export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
-export native_dir=/groupspace/cnerg/users/jacobson/opt/misc
+export install_dir=/groupspace/cnerg/users/jacobson/opt/software_${compiler}
+export native_dir=/groupspace/cnerg/users/jacobson/opt/software_misc
 export gcc_dir=
 export intel_dir=/groupspace/cnerg/users/jacobson/intel
 export lapack_dir=/usr/lib
@@ -35,9 +35,10 @@ export CMAKE=${native_dir}/cmake/bin/cmake
 # Specify path to GCC
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0
 elif [ "${compiler}" == "gcc-6"  ]; then gcc_dir=${native_dir}/gcc-6.5.0
-elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.4.0
-elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.2.0
-elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-8.2.0
+elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.5.0
+elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.3.0
+elif [ "${compiler}" == "gcc-9"  ]; then gcc_dir=${native_dir}/gcc-9.2.0
+elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-9.2.0
 fi
 
 # Specify path to intel compiler
@@ -47,7 +48,8 @@ elif [ "${compiler}" == "intel-15" ]; then intel_dir=${intel_dir}/15.0.7.235
 elif [ "${compiler}" == "intel-16" ]; then intel_dir=${intel_dir}/16.0.8.266
 elif [ "${compiler}" == "intel-17" ]; then intel_dir=${intel_dir}/17.0.8.262
 elif [ "${compiler}" == "intel-18" ]; then intel_dir=${intel_dir}/18.0.5.274
-elif [ "${compiler}" == "custom"   ]; then intel_dir=${intel_dir}/18.0.5.274
+elif [ "${compiler}" == "intel-19" ]; then intel_dir=${intel_dir}/19.0.5.281
+elif [ "${compiler}" == "custom"   ]; then intel_dir=${intel_dir}/19.0.5.281
 fi
 
 # Specify paths to compilers

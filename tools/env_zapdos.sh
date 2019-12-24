@@ -5,8 +5,8 @@ source versions.sh
 # Important directories
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
-export install_dir=/home/lucas/opt/${compiler}
-export native_dir=/opt
+export install_dir=opt/software_${compiler}
+export native_dir=/opt/software_misc
 export gcc_dir=
 export intel_dir=/opt/intel
 export lapack_dir=/usr/lib/x86_64-linux-gnu
@@ -17,7 +17,7 @@ export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
 export jobs=`grep -c processor /proc/cpuinfo`
-export sudo_cmd_install=
+export sudo_cmd_install=sudo
 export sudo_cmd_native=sudo
 export slurm_support=true
 export pmi_support=false
@@ -39,7 +39,8 @@ elif [ "${compiler}" == "intel-15" ]; then intel_dir=${intel_dir}/15.0.7.235
 elif [ "${compiler}" == "intel-16" ]; then intel_dir=${intel_dir}/16.0.8.266
 elif [ "${compiler}" == "intel-17" ]; then intel_dir=${intel_dir}/17.0.8.262
 elif [ "${compiler}" == "intel-18" ]; then intel_dir=${intel_dir}/18.0.5.274
-elif [ "${compiler}" == "custom"   ]; then intel_dir=${intel_dir}/18.0.5.274
+elif [ "${compiler}" == "intel-19" ]; then intel_dir=${intel_dir}/19.0.5.281
+elif [ "${compiler}" == "custom"   ]; then intel_dir=${intel_dir}/19.0.5.281
 fi
 
 # Specify paths to compilers

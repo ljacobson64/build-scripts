@@ -8,8 +8,8 @@ export openmpi_version=3.1.3
 # Important directories
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
-export install_dir=/home/group/dagmc/opt/${compiler}
-export native_dir=/home/group/dagmc/opt/misc
+export install_dir=/home/group/dagmc/opt/software_${compiler}
+export native_dir=/home/group/dagmc/opt/software_misc
 export gcc_dir=
 export intel_dir=
 export lapack_dir=/usr/lib64/atlas
@@ -39,8 +39,9 @@ export CMAKE=${native_dir}/cmake/bin/cmake
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0
 elif [ "${compiler}" == "gcc-6"  ]; then gcc_dir=${native_dir}/gcc-6.5.0
 elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.4.0
-elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.2.0
-elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-8.2.0
+elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.3.0
+elif [ "${compiler}" == "gcc-9"  ]; then gcc_dir=${native_dir}/gcc-9.2.0
+elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-9.2.0
 fi
 
 # Specify path to intel compiler
