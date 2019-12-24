@@ -28,7 +28,11 @@ config_string+=" --disable-debug"
 config_string+=" --with-occ=${oce_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${oce_dir}/lib"
+if [ -n "${compiler_lib_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${oce_dir}/lib"
+else
+  config_string+=" LDFLAGS=-Wl,-rpath,${oce_dir}/lib"
+fi
 
 ../src/configure ${config_string}
 make -j${jobs}

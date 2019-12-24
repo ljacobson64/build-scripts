@@ -38,7 +38,11 @@ setup_string_1+=" -DCMAKE_BUILD_TYPE=Release"
 setup_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 setup_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
 setup_string_1+=" -DCMAKE_Fortran_COMPILER=${FC}"
-setup_string_1+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${hdf5_dir}/lib:${moab_dir}/lib:${dagmc_dir}/lib"
+if [ -n "${compiler_lib_dirs}" ]; then
+  setup_string_1+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${hdf5_dir}/lib:${moab_dir}/lib:${dagmc_dir}/lib"
+else
+  setup_string_1+=" -DCMAKE_INSTALL_RPATH=${hdf5_dir}/lib:${moab_dir}/lib:${dagmc_dir}/lib"
+fi
 setup_string_2=
 setup_string_2+=" --hdf5=${hdf5_dir}"
 setup_string_2+=" --moab=${moab_dir}"

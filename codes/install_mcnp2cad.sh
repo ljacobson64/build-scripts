@@ -33,7 +33,11 @@ if [ ! -f /usr/lib/libarmadillo.so ]; then
 fi
 make_string+=" CGM_BASE_DIR=${cgm_dir}"
 make_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${cubit_dir}/bin:${cgm_dir}/lib"
+if [ -n "${compiler_lib_dirs}" ]; then
+  make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${cubit_dir}/bin:${cgm_dir}/lib"
+else
+  make_string_pre="LDFLAGS=-Wl,-rpath,:${cubit_dir}/bin:${cgm_dir}/lib"
+fi
 
 eval ${make_string_pre} make -j${jobs} ${make_string}
 ${sudo_cmd_install} mkdir -pv ${install_prefix}/bin

@@ -48,7 +48,11 @@ cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${openmpi_dir}/lib"
+if [ -n "${compiler_lib_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${openmpi_dir}/lib"
+else
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${openmpi_dir}/lib"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}

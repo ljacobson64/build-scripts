@@ -18,7 +18,11 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${install_prefix}/lib"
+if [ -n "${compiler_lib_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${install_prefix}/lib"
+else
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${install_prefix}/lib"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
