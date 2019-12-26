@@ -23,7 +23,7 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=exnihilo-${exnihilo_version}.tar.gz
-tar -xzvf ${dist_dir}/misc/${tarball}
+tar -xzvf ${dist_dir}/advantg/${tarball}
 ln -sv Scale src
 cd Scale
 mv Exnihilo ..

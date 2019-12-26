@@ -23,14 +23,14 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=advantg-${advantg_version}.tar.gz
-tar -xzvf ${dist_dir}/misc/${tarball}
+tar -xzvf ${dist_dir}/advantg/${tarball}
 ln -sv advantg src
 cd advantg
 sed -i "s/ADVANTG CXX Fortran/ADVANTG C CXX Fortran/" CMakeLists.txt
 
 ${sudo_cmd_install} mkdir -p ${install_prefix}/mgxs
 cd ${install_prefix}/mgxs
-${sudo_cmd_install} tar -xzvf ${dist_dir}/misc/mgxs.tar.gz
+${sudo_cmd_install} tar -xzvf ${dist_dir}/advantg/mgxs.tar.gz
 
 cd ${build_prefix}/bld
 
