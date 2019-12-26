@@ -5,7 +5,7 @@ source versions.sh
 # Important directories
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
-export install_dir=opt/software_${compiler}
+export install_dir=/opt/software_${compiler}
 export native_dir=/opt/software_misc
 export gcc_dir=
 export intel_dir=/opt/intel
