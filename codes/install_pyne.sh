@@ -52,5 +52,15 @@ setup_string_2+=" -j${jobs}"
 
 ${sudo_cmd_install} python setup.py ${setup_string_1} install ${setup_string_2}
 cd ..
-LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
-${sudo_cmd_install} nuc_data_make
+
+if [ -z "${sudo_cmd_install}" ]; then
+  LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
+  ${sudo_cmd_install} nuc_data_make
+else
+  export install_prefix
+  sudo --preserve-env=install_prefix sh -c '
+  export PATH=${install_prefix}/bin:${PATH}
+  export PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
+  export LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
+  nuc_data_make'
+fi
