@@ -11,7 +11,5 @@ tarball=fluka${fluka_version}-linux-gfor64bitAA.tar.gz
 ${sudo_cmd_install} tar -xzvf ${dist_dir}/misc/${tarball}
 
 if [ ! -z "${gcc_dir}" ]; then PATH=${gcc_dir}/bin:${PATH}; fi
-export FLUFOR=$(basename $FC)
-export FLUPRO=${PWD}
 
-${sudo_cmd_install} make
+${sudo_cmd_install} FLUFOR=$(basename $FC) FLUPRO=${PWD} make
