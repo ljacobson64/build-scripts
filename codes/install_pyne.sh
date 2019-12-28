@@ -58,7 +58,7 @@ if [ -z "${sudo_cmd_install}" ]; then
   ${sudo_cmd_install} nuc_data_make
 else
   export install_prefix
-  sudo --preserve-env=install_prefix sh -c '
+  ${sudo_cmd_install} --preserve-env=install_prefix sh -c '
   export PATH=${install_prefix}/bin:${PATH}
   export PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
   export LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}

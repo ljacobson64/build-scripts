@@ -12,4 +12,10 @@ ${sudo_cmd_install} tar -xzvf ${dist_dir}/misc/${tarball}
 
 if [ ! -z "${gcc_dir}" ]; then PATH=${gcc_dir}/bin:${PATH}; fi
 
-${sudo_cmd_install} FLUFOR=$(basename $FC) FLUPRO=${PWD} make
+export FLUFOR=$(basename $FC)
+export FLUPRO=${PWD}
+if [ -z "${sudo_cmd_install}" ]; then
+  ${sudo_cmd_install} make
+else
+  ${sudo_cmd_install} --preserve-env=FLUFOR,FLUPRO make
+fi

@@ -5,8 +5,8 @@ source versions.sh
 # Important directories
 export dist_dir=/groupspace/cnerg/users/jacobson/dist
 export build_dir=/local.hd/cnergg/jacobson/build/${compiler}
-export install_dir=/groupspace/cnerg/users/jacobson/opt/software_${compiler}
-export native_dir=/groupspace/cnerg/users/jacobson/opt/software_misc
+export install_dir=/groupspace/cnerg/users/jacobson/opt/${compiler}
+export native_dir=/groupspace/cnerg/users/jacobson/opt/misc
 export gcc_dir=
 export intel_dir=/groupspace/cnerg/users/jacobson/intel
 export lapack_dir=/usr/lib
