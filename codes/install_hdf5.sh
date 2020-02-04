@@ -19,6 +19,9 @@ ln -sv hdf5-${hdf5_version} src
 cd bld
 
 config_string=
+config_string+=" --enable-cxx"
+config_string+=" --enable-fortran"
+config_string+=" --enable-java"
 config_string+=" --enable-shared"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"

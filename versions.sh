@@ -5,6 +5,7 @@ export armadillo_version=9.800.3
 export binutils_version=2.33.1
 export cgm_version=14.0
 export cmake_version=3.16.2
+export dakota_version=6.11.0
 export exnihilo_version=5.4.0
 export fluka_version=2011.2x
 export gcc_version=9.2.0
