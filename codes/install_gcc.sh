@@ -44,5 +44,5 @@ config_string+=" --with-pkgversion=CNERG"
 config_string+=" --prefix=${install_prefix}"
 
 ../src/configure ${config_string}
-make -j${jobs}
+env -i PATH=/bin:/usr/bin make -j${jobs}
 ${sudo_cmd_native} make -j${jobs} install
