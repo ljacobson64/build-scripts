@@ -3,7 +3,6 @@
 source versions.sh
 export binutils_version=2.30
 export geany_version=1.27
-export openmpi_version=3.1.3
 
 # Important directories
 export dist_dir=/home/ljjacobson/dist
