@@ -6,8 +6,8 @@ build_prefix=${build_dir}/openmc-${openmc_version}
 install_prefix=${install_dir}/openmc-${openmc_version}
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
-hdf5_dir=/opt/software_native/hdf5-${hdf5_version}
-dagmc_dir=/opt/software_native/DAGMC-moab-${moab_version}
+hdf5_dir=${install_dir}/hdf5-${hdf5_version}
+dagmc_dir=${install_dir}/DAGMC-moab-${moab_version}
 
 CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++
