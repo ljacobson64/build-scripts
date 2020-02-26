@@ -28,6 +28,7 @@ export njoy_version=2016
 export numpy_version=1.18.0
 export oce_version=0.18.3
 export opencascade_version=7.3.0
+export openmc_version=0.11.0
 export openmpi_version=3.1.5
 export pcre_version=8.43
 export python_version=2.7.17
