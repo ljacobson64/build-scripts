@@ -3,6 +3,7 @@
 source versions.sh
 export binutils_version=2.30
 export geany_version=1.27
+export python3_version=3.6.10
 
 # Important directories
 export dist_dir=/home/ljjacobson/dist
