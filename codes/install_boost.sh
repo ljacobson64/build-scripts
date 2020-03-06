@@ -29,6 +29,10 @@ else
   rpath_dirs=${install_prefix}/lib
 fi
 
+if [ "${native_python}" != "true" ]; then
+  PATH=${install_dir}/python-${python_version}/bin:${PATH}
+fi
+
 b2_string=
 if [[ "${compiler}" == "intel-"* ]]; then
   b2_string+=" --toolset=intel"
