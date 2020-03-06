@@ -3,6 +3,7 @@
 export advantg_version=3.0.3
 export armadillo_version=9.800.3
 export binutils_version=2.33.1
+export boost_version=1.72.0
 export cgm_version=14.0
 export cmake_version=3.16.2
 export dakota_version=6.11.0
