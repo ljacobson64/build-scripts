@@ -25,7 +25,6 @@ export geany_needs_intltool=true
 export geant4_libdir=lib
 export native_python=false
 export native_exnihilo_packs=false
-export moab_needs_ldpath=false
 export mcnp_needs_omp_name=true
 
 # Specify location of CMake

@@ -72,12 +72,11 @@ config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
-if [ "${moab_needs_ldpath}" == "true" ]; then
-  LD_LIBRARY_PATH=${compiler_lib_dirs}
-fi
 if [ "${install_pymoab}" == "true" ] && [ "${native_python}" != "true" ]; then
   PATH=${install_dir}/python-${python_version}/bin:${PATH}
 fi
+
+LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ../src/configure ${config_string}
 make -j${jobs}

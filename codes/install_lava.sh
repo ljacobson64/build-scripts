@@ -5,8 +5,6 @@ set -e
 build_prefix=${build_dir}/lava-${lava_version}
 install_prefix=${install_dir}/lava-${lava_version}
 
-LD_LIBRARY_PATH=${compiler_lib_dirs}
-
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
@@ -28,6 +26,8 @@ cmake_string_static=${cmake_string}
 cmake_string_shared=${cmake_string}
 cmake_string_static+=" -DBUILD_SHARED_LIBS=OFF"
 cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
+
+LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ${CMAKE} ../src ${cmake_string_static}
 make -j${jobs}
