@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/boost-${boost_version}
-install_prefix=${native_dir}/boost-${boost_version}
+install_prefix=${install_dir}/boost-${boost_version}
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 
@@ -18,6 +18,24 @@ tar -xzvf ${dist_dir}/misc/${tarball}
 cd boost_${boost_version_with_underscores}
 
 ./bootstrap.sh --prefix=${install_prefix}
+
 echo >> project-config.jam
 echo "using mpi : ${openmpi_dir}/bin/mpicc ;" >> project-config.jam
-${sudo_cmd_native} ./b2 link=shared runtime-link=shared linkflags="-Wl,-rpath,${install_prefix}/lib" -j ${jobs} install
+
+if [ -n "${compiler_lib_dirs}" ]; then
+  PATH=$(dirname ${CXX}):${PATH}
+  rpath_dirs=${compiler_lib_dirs}:${install_prefix}/lib
+else
+  rpath_dirs=${install_prefix}/lib
+fi
+
+b2_string=
+if [[ "${compiler}" == "intel-"* ]]; then
+  b2_string+=" --toolset=intel"
+fi
+b2_string+=" link=shared"
+b2_string+=" runtime-link=shared"
+b2_string+=" linkflags=-Wl,-rpath,${rpath_dirs}"
+b2_string+=" -j${jobs}"
+
+${sudo_cmd_install} ./b2 ${b2_string} install
