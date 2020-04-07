@@ -18,11 +18,11 @@ silo_dir=${install_dir}/silo-${silo_version}
 ./configure.py --use-silo --silo-inc-dir=${silo_dir}/include --silo-lib-dir=${silo_dir}/lib
 
 ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python3.6/site-packages
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python3.8/site-packages
 
 setup_string="--prefix=${install_prefix}"
 
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 ${sudo_cmd_install} python setup.py install ${setup_string}
-PYTHONPATH=${install_prefix}/lib/python3.6/site-packages
+PYTHONPATH=${install_prefix}/lib/python3.8/site-packages
 ${sudo_cmd_install} python3 setup.py install ${setup_string}

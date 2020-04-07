@@ -16,17 +16,17 @@ fi
 if [ "${native_python}" != "true" ]; then
   python_dir=${install_dir}/python-${python_version}
   PATH=${python_dir}/bin:${PATH}
-  PYTHONPATH=${python_dir}/lib/python2.7/site-packages
+  PYTHONPATH=${python_dir}/lib/python3.8/site-packages
 fi
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python3.8/site-packages
 
 PATH=${hdf5_dir}/bin:${PATH}
 PATH=${moab_dir}/bin:${PATH}
 PATH=${install_prefix}/bin:${PATH}
-PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
+PYTHONPATH=${install_prefix}/lib/python3.8/site-packages:${PYTHONPATH}
 
 cd ${build_prefix}
 git clone https://github.com/pyne/pyne -b develop --single-branch
@@ -60,7 +60,7 @@ else
   export install_prefix
   ${sudo_cmd_install} --preserve-env=install_prefix sh -c '
   export PATH=${install_prefix}/bin:${PATH}
-  export PYTHONPATH=${install_prefix}/lib/python2.7/site-packages:${PYTHONPATH}
+  export PYTHONPATH=${install_prefix}/lib/python3.8/site-packages:${PYTHONPATH}
   export LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
   nuc_data_make'
 fi

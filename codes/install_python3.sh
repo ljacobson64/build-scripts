@@ -38,7 +38,7 @@ if [ "${compiler}" != "native" ]; then
 fi
 
 PATH=${install_prefix}/bin:${PATH}
-PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
+PYTHONPATH=${install_prefix}/lib/python3.8/site-packages
 
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"

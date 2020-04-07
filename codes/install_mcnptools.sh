@@ -29,6 +29,6 @@ PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
 ${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python setup.py install --prefix=${install_prefix}
 
 python3 setup.py build
-${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python3.6/site-packages
-PYTHONPATH=${install_prefix}/lib/python3.6/site-packages
+${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python3.8/site-packages
+PYTHONPATH=${install_prefix}/lib/python3.8/site-packages
 ${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python3 setup.py install --prefix=${install_prefix}
