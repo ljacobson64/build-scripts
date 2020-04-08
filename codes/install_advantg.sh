@@ -27,6 +27,7 @@ tar -xzvf ${dist_dir}/advantg/${tarball}
 ln -sv advantg src
 cd advantg
 sed -i "s/ADVANTG CXX Fortran/ADVANTG C CXX Fortran/" CMakeLists.txt
+sed -i "s/find_package(PythonInterp)/find_package(PythonInterp 2)/" cmake/config.cmake
 
 ${sudo_cmd_install} mkdir -p ${install_prefix}/mgxs
 cd ${install_prefix}/mgxs
