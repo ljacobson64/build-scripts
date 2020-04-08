@@ -17,7 +17,9 @@ url=https://dakota.sandia.gov/sites/default/files/distributions/public/${tarball
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 ln -sv dakota-${dakota_version}-release-public.src-UI src
-cd bld
+cd dakota-${dakota_version}-release-public.src-UI
+sed -i "s/find_package(Boost 1.49 REQUIRED COMPONENTS \"\${dakota_boost_components}\")/find_package(Boost 1.49 REQUIRED COMPONENTS \${dakota_boost_components})/" CMakeLists.txt
+cd ../bld
 
 if [ -n "${compiler_lib_dirs}" ]; then
   LD_LIBRARY_PATH=${compiler_lib_dirs}
