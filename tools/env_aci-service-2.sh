@@ -28,8 +28,9 @@ export geany_needs_intltool=false
 export geant4_libdir=lib64
 export native_eigen=false
 export native_python=false
+export native_boost=false
+export native_latex=false
 export native_exnihilo_packs=false
-export mcnp_needs_omp_name=true
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake/bin:${PATH}
@@ -38,10 +39,10 @@ export CMAKE=${native_dir}/cmake/bin/cmake
 # Specify path to GCC
 if   [ "${compiler}" == "gcc-5"  ]; then gcc_dir=${native_dir}/gcc-5.5.0
 elif [ "${compiler}" == "gcc-6"  ]; then gcc_dir=${native_dir}/gcc-6.5.0
-elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.4.0
-elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.3.0
-elif [ "${compiler}" == "gcc-9"  ]; then gcc_dir=${native_dir}/gcc-9.2.0
-elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-9.2.0
+elif [ "${compiler}" == "gcc-7"  ]; then gcc_dir=${native_dir}/gcc-7.5.0
+elif [ "${compiler}" == "gcc-8"  ]; then gcc_dir=${native_dir}/gcc-8.4.0
+elif [ "${compiler}" == "gcc-9"  ]; then gcc_dir=${native_dir}/gcc-9.3.0
+elif [ "${compiler}" == "custom" ]; then gcc_dir=${native_dir}/gcc-8.4.0
 fi
 
 # Specify path to intel compiler

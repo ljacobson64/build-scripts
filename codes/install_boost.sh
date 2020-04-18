@@ -24,6 +24,7 @@ echo "using mpi : ${openmpi_dir}/bin/mpicc ;" >> project-config.jam
 
 if [ -n "${compiler_lib_dirs}" ]; then
   PATH=$(dirname ${CXX}):${PATH}
+  LD_LIBRARY_PATH=${compiler_lib_dirs}
   rpath_dirs=${compiler_lib_dirs}:${install_prefix}/lib
 else
   rpath_dirs=${install_prefix}/lib

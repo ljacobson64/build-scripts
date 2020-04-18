@@ -25,8 +25,9 @@ export geany_needs_intltool=false
 export geant4_libdir=lib
 export native_eigen=true
 export native_python=true
+export native_boost=true
+export native_latex=true
 export native_exnihilo_packs=true
-export mcnp_needs_omp_name=true
 
 # Specify location of CMake
 export PATH=${native_dir}/cmake/bin:${PATH}

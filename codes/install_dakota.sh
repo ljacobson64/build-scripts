@@ -7,6 +7,7 @@ install_prefix=${install_dir}/dakota-${dakota_version}
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
+boost_dir=${install_dir}/boost-${boost_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -25,7 +26,15 @@ cmake_string+=" -DHAVE_QUESO=ON"
 cmake_string+=" -DDAKOTA_HAVE_GSL=ON"
 cmake_string+=" -DDAKOTA_HAVE_HDF5=ON"
 cmake_string+=" -DHDF5_ROOT=${hdf5_dir}"
-cmake_string+=" -DENABLE_DAKOTA_DOCS=TRUE"
+if [ "${native_boost}" == "false" ]; then
+  cmake_string+=" -DBoost_NO_SYSTEM_PATHS=TRUE"
+  cmake_string+=" -DBOOST_ROOT=${boost_dir}"
+fi
+if [ "${native_latex}" == "true" ]; then
+  cmake_string+=" -DENABLE_DAKOTA_DOCS=TRUE"
+else
+  cmake_string+=" -DENABLE_DAKOTA_DOCS=FALSE"
+fi
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"

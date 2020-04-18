@@ -30,11 +30,6 @@ cmake_string+=" -DBUILD_MCNP620=ON"
 cmake_string+=" -DBUILD_PLOT=ON"
 if [ "$(basename $FC)" == "ifort" ]; then
   cmake_string+=" -DBUILD_OPENMP=ON"
-  if [ "${mcnp_needs_omp_name}" == "true" ]; then
-    cmake_string+=" -DOpenMP_C_LIB_NAMES:STRING=gomp"
-    cmake_string+=" -DOpenMP_CXX_LIB_NAMES:STRING=gomp"
-    cmake_string+=" -DOpenMP_Fortran_LIB_NAMES:STRING=gomp"
-  fi
 fi
 cmake_string+=" -DBUILD_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
