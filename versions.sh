@@ -27,7 +27,6 @@ export mpc_version=1.1.0
 export mpfr_version=4.0.2
 export mpich_version=3.3.2
 export njoy_version=2016
-export numpy_version=1.18.2
 export oce_version=0.18.3
 export opencascade_version=7.4.0
 export openmc_version=0.11.0
