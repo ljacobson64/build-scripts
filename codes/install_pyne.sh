@@ -50,7 +50,7 @@ setup_string_2+=" --dagmc=${dagmc_dir}"
 setup_string_2+=" --prefix=${install_prefix}"
 setup_string_2+=" -j${jobs}"
 
-${sudo_cmd_install} python setup.py ${setup_string_1} install ${setup_string_2}
+${sudo_cmd_install} python3 setup.py ${setup_string_1} install ${setup_string_2}
 cd ..
 
 if [ -z "${sudo_cmd_install}" ]; then

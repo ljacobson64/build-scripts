@@ -23,6 +23,6 @@ ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python3.8/site-packages
 setup_string="--prefix=${install_prefix}"
 
 PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
-${sudo_cmd_install} python setup.py install ${setup_string}
+${sudo_cmd_install} python2 setup.py install ${setup_string}
 PYTHONPATH=${install_prefix}/lib/python3.8/site-packages
 ${sudo_cmd_install} python3 setup.py install ${setup_string}

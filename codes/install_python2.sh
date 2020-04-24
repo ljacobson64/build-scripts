@@ -53,8 +53,8 @@ if [ ! -f ${dist_dir}/misc/${tarball} ]; then
 fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd setuptools-${python_setuptools_version}
-python bootstrap.py
-${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+python2 bootstrap.py
+${sudo_cmd_install} python2 setup.py install --prefix=${install_prefix}
 
 cd ${build_prefix}
 tarball=pip-${python_pip_version}.tar.gz
@@ -65,10 +65,10 @@ if [ ! -f ${dist_dir}/misc/${tarball} ]; then
 fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd pip-${python_pip_version}
-${sudo_cmd_install} python setup.py install --prefix=${install_prefix}
+${sudo_cmd_install} python2 setup.py install --prefix=${install_prefix}
 
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"
 for pack in ${python_packs}; do
-  ${sudo_cmd_install} pip install --prefix=${install_prefix} --upgrade ${pack}
+  ${sudo_cmd_install} pip2 install --prefix=${install_prefix} --upgrade ${pack}
 done
