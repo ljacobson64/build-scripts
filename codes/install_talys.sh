@@ -15,6 +15,7 @@ ln -sv talys/source src
 
 talyspath=`echo ${install_prefix}/ | sed 's/\//\\\\\//g'`
 cd talys/source
+rm -f ._*.f
 sed -i "s/ home='.*'/ home='${talyspath}'/; s/60/132/" machine.f
 sed -i "s/60 path/132 path/" talys.cmb
 sed -i "s/90/162/" fissionpar.f
@@ -38,6 +39,9 @@ fi
 ${CMAKE} ../src ${cmake_string}
 make -j${jobs}
 ${sudo_cmd_native} make -j${jobs} install
+
+cd ../talys
+${sudo_cmd_native} cp -rpv LOG README doc samples source ${install_prefix}/talys/
 
 cd ${install_prefix}
 ${sudo_cmd_native} tar -xzvf ${dist_dir}/talys/${tarball_data}
