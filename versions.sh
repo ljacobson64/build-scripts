@@ -1,19 +1,19 @@
 #!/bin/bash
 
 export advantg_version=3.0.3
-export armadillo_version=9.860.2
+export armadillo_version=9.870.2
 export binutils_version=2.34
-export boost_version=1.72.0
+export boost_version=1.73.0
 export cgm_version=14.0
 export cmake_version=3.17.1
 export dakota_version=6.11.0
 export eigen_version=3.3.7
 export exnihilo_version=5.4.0
 export fluka_version=2011.2x
-export gcc_version=8.4.0
+export gcc_version=9.3.0
 export geant4_version=10.05.p01
 export geany_version=1.36
-export git_version=2.26.1
+export git_version=2.26.2
 export gmp_version=6.1.2
 export hdf5_version=1.10.6
 export intltool_version=0.51.0
@@ -32,7 +32,7 @@ export opencascade_version=7.4.0
 export openmc_version=0.11.0
 export openmpi_version=3.1.6
 export pcre_version=8.44
-export python_version=2.7.17
+export python_version=2.7.18
 export python3_version=3.8.2
 export pyvisfile_version=2016.1
 export scale_version=6.2.3
