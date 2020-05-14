@@ -14,10 +14,12 @@ if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; 
 unzip ${dist_dir}/misc/${tarball}
 ln -sv pentiumpro src
 cd pentiumpro
+ln -sv ${script_dir}/codes/drosg2000/CMakeLists.txt .
 mv -v neuyie/PARAM.NEU neuyie/param.neu
 mv -v timrev/PARAM.NEU timrev/param.neu
 mv -v whiyie/PARAM.NEU whiyie/param.neu
-ln -sv ${script_dir}/codes/drosg2000/CMakeLists.txt .
+sed -i "s/MANG=181/MANG=7201/" `grep -rl MANG=181`
+sed -i "s/FORMAT(F11.2/FORMAT(F11.3/" NYIOUT.f95
 cd ../bld
 
 cmake_string=
