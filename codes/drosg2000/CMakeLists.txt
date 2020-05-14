@@ -1,8 +1,9 @@
 project(DROSG2000 Fortran)
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_Fortran_FLAGS_RELEASE "-O1")
+if (NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif ()
 
 # Source files shared by all executables
 set(SRC_FILES ANGCAL.f95

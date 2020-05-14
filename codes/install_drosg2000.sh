@@ -13,6 +13,7 @@ url=https://www-nds.iaea.org/public/libraries/drosg2000/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 unzip ${dist_dir}/misc/${tarball}
 ln -sv pentiumpro src
+
 cd pentiumpro
 ln -sv ${script_dir}/codes/drosg2000/CMakeLists.txt .
 mv -v neuyie/PARAM.NEU neuyie/param.neu
@@ -20,6 +21,10 @@ mv -v timrev/PARAM.NEU timrev/param.neu
 mv -v whiyie/PARAM.NEU whiyie/param.neu
 sed -i "s/MANG=181/MANG=7201/" `grep -rl MANG=181`
 sed -i "s/FORMAT(F11.2/FORMAT(F11.3/" NYIOUT.f95
+datadir=`echo ${install_prefix}/bin/ | sed 's/\//\\\\\//g'`
+sed -i "s/OPEN(UNIT=3,FILE=/OPEN(UNIT=3,FILE=\'${datadir}\'\/\//" NEUYIE.f95 ANGINP.f95
+sed -i "s/OPEN (UNIT=3,FILE=/OPEN(UNIT=3,FILE=\'${datadir}\'\/\//" LEGINT.f95
+sed -i "s/open(unit=3,file=/OPEN(unit=3,file=\'${datadir}\'\/\//" whiout.f95
 cd ../bld
 
 cmake_string=
