@@ -7,6 +7,7 @@ export boost_version=1.73.0
 export cgm_version=14.0
 export cmake_version=3.17.1
 export dakota_version=6.11.0
+export drosg2000_version=12.01
 export eigen_version=3.3.7
 export exnihilo_version=5.4.0
 export fluka_version=2020.0

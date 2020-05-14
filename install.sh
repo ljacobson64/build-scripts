@@ -4,6 +4,7 @@ set -e
 export compiler=$1
 shift
 source tools/env_`hostname -s`.sh
+export script_dir=${PWD}
 
 if [ ! -e "${CC}"    ]; then echo "Error: C compiler not found at ${CC}"       && exit 1; fi
 if [ ! -e "${CXX}"   ]; then echo "Error: C++ compiler not found at ${CXX}"    && exit 1; fi
