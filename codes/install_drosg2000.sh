@@ -20,7 +20,8 @@ mv -v neuyie/PARAM.NEU neuyie/param.neu
 mv -v timrev/PARAM.NEU timrev/param.neu
 mv -v whiyie/PARAM.NEU whiyie/param.neu
 sed -i "s/MANG=181/MANG=7201/" `grep -rl MANG=181`
-sed -i "s/FORMAT(F11.2/FORMAT(F11.3/" NYIOUT.f95
+sed -i "s/85 FORMAT(F11.2,F10.3,f10.5,F10.2,F10.3/85 FORMAT(F9.3,1P,E13.5,0P,F10.5,F9.3,1P,E13.5,0P/;
+        s/86 FORMAT(F11.2,F10.3,1P,E10.3,0P,F10.2,F10.3/86 FORMAT(F9.3,1P,E13.5,0P,F10.5,F9.3,1P,E13.5,0P/" NYIOUT.f95
 datadir=`echo ${install_prefix}/bin/ | sed 's/\//\\\\\//g'`
 sed -i "s/OPEN(UNIT=3,FILE=/OPEN(UNIT=3,FILE=\'${datadir}\'\/\//" NEUYIE.f95 ANGINP.f95
 sed -i "s/OPEN (UNIT=3,FILE=/OPEN(UNIT=3,FILE=\'${datadir}\'\/\//" LEGINT.f95
