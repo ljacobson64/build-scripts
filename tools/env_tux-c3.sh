@@ -23,6 +23,7 @@ export slurm_support=false
 export pmi_support=false
 export geany_needs_intltool=true
 export geant4_libdir=lib
+export native_eigen=true
 export native_python=false
 export native_exnihilo_packs=false
 export mcnp_needs_omp_name=true

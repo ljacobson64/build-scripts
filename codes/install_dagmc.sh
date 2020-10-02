@@ -5,6 +5,7 @@ set -e
 build_prefix=${build_dir}/DAGMC-moab-${moab_version}
 install_prefix=${install_dir}/DAGMC-moab-${moab_version}
 
+eigen_dir=${install_dir}/eigen-${eigen_version}
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 moab_dir=${install_dir}/moab-${moab_version}
@@ -44,6 +45,9 @@ fi
 cd ../bld
 
 cmake_string=
+if [ "${native_eigen}" == "false" ]; then
+  cmake_string+=" -DEigen3_DIR=${eigen_dir}/share/eigen3/cmake"
+fi
 cmake_string+=" -DMOAB_DIR=${moab_dir}"
 if [ "${install_dagmcnp5}" == "true" ]; then
   cmake_string+=" -DBUILD_MCNP5=ON"

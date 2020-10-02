@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ ${moab_version} == *"-cgm-"* ]]; then
+if [[ "${moab_version}" == *"-cgm-"* ]]; then
   with_cgm=true
   cgm_version=$(cut -d '-' -f3  <<< "${moab_version}")
   moab_version=$(cut -d '-' -f1  <<< "${moab_version}")
@@ -10,7 +10,7 @@ else
   with_cgm=false
 fi
 
-if [ ${with_cgm} == "true" ]; then
+if [ "${with_cgm}" == "true" ]; then
   build_prefix=${build_dir}/moab-${moab_version}-cgm-${cgm_version}
   install_prefix=${install_dir}/moab-${moab_version}-cgm-${cgm_version}
   cgm_dir=${install_dir}/cgm-${cgm_version}
@@ -19,9 +19,10 @@ else
   install_prefix=${install_dir}/moab-${moab_version}
 fi
 
+eigen_dir=${install_dir}/eigen-${eigen_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 
-if [ ${moab_version} == "master" ]; then
+if [ "${moab_version}" == "master" ]; then
   branch=master
 else
   branch=Version${moab_version}
@@ -67,6 +68,10 @@ fi
 config_string+=" --enable-shared"
 config_string+=" --enable-optimize"
 config_string+=" --disable-debug"
+config_string+=" --disable-blaslapack"
+if [ "${native_eigen}" == "false" ]; then
+  config_string+=" --with-eigen3=${eigen_dir}/include/eigen3"
+fi
 config_string+=" --with-hdf5=${hdf5_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
