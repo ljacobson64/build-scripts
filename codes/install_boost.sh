@@ -31,7 +31,7 @@ else
 fi
 
 if [ "${native_python}" == "false" ]; then
-  PATH=${install_dir}/python-${python_version}/bin:${PATH}
+  PATH=${install_dir}/python-${python2_version}/bin:${PATH}
 fi
 
 b2_string=

@@ -14,7 +14,7 @@ if [ "${compiler}" != "native" ]; then
 fi
 
 if [ "${native_python}" == "false" ]; then
-  python_dir=${install_dir}/python-${python_version}
+  python_dir=${install_dir}/python-${python2_version}
   PATH=${python_dir}/bin:${PATH}
   PYTHONPATH=${python_dir}/lib/python3.8/site-packages
 fi

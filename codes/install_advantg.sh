@@ -8,7 +8,7 @@ install_prefix=${install_dir}/ADVANTG-${advantg_version}
 if [ "${native_exnihilo_packs}" == "false" ]; then
   pcre_dir=${install_dir}/pcre-${pcre_version}
   swig_dir=${install_dir}/swig-${swig_version}
-  python_dir=${install_dir}/python-${python_version}
+  python_dir=${install_dir}/python-${python2_version}
 fi
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
