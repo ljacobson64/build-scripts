@@ -9,7 +9,7 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=intltool-${intltool_version}.tar.gz
-url=https://launchpad.net/intltool/trunk/${version}/+download/${tarball}
+url=https://launchpad.net/intltool/trunk/${intltool_version}/+download/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 ln -sv intltool-${intltool_version} src
