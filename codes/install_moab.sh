@@ -79,6 +79,7 @@ config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
   PATH=${install_dir}/python-${python3_version}/bin:${PATH}
+  PYTHONPATH=${install_dir}/python-${python3_version}/lib/python3.8/site-packages
 fi
 
 LD_LIBRARY_PATH=${compiler_lib_dirs}
