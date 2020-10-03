@@ -8,7 +8,7 @@ install_prefix=${install_dir}/ALARA
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/svalinn/ALARA -b master --single-branch
+git clone https://github.com/svalinn/ALARA -b main --single-branch
 ln -sv ALARA src
 cd ALARA
 autoreconf -fi

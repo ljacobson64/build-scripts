@@ -33,8 +33,8 @@ if [ "${native_python}" == "true" ]; then
   exit 0
 fi
 
-export python_pip_version=20.0.2
-export python_setuptools_version=46.1.3
+export python_pip_version=20.2.3
+export python_setuptools_version=41.3.0
 
 if [ "${compiler}" != "native" ]; then
   PATH=${gcc_dir}/bin:${PATH}

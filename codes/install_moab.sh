@@ -78,7 +78,7 @@ config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
-  PATH=${install_dir}/python-${python2_version}/bin:${PATH}
+  PATH=${install_dir}/python-${python3_version}/bin:${PATH}
 fi
 
 LD_LIBRARY_PATH=${compiler_lib_dirs}
