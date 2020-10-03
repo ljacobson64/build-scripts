@@ -26,8 +26,8 @@ else
 fi
 
 ../src/configure ${config_string}
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install
 
 if [ "${native_python}" == "true" ]; then
   exit 0

@@ -16,7 +16,7 @@ export DATAPATH=${native_dir}/MCNP/MCNP_DATA
 export scale_data_dir=${native_dir}/SCALE/data
 
 # Miscellaneous environment variables used by install scripts
-export jobs=`grep -c processor /proc/cpuinfo`
+export num_cpus=`grep -c processor /proc/cpuinfo`
 export sudo_cmd_install=
 export sudo_cmd_native=
 export slurm_support=false

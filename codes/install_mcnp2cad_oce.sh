@@ -33,6 +33,6 @@ else
   make_string_pre="LDFLAGS=-Wl,-rpath,${oce_dir}/bin:${cgm_dir}/lib"
 fi
 
-eval ${make_string_pre} make -j${jobs} ${make_string}
+eval ${make_string_pre} make -j${num_cpus} ${make_string}
 ${sudo_cmd_install} mkdir -pv ${install_prefix}/bin
 ${sudo_cmd_install} cp -pv mcnp2cad ${install_prefix}/bin

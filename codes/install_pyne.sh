@@ -48,7 +48,7 @@ setup_string_2+=" --hdf5=${hdf5_dir}"
 setup_string_2+=" --moab=${moab_dir}"
 setup_string_2+=" --dagmc=${dagmc_dir}"
 setup_string_2+=" --prefix=${install_prefix}"
-setup_string_2+=" -j${jobs}"
+setup_string_2+=" -j${num_cpus}"
 
 ${sudo_cmd_install} python3 setup.py ${setup_string_1} install ${setup_string_2}
 cd ..

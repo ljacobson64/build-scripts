@@ -25,5 +25,5 @@ else
 fi
 
 ${CMAKE} ../src ${cmake_string}
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install

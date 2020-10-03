@@ -18,7 +18,7 @@ echo "CC:          ${CC}"
 echo "CXX:         ${CXX}"
 echo "FC:          ${FC}"
 echo "CMAKE:       ${CMAKE}"
-echo "jobs:        ${jobs}"
+echo "num_cpus:    ${num_cpus}"
 echo
 ${CC}    --version
 ${CXX}   --version

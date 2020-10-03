@@ -30,5 +30,5 @@ sed -i "s/export INSTALL_PATH=/#export INSTALL_PATH=/;
 chmod +x configure_scale_mpi.sh
 
 ./configure_scale_mpi.sh ../src
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install

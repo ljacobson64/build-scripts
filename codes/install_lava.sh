@@ -30,9 +30,9 @@ cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
 LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ${CMAKE} ../src ${cmake_string_static}
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install
 cd ..; rm -rfv bld; mkdir -pv bld; cd bld
 ${CMAKE} ../src ${cmake_string_shared}
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install

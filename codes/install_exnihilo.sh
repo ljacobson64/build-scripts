@@ -56,5 +56,5 @@ cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 ${CMAKE} -C ${build_prefix}/Exnihilo/install/codes/Exnihilo/for-advantg.cmake ${cmake_string} ../src
-make -j${jobs}
-${sudo_cmd_install} make -j${jobs} install
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install

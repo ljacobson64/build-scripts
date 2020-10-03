@@ -31,13 +31,6 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 # Note: RPATH will not include path to compiler libraries if using custom compilers
 
-# There is a bug (feature?) in git where the environment variable $jobs causes
-# errors. Rename this variable to avoid these errors.
-jobs_save=${jobs}
-unset jobs
-
 ${CMAKE} ../src ${cmake_string}
-make -j${jobs_save}
-${sudo_cmd_install} make -j${jobs_save} install
-
-export jobs=${jobs_save}
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install

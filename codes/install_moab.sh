@@ -84,5 +84,5 @@ fi
 LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ../src/configure ${config_string}
-make -j${jobs}
+make -j${num_cpus}
 ${sudo_cmd_install} make install
