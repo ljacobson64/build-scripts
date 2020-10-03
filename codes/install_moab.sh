@@ -77,7 +77,7 @@ config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
-if [ "${install_pymoab}" == "true" ] && [ "${native_python}" != "true" ]; then
+if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
   PATH=${install_dir}/python-${python_version}/bin:${PATH}
 fi
 

@@ -5,7 +5,7 @@ set -e
 build_prefix=${build_dir}/exnihilo-${exnihilo_version}
 install_prefix=${install_dir}/exnihilo-${exnihilo_version}
 
-if [ "${native_exnihilo_packs}" != "true" ]; then
+if [ "${native_exnihilo_packs}" == "false" ]; then
   pcre_dir=${install_dir}/pcre-${pcre_version}
   swig_dir=${install_dir}/swig-${swig_version}
   python_dir=${install_dir}/python-${python_version}
@@ -38,7 +38,7 @@ git clone https://github.com/trilinos/Trilinos  -b master --single-branch
 cd bld
 
 export CMAKE_PREFIX_PATH=
-if [ "${native_exnihilo_packs}" != "true" ]; then
+if [ "${native_exnihilo_packs}" == "false" ]; then
   export CMAKE_PREFIX_PATH+=:${pcre_dir}
   export CMAKE_PREFIX_PATH+=:${swig_dir}
   export CMAKE_PREFIX_PATH+=:${python_dir}
