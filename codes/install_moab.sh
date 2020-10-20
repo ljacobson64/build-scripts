@@ -20,6 +20,7 @@ else
 fi
 
 eigen_dir=${install_dir}/eigen-${eigen_version}
+python3_dir=${install_dir}/python-${python3_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 
 if [ "${moab_version}" == "master" ]; then
@@ -75,11 +76,14 @@ fi
 config_string+=" --with-hdf5=${hdf5_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
+if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
+  config_string+=" PYTHON=${python3_dir}/bin/python3"
+fi
 config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
-  PATH=${install_dir}/python-${python3_version}/bin:${PATH}
-  PYTHONPATH=${install_dir}/python-${python3_version}/lib/python3.8/site-packages
+  PATH=${python3_dir}/bin:${PATH}
+  PYTHONPATH=${python3_dir}/lib/python3.8/site-packages
 fi
 
 LD_LIBRARY_PATH=${compiler_lib_dirs}
