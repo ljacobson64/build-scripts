@@ -5,11 +5,12 @@ set -e
 build_prefix=${build_dir}/ADVANTG-${advantg_version}
 install_prefix=${install_dir}/ADVANTG-${advantg_version}
 
-if [ "${native_exnihilo_packs}" == "false" ]; then
-  pcre_dir=${install_dir}/pcre-${pcre_version}
-  swig_dir=${install_dir}/swig-${swig_version}
-  python_dir=${install_dir}/python-${python2_version}
+if [ "${custom_python}" == "true" ]; then
+  load_python2
 fi
+
+pcre_dir=${install_dir}/pcre-${pcre_version}
+swig_dir=${install_dir}/swig-${swig_version}
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 silo_dir=${install_dir}/silo-${silo_version}
@@ -36,10 +37,10 @@ ${sudo_cmd_install} tar -xzvf ${dist_dir}/advantg/mgxs.tar.gz
 cd ${build_prefix}/bld
 
 export CMAKE_PREFIX_PATH=
-if [ "${native_exnihilo_packs}" == "false" ]; then
+if [ "${custom_exnihilo_packs}" == "true" ]; then
   export CMAKE_PREFIX_PATH+=:${pcre_dir}
   export CMAKE_PREFIX_PATH+=:${swig_dir}
-  export CMAKE_PREFIX_PATH+=:${python_dir}
+  export CMAKE_PREFIX_PATH+=:${python2_dir}
 fi
 export CMAKE_PREFIX_PATH+=:${openmpi_dir}
 export CMAKE_PREFIX_PATH+=:${hdf5_dir}

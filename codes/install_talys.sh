@@ -32,8 +32,8 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
 fi
 
 ${CMAKE} ../src ${cmake_string}
@@ -41,6 +41,7 @@ make -j${num_cpus}
 ${sudo_cmd_native} make -j${num_cpus} install
 
 cd ../talys
+${sudo_cmd_native} mkdir -p ${install_prefix}/talys
 ${sudo_cmd_native} cp -rpv LOG README doc samples source ${install_prefix}/talys/
 
 cd ${install_prefix}

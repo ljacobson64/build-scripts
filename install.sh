@@ -3,6 +3,7 @@
 set -e
 export compiler=$1
 shift
+packages="$@"
 source tools/env_`hostname -s`.sh
 export script_dir=${PWD}
 
@@ -25,9 +26,9 @@ ${CXX}   --version
 ${FC}    --version
 ${CMAKE} --version
 echo
-sleep 3
+sleep 1
 
-for package in "$@"; do
+for package in ${packages}; do
   if [[ "${package}" == *"-"* ]]; then
     name=$(cut -d '-' -f1  <<< "${package}")
     version=$(cut -d '-' -f2- <<< "${package}")

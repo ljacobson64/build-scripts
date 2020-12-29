@@ -23,8 +23,8 @@ config_string+=" --with-python"
 config_string+=" --with-pcre-prefix=${pcre_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${pcre_dir}/lib"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}:${pcre_dir}/lib"
 else
   config_string+=" LDFLAGS=-Wl,-rpath,${pcre_dir}/lib"
 fi

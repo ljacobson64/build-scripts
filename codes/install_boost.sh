@@ -5,7 +5,16 @@ set -e
 build_prefix=${build_dir}/boost-${boost_version}
 install_prefix=${install_dir}/boost-${boost_version}
 
-openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+if [ "${custom_python}" == "true" ]; then
+  load_python2
+fi
+
+if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
+  module load openmpi/4.0.5-gcc930
+  openmpi_dir=${EBROOTOPENMPI}
+else
+  openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+fi
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}
@@ -22,16 +31,10 @@ cd boost_${boost_version_with_underscores}
 echo >> project-config.jam
 echo "using mpi : ${openmpi_dir}/bin/mpicc ;" >> project-config.jam
 
-if [ -n "${compiler_lib_dirs}" ]; then
-  PATH=$(dirname ${CXX}):${PATH}
-  LD_LIBRARY_PATH=${compiler_lib_dirs}
-  rpath_dirs=${compiler_lib_dirs}:${install_prefix}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${install_prefix}/lib
 else
   rpath_dirs=${install_prefix}/lib
-fi
-
-if [ "${native_python}" == "false" ]; then
-  PATH=${install_dir}/python-${python2_version}/bin:${PATH}
 fi
 
 b2_string=

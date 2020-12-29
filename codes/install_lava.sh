@@ -19,15 +19,13 @@ cmake_string+=" -DMCNP_EXECUTABLE=${mcnp_exe}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
 fi
 cmake_string_static=${cmake_string}
 cmake_string_shared=${cmake_string}
 cmake_string_static+=" -DBUILD_SHARED_LIBS=OFF"
 cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
-
-LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ${CMAKE} ../src ${cmake_string_static}
 make -j${num_cpus}

@@ -9,9 +9,7 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=openmpi-${openmpi_version}.tar.gz
-if   [ "${openmpi_version:3:1}" == "." ]; then openmpi_version_major=${openmpi_version::3}
-elif [ "${openmpi_version:4:1}" == "." ]; then openmpi_version_major=${openmpi_version::4}
-fi
+openmpi_version_major=$(echo ${openmpi_version} | cut -f1,2 -d'.')
 url=http://www.open-mpi.org/software/ompi/v${openmpi_version_major}/downloads/${tarball}
 if [ ! -f ${dist_dir}/openmpi/${tarball} ]; then wget ${url} -P ${dist_dir}/openmpi/; fi
 tar -xzvf ${dist_dir}/openmpi/${tarball}
@@ -19,18 +17,14 @@ ln -sv openmpi-${openmpi_version} src
 cd bld
 
 config_string=
-if [ "${slurm_support}" == "true" ]; then
-  config_string+=" --with-slurm"
-  if [ "${pmi_support}" == "true" ]; then
-    config_string+=" --with-pmi"
-  fi
-fi
+config_string+=" --with-slurm"
+config_string+=" --with-pmi"
 config_string+=" --enable-static"
 config_string+=" --disable-dlopen"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}"
 fi
 
 ../src/configure ${config_string}

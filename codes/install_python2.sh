@@ -5,6 +5,8 @@ set -e
 build_prefix=${build_dir}/python-${python2_version}
 install_prefix=${install_dir}/python-${python2_version}
 
+load_python2
+
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
@@ -19,8 +21,8 @@ config_string=
 config_string+=" --enable-shared"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${install_prefix}/lib"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}:${install_prefix}/lib"
 else
   config_string+=" LDFLAGS=-Wl,-rpath,${install_prefix}/lib"
 fi
@@ -29,20 +31,14 @@ fi
 make -j${num_cpus}
 ${sudo_cmd_install} make -j${num_cpus} install
 
-if [ "${native_python}" == "true" ]; then
+if [ "${custom_python}" == "false" ]; then
   exit 0
 fi
 
 export python_pip_version=20.2.3
 export python_setuptools_version=41.3.0
 
-if [ "${compiler}" != "native" ]; then
-  PATH=${gcc_dir}/bin:${PATH}
-fi
-
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
-PATH=${install_prefix}/bin:${PATH}
-PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
+${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
 
 cd ${build_prefix}
 tarball=setuptools-${python_setuptools_version}.tar.gz

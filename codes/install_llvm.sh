@@ -40,11 +40,9 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
 fi
-
-LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

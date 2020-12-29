@@ -6,10 +6,15 @@ build_prefix=${build_dir}/DAGMC-JET-moab-${moab_version}
 install_prefix=${install_dir}/DAGMC-JET-moab-${moab_version}
 
 eigen_dir=${install_dir}/eigen-${eigen_version}
-openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 moab_dir=${install_dir}/moab-${moab_version}
 
+if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
+  module load openmpi/4.0.5-gcc930
+  openmpi_dir=${EBROOTOPENMPI}
+else
+  openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+fi
 CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++
 FC=${openmpi_dir}/bin/mpifort
@@ -26,12 +31,14 @@ cp -pv ${dist_dir}/mcnp/source_plasma.F90 Source/src/source.F90
 cd ../../../../bld
 
 cmake_string=
-if [ "${native_eigen}" == "false" ]; then
+if [ "${custom_eigen}" == "true" ]; then
   cmake_string+=" -DEigen3_DIR=${eigen_dir}/share/eigen3/cmake"
 fi
 cmake_string+=" -DMOAB_DIR=${moab_dir}"
 cmake_string+=" -DBUILD_MCNP5=ON"
-cmake_string+=" -DBUILD_MCNP_PLOT=ON"
+if [ "${system_has_x11}" == "true" ]; then
+  cmake_string+=" -DBUILD_MCNP_PLOT=ON"
+fi
 #cmake_string+=" -DBUILD_MCNP_OPENMP=ON"
 cmake_string+=" -DBUILD_MCNP_MPI=ON"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
@@ -41,8 +48,8 @@ cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
 fi
 
 ${CMAKE} ../src ${cmake_string}

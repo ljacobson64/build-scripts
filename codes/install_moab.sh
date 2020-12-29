@@ -2,25 +2,14 @@
 
 set -e
 
-if [[ "${moab_version}" == *"-cgm-"* ]]; then
-  with_cgm=true
-  cgm_version=$(cut -d '-' -f3  <<< "${moab_version}")
-  moab_version=$(cut -d '-' -f1  <<< "${moab_version}")
-else
-  with_cgm=false
-fi
+build_prefix=${build_dir}/moab-${moab_version}
+install_prefix=${install_dir}/moab-${moab_version}
 
-if [ "${with_cgm}" == "true" ]; then
-  build_prefix=${build_dir}/moab-${moab_version}-cgm-${cgm_version}
-  install_prefix=${install_dir}/moab-${moab_version}-cgm-${cgm_version}
-  cgm_dir=${install_dir}/cgm-${cgm_version}
-else
-  build_prefix=${build_dir}/moab-${moab_version}
-  install_prefix=${install_dir}/moab-${moab_version}
+if [ "${install_pymoab}" == "true" ] && [ "${custom_python}" == "true" ]; then
+  load_python3
 fi
 
 eigen_dir=${install_dir}/eigen-${eigen_version}
-python3_dir=${install_dir}/python-${python3_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 
 if [ "${moab_version}" == "master" ]; then
@@ -46,22 +35,15 @@ else
   install_pymoab=false
 fi
 
-if [ -n "${compiler_lib_dirs}" ]; then
-  rpath_dirs=${compiler_lib_dirs}:${hdf5_dir}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${hdf5_dir}/lib
 else
   rpath_dirs=${hdf5_dir}/lib
-fi
-if [ "${with_cgm}" == "true" ]; then
-  rpath_dirs+=:${cgm_dir}/lib
 fi
 
 config_string=
 if [[ "${moab_version}" == "4"* ]]; then
   config_string+=" --enable-dagmc"
-fi
-if [ "${with_cgm}" == "true" ]; then
-  config_string+=" --enable-irel"
-  config_string+=" --with-cgm=${cgm_dir}"
 fi
 if [ "${install_pymoab}" == "true" ]; then
   config_string+=" --enable-pymoab"
@@ -70,23 +52,16 @@ config_string+=" --enable-shared"
 config_string+=" --enable-optimize"
 config_string+=" --disable-debug"
 config_string+=" --disable-blaslapack"
-if [ "${native_eigen}" == "false" ]; then
+if [ "${custom_eigen}" == "true" ]; then
   config_string+=" --with-eigen3=${eigen_dir}/include/eigen3"
 fi
 config_string+=" --with-hdf5=${hdf5_dir}"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
+if [ "${install_pymoab}" == "true" ] && [ "${custom_python}" == "true" ]; then
   config_string+=" PYTHON=${python3_dir}/bin/python3"
 fi
 config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
-
-if [ "${install_pymoab}" == "true" ] && [ "${native_python}" == "false" ]; then
-  PATH=${python3_dir}/bin:${PATH}
-  PYTHONPATH=${python3_dir}/lib/python3.8/site-packages
-fi
-
-LD_LIBRARY_PATH=${compiler_lib_dirs}
 
 ../src/configure ${config_string}
 make -j${num_cpus}

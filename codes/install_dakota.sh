@@ -21,10 +21,6 @@ cd dakota-${dakota_version}-release-public.src-UI
 sed -i "s/COMPONENTS \"filesystem;program_options;regex;serialization;system\"/COMPONENTS filesystem;program_options;regex;serialization;system/" cmake/DakotaFindSystemTPLs.cmake
 cd ../bld
 
-if [ -n "${compiler_lib_dirs}" ]; then
-  LD_LIBRARY_PATH=${compiler_lib_dirs}
-fi
-
 cmake_string=
 cmake_string+=" -DDAKOTA_HAVE_MPI=TRUE"
 cmake_string+=" -DMPI_HOME=${openmpi_dir}"
@@ -32,11 +28,11 @@ cmake_string+=" -DHAVE_QUESO=ON"
 cmake_string+=" -DDAKOTA_HAVE_GSL=ON"
 cmake_string+=" -DDAKOTA_HAVE_HDF5=ON"
 cmake_string+=" -DHDF5_ROOT=${hdf5_dir}"
-if [ "${native_boost}" == "false" ]; then
+if [ "${custom_boost}" == "true" ]; then
   cmake_string+=" -DBoost_NO_SYSTEM_PATHS=TRUE"
   cmake_string+=" -DBOOST_ROOT=${boost_dir}"
 fi
-if [ "${native_latex}" == "true" ]; then
+if [ "${system_has_latex}" == "true" ]; then
   cmake_string+=" -DENABLE_DAKOTA_DOCS=TRUE"
 else
   cmake_string+=" -DENABLE_DAKOTA_DOCS=FALSE"

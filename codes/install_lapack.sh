@@ -9,8 +9,11 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=lapack-${lapack_version}.tar.gz
-url=http://www.netlib.org/lapack/${tarball}
-if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
+url=https://github.com/Reference-LAPACK/lapack/archive/v${lapack_version}.tar.gz
+if [ ! -f ${dist_dir}/misc/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/misc/
+  mv -v ${dist_dir}/misc/v${lapack_version}.tar.gz ${dist_dir}/misc/${tarball}
+fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 ln -sv lapack-${lapack_version} src
 cd bld
@@ -19,8 +22,8 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
 fi
 cmake_string_static=${cmake_string}
 cmake_string_shared=${cmake_string}

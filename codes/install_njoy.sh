@@ -12,15 +12,16 @@ git clone https://github.com/njoy/NJOY${njoy_version} -b master --single-branch
 ln -sv NJOY${njoy_version} src
 cd bld
 
+rpath_dirs=${install_prefix}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
+fi
+
 cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_lib_dirs}:${install_prefix}/lib"
-else
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${install_prefix}/lib"
-fi
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

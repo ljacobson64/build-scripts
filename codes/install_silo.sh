@@ -22,8 +22,8 @@ config_string+=" --enable-shared"
 config_string+=" --with-hdf5=${hdf5_dir}/include,${hdf5_dir}/lib"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}"
 fi
 
 ../src/configure ${config_string}

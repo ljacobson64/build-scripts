@@ -17,8 +17,8 @@ cd ../bld
 config_string=
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}"
 fi
 
 ../src/configure ${config_string}

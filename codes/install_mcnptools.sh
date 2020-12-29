@@ -24,11 +24,11 @@ ${sudo_cmd_native} make -j${num_cpus} install
 cd ../Source/python
 
 python2 setup.py build
-${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python2.7/site-packages
-PYTHONPATH=${install_prefix}/lib/python2.7/site-packages
+${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
+PYTHONPATH=${install_prefix}/lib/python${python2_version_major}/site-packages
 ${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python2 setup.py install --prefix=${install_prefix}
 
 python3 setup.py build
-${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python3.8/site-packages
-PYTHONPATH=${install_prefix}/lib/python3.8/site-packages
+${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
+PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages
 ${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python3 setup.py install --prefix=${install_prefix}

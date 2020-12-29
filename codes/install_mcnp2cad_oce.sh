@@ -27,8 +27,8 @@ if [ ! -f /usr/lib/libarmadillo.so ]; then
 fi
 make_string+=" CGM_BASE_DIR=${cgm_dir}"
 make_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_lib_dirs}" ]; then
-  make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_lib_dirs}:${oce_dir}/bin:${cgm_dir}/lib"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}:${oce_dir}/bin:${cgm_dir}/lib"
 else
   make_string_pre="LDFLAGS=-Wl,-rpath,${oce_dir}/bin:${cgm_dir}/lib"
 fi
