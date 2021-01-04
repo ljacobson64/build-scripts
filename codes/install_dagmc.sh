@@ -2,6 +2,8 @@
 
 set -e
 
+export geant4_version=10.05.p01
+
 build_prefix=${build_dir}/DAGMC-moab-${moab_version}
 install_prefix=${install_dir}/DAGMC-moab-${moab_version}
 
