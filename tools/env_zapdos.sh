@@ -40,11 +40,11 @@ if [ "${compiler}" == "native" ]; then
   export compiler_rpath_dirs=
 elif [ "${compiler}" == "gcc-9" ]; then
   :
-
-
-
-
-
+  :
+  :
+  :
+  :
+  :
 elif [ "${compiler}" == "intel" ]; then
   export intel_dir=/opt/intel/oneapi
   source ${intel_dir}/setvars.sh
@@ -72,12 +72,12 @@ export python3_version_major=3.8
 
 # Functions to load python variables
 load_python2() {
-
-
-
+:
+:
+:
 }
 load_python3() {
-
-
-
+:
+:
+:
 }
