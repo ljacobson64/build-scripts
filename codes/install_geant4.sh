@@ -44,3 +44,21 @@ cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 ${sudo_cmd_install} make -j${num_cpus} install
+
+if [ "${geant4_version}" != "10.05.p01" ]; then
+  cd ..
+  mkdir bld-mpi
+  cd bld-mpi
+  
+  cmake_string=
+  cmake_string+=" -DGeant4_DIR=${install_prefix}/lib/Geant4-10.7.0"
+  cmake_string+=" -DBUILD_STATIC_LIBS=ON"
+  cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
+  cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
+  cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+  
+  ${CMAKE} ../src/examples/extended/parallel/MPI/source ${cmake_string}
+  make -j${num_cpus}
+  ${sudo_cmd_install} make -j${num_cpus} install
+fi
