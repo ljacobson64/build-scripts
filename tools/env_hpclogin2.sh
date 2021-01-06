@@ -27,7 +27,7 @@ export custom_python=true
 export system_has_java=false
 export system_has_latex=false
 export system_has_x11=false
-export fluka_tarball=fluka${fluka_version}-linux-gfor64bit-8.3-AA.tar.gz
+export fluka_tarball=fluka${fluka_version}-linux-gfor64bit-9.3-AA.tar.gz
 
 # Specify location of CMake
 export CMAKE=${native_dir}/cmake/bin/cmake
