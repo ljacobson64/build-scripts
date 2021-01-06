@@ -50,8 +50,17 @@ if [ "${geant4_version}" != "10.05.p01" ]; then
   mkdir bld-mpi
   cd bld-mpi
   
+  if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
+    module load openmpi/4.0.5-gcc930
+    openmpi_dir=${EBROOTOPENMPI}
+  else
+    openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+  fi
+  rpath_dirs=${rpath_dirs}:${openmpi_dir}/lib
+
   cmake_string=
   cmake_string+=" -DGeant4_DIR=${install_prefix}/lib/Geant4-10.7.0"
+  cmake_string+=" -DMPI_HOME=${openmpi_dir}"
   cmake_string+=" -DBUILD_STATIC_LIBS=ON"
   cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
   cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
