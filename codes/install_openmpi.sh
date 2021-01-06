@@ -17,10 +17,18 @@ ln -sv openmpi-${openmpi_version} src
 cd bld
 
 config_string=
-config_string+=" --with-slurm"
-config_string+=" --with-pmi"
-config_string+=" --enable-static"
 config_string+=" --disable-dlopen"
+config_string+=" --enable-shared"
+config_string+=" --enable-static"
+config_string+=" --enable-mpi-cxx"
+config_string+=" --enable-mpi-fortran"
+if [ "${system_has_java}" == "true" ]; then
+  config_string+=" --enable-mpi-java"
+  config_string+=" --with-jdk-dir=${native_dir}/jdk"
+fi
+config_string+=" --with-pmi"
+config_string+=" --with-pmix"
+config_string+=" --with-slurm"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
 if [ -n "${compiler_rpath_dirs}" ]; then

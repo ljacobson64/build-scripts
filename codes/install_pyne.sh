@@ -58,7 +58,7 @@ if [ -z "${sudo_cmd_install}" ]; then
   ${sudo_cmd_install} nuc_data_make
 else
   export install_prefix
-  ${sudo_cmd_install} --preserve-env=install_prefix,python3_version_major sh -c '
+  ${sudo_cmd_install} --preserve-env=install_prefix,python3_version_major,DATAPATH sh -c '
   export PATH=${install_prefix}/bin:${PATH}
   export PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
   export LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}

@@ -15,8 +15,12 @@ tar -xzvf ${dist_dir}/mpich/${tarball}
 ln -sv mpich-${mpich_version} src
 cd bld
 
-config_string=
 LIBS=
+
+config_string=
+config_string+=" --enable-cxx"
+config_string+=" --enable-fortran=yes"
+config_string+=" --with-device=ch4:ofi"
 config_string+=" --with-slurm=/usr"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC} LIBS=${LIBS}"
