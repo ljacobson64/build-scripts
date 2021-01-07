@@ -35,10 +35,9 @@ else
   install_pymoab=false
 fi
 
+rpath_dirs=${hdf5_dir}/lib
 if [ -n "${compiler_rpath_dirs}" ]; then
-  rpath_dirs=${compiler_rpath_dirs}:${hdf5_dir}/lib
-else
-  rpath_dirs=${hdf5_dir}/lib
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
 fi
 
 config_string=

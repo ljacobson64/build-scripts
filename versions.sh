@@ -36,6 +36,7 @@ export pcre_version=8.44
 export python2_version=2.7.18
 export python3_version=3.8.7
 export pyvisfile_version=2016.1
+export root_version=6.22.06
 export scale_version=6.2.3
 export silo_version=4.10.2
 export swig_version=3.0.12
