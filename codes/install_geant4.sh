@@ -21,17 +21,17 @@ if [ -n "${compiler_rpath_dirs}" ]; then
 fi
 
 cmake_string=
-if [ "${geant4_version}" != "10.05.p01" ]; then
   cmake_string+=" -DGEANT4_BUILD_MULTITHREADED=ON"
   cmake_string+=" -DGEANT4_BUILD_TLS_MODEL=global-dynamic"
   cmake_string+=" -DGEANT4_INSTALL_DATA=ON"
   cmake_string+=" -DGEANT4_USE_G3TOG4=ON"
   cmake_string+=" -DGEANT4_USE_GDML=ON"
   cmake_string+=" -DGEANT4_USE_OPENGL_X11=ON"
-  cmake_string+=" -DGEANT4_USE_PYTHON=ON"
   cmake_string+=" -DGEANT4_USE_QT=ON"
   cmake_string+=" -DGEANT4_USE_RAYTRACER_X11=ON"
   cmake_string+=" -DGEANT4_USE_XM=ON"
+if [ "${geant4_version}" != "10.05.p01" ]; then
+  cmake_string+=" -DGEANT4_USE_PYTHON=ON"
 fi
 cmake_string+=" -DGEANT4_USE_SYSTEM_EXPAT=OFF"
 cmake_string+=" -DBUILD_STATIC_LIBS=ON"
@@ -45,29 +45,38 @@ ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 ${sudo_cmd_install} make -j${num_cpus} install
 
-if [ "${geant4_version}" != "10.05.p01" ]; then
-  cd ..
-  mkdir bld-mpi
-  cd bld-mpi
-  
-  if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
-    module load openmpi/4.0.5-gcc930
-    openmpi_dir=${EBROOTOPENMPI}
-  else
-    openmpi_dir=${install_dir}/openmpi-${openmpi_version}
-  fi
-  rpath_dirs=${rpath_dirs}:${openmpi_dir}/lib
+cd ../src
 
-  cmake_string=
-  cmake_string+=" -DGeant4_DIR=${install_prefix}/lib/Geant4-10.7.0"
-  cmake_string+=" -DMPI_HOME=${openmpi_dir}"
-  cmake_string+=" -DBUILD_STATIC_LIBS=ON"
-  cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
-  cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
-  cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
-  
-  ${CMAKE} ../src/examples/extended/parallel/MPI/source ${cmake_string}
-  make -j${num_cpus}
-  ${sudo_cmd_install} make -j${num_cpus} install
+if [ "${geant4_version}" == "10.05.p01" ]; then
+  sed -i "s/g4ios.hh/G4ios.hh/" examples/extended/parallel/MPI/source/src/G4MPIextraWorker.cc
 fi
+
+cd ..
+mkdir bld-mpi
+cd bld-mpi
+
+v1=$(echo ${geant4_version} | cut -f1,1 -d'.')
+v2=$(echo ${geant4_version} | cut -f2,2 -d'.')
+v3=$(echo ${geant4_version} | cut -f3,3 -d'.')
+geant4_version_mod=${v1}.$((${v2})).$((${v3/p/}))
+
+if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
+  module load openmpi/4.0.5-gcc930
+  openmpi_dir=${EBROOTOPENMPI}
+else
+  openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+fi
+rpath_dirs=${rpath_dirs}:${openmpi_dir}/lib
+
+cmake_string=
+cmake_string+=" -DGeant4_DIR=${install_prefix}/lib/Geant4-${geant4_version_mod}"
+cmake_string+=" -DMPI_HOME=${openmpi_dir}"
+cmake_string+=" -DBUILD_STATIC_LIBS=ON"
+cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
+cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
+cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+
+${CMAKE} ../src/examples/extended/parallel/MPI/source ${cmake_string}
+make -j${num_cpus}
+${sudo_cmd_install} make -j${num_cpus} install
