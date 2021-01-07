@@ -21,17 +21,18 @@ if [ -n "${compiler_rpath_dirs}" ]; then
 fi
 
 cmake_string=
-  cmake_string+=" -DGEANT4_BUILD_MULTITHREADED=ON"
-  cmake_string+=" -DGEANT4_BUILD_TLS_MODEL=global-dynamic"
-  cmake_string+=" -DGEANT4_INSTALL_DATA=ON"
-  cmake_string+=" -DGEANT4_USE_G3TOG4=ON"
-  cmake_string+=" -DGEANT4_USE_GDML=ON"
-  cmake_string+=" -DGEANT4_USE_OPENGL_X11=ON"
-  cmake_string+=" -DGEANT4_USE_QT=ON"
-  cmake_string+=" -DGEANT4_USE_RAYTRACER_X11=ON"
-  cmake_string+=" -DGEANT4_USE_XM=ON"
+cmake_string+=" -DGEANT4_BUILD_MULTITHREADED=ON"
+cmake_string+=" -DGEANT4_BUILD_TLS_MODEL=global-dynamic"
+cmake_string+=" -DGEANT4_INSTALL_DATA=ON"
+cmake_string+=" -DGEANT4_USE_G3TOG4=ON"
+cmake_string+=" -DGEANT4_USE_GDML=ON"
+cmake_string+=" -DGEANT4_USE_OPENGL_X11=ON"
+cmake_string+=" -DGEANT4_USE_QT=ON"
+cmake_string+=" -DGEANT4_USE_RAYTRACER_X11=ON"
+cmake_string+=" -DGEANT4_USE_XM=ON"
 if [ "${geant4_version}" != "10.05.p01" ]; then
   cmake_string+=" -DGEANT4_USE_PYTHON=ON"
+  cmake_string+=" -DGEANT4_INSTALL_DATASETS_TENDL=ON"
 fi
 cmake_string+=" -DGEANT4_USE_SYSTEM_EXPAT=OFF"
 cmake_string+=" -DBUILD_STATIC_LIBS=ON"
