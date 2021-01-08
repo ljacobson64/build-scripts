@@ -19,7 +19,7 @@ cd ../bld
 
 rpath_dirs=${install_prefix}/lib
 if [ -n "${compiler_rpath_dirs}" ]; then
-  rpath_dirs=${compiler_rpath_dirs}:${install_prefix}/lib
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
 fi
 
 cmake_string=

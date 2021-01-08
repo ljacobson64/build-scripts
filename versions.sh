@@ -11,6 +11,7 @@ export drosg2000_version=12.01
 export eigen_version=3.3.9
 export exnihilo_version=5.4.0
 export fluka_version=2020.0
+export g4beamline_version=3.06
 export gcc_version=10.2.0
 export geant4_version=10.07
 export geany_version=1.37
