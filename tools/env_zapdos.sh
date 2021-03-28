@@ -8,6 +8,7 @@ export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build/${compiler}
 export install_dir=/opt/software_${compiler}
 export native_dir=/opt/software_misc
+export local_dir=/home/lucas/.local
 
 # Miscellaneous directories
 export lapack_dir=/usr/lib/x86_64-linux-gnu     # SCALE

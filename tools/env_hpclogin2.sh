@@ -8,6 +8,7 @@ export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build/${compiler}
 export install_dir=/software/groups/dagmc/opt/${compiler}
 export native_dir=/software/groups/dagmc/opt/misc
+export local_dir=/home/ljjacobson/.local
 
 # Miscellaneous directories
 export lapack_dir=/usr/lib64                    # SCALE

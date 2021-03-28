@@ -30,6 +30,7 @@ if [ -n "${compiler_rpath_dirs}" ]; then
 fi
 
 setup_string_1=
+setup_string_1+=" -DDEPS_ROOT_DIR=${local_dir}/bin"
 setup_string_1+=" -DCMAKE_BUILD_TYPE=Release"
 setup_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 setup_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
@@ -45,22 +46,28 @@ setup_string_2+=" --dagmc=${dagmc_dir}"
 setup_string_2+=" --prefix=${install_prefix}"
 setup_string_2+=" -j${num_cpus}"
 
-PATH=${hdf5_dir}/bin:${PATH}
-PATH=${moab_dir}/bin:${PATH}
-PATH=${install_prefix}/bin:${PATH}
 ${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
-PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
-${sudo_cmd_install} python3 setup.py ${setup_string_1} install ${setup_string_2}
-cd ..
 
 if [ -z "${sudo_cmd_install}" ]; then
+  PATH=${local_dir}/bin:${PATH}
+  PATH=${install_prefix}/bin:${PATH}
+  PYTHONPATH=${local_dir}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
+  PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
+  ${sudo_cmd_install} python3 setup.py ${setup_string_1} install ${setup_string_2}
+  cd ..
   LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
   ${sudo_cmd_install} nuc_data_make
 else
   export install_prefix
-  ${sudo_cmd_install} --preserve-env=install_prefix,python3_version_major,DATAPATH sh -c '
+  export setup_string_1
+  export setup_string_2
+  ${sudo_cmd_install} --preserve-env=install_prefix,local_dir,setup_string_1,setup_string_2,python3_version_major,DATAPATH sh -c '
+  export PATH=${local_dir}/bin:${PATH}
   export PATH=${install_prefix}/bin:${PATH}
+  export PYTHONPATH=${local_dir}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
   export PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
+  python3 setup.py ${setup_string_1} install ${setup_string_2}
+  cd ..
   export LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
   nuc_data_make'
 fi
