@@ -10,7 +10,7 @@ mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=openmpi-${openmpi_version}.tar.gz
 openmpi_version_major=$(echo ${openmpi_version} | cut -f1,2 -d'.')
-url=http://www.open-mpi.org/software/ompi/v${openmpi_version_major}/downloads/${tarball}
+url=https://download.open-mpi.org/release/open-mpi/v${openmpi_version_major}/${tarball}
 if [ ! -f ${dist_dir}/openmpi/${tarball} ]; then wget ${url} -P ${dist_dir}/openmpi/; fi
 tar -xzvf ${dist_dir}/openmpi/${tarball}
 ln -sv openmpi-${openmpi_version} src

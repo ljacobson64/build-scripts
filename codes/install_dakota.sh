@@ -12,12 +12,12 @@ boost_dir=${install_dir}/boost-${boost_version}
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-tarball=dakota-${dakota_version}-release-public.src-UI.tar.gz
+tarball=dakota-${dakota_version}-release-public-src-gui_cli.tar.gz
 url=https://dakota.sandia.gov/sites/default/files/distributions/public/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
-ln -sv dakota-${dakota_version}-release-public.src-UI src
-cd dakota-${dakota_version}-release-public.src-UI
+ln -sv dakota-${dakota_version}-release-public-src-gui_cli src
+cd dakota-${dakota_version}-release-public-src-gui_cli
 sed -i "s/COMPONENTS \"filesystem;program_options;regex;serialization;system\"/COMPONENTS filesystem;program_options;regex;serialization;system/" cmake/DakotaFindSystemTPLs.cmake
 cd ../bld
 

@@ -21,7 +21,7 @@ mkdir -pv ${build_prefix}
 cd ${build_prefix}
 boost_version_with_underscores=${boost_version//./_}
 tarball=boost_${boost_version_with_underscores}.tar.gz
-url=https://dl.bintray.com/boostorg/release/${boost_version}/source/${tarball}
+url=https://boostorg.jfrog.io/artifactory/main/release/${boost_version}/source/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd boost_${boost_version_with_underscores}
