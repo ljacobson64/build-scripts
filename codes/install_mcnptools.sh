@@ -13,6 +13,7 @@ ln -sv Source/libmcnptools src
 cd bld
 
 cmake_string=
+cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"

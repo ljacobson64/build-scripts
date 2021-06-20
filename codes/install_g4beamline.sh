@@ -75,6 +75,7 @@ cmake_string+=" -DGEANT4_DIR=${geant4_dir}"
 cmake_string+=" -DROOT_DIR=${root_dir}"
 cmake_string+=" -DGSL_DIR=/usr"
 cmake_string+=" -DFFTW_DIR=/usr"
+cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
