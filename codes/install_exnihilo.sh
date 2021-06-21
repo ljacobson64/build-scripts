@@ -30,12 +30,11 @@ cd Scale
 mv Exnihilo ..
 ln -sv ../Exnihilo .
 cd ..
-git clone https://github.com/TriBITSPub/TriBITS -b master --single-branch
-cd TriBITS
-git checkout a24cefe7d538cc179111b1abc4279aee03282141
-sed -i "s/FIND_PACKAGE(\${FIND_PythonInterp_ARGS})/FIND_PACKAGE(\${FIND_PythonInterp_ARGS} 2)/" tribits/core/package_arch/TribitsFindPythonInterp.cmake
-cd ..
-git clone https://github.com/trilinos/Trilinos -b master --single-branch
+tar -xzvf ${dist_dir}/advantg/TriBITS-a24cefe.tar.gz
+ln -sv TriBITS-a24cefe TriBITS
+sed -i "s/FIND_PACKAGE(\${FIND_PythonInterp_ARGS})/FIND_PACKAGE(\${FIND_PythonInterp_ARGS} 2)/" TriBITS/tribits/core/package_arch/TribitsFindPythonInterp.cmake
+tar -xzvf ${dist_dir}/advantg/trilinos-release-13-0-1.tar.gz
+ln -sv Trilinos-trilinos-release-13-0-1 Trilinos
 cd bld
 
 export CMAKE_PREFIX_PATH=
