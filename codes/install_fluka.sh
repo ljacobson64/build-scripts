@@ -4,7 +4,7 @@ set -e
 
 install_prefix=${install_dir}/fluka-${fluka_version}
 
-if [ "${fluka_version}" == "2011.2x" ] || [ "${fluka_version}" == "2020.0" ]; then
+if [[ "${fluka_version}" == "20"* ]]; then
   ${sudo_cmd_install} rm -rfv ${install_prefix}
   ${sudo_cmd_install} mkdir -pv ${install_prefix}/bin
   cd ${install_prefix}/bin
