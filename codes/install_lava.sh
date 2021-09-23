@@ -10,7 +10,11 @@ mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
 tarball=lava-${lava_version}.tar.gz
 tar -xzvf ${dist_dir}/advantg/${tarball}
-ln -sv lava src
+if [ "${lava_version}" == "1.1.1" ]; then
+  ln -sv lava src
+else
+  ln -sv lava-${lava_version} src
+fi
 cd bld
 
 cmake_string=
