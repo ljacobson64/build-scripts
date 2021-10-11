@@ -18,7 +18,7 @@ FC=${openmpi_dir}/bin/mpifort
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/ljacobson64/MCNP_CMake -b master --single-branch
+git clone https://github.com/ljacobson64/MCNP_CMake -b main --single-branch
 ln -sv MCNP_CMake src
 cd MCNP_CMake
 ./mcnp_source.sh
