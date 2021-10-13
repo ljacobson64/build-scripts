@@ -64,4 +64,4 @@ config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 ../src/configure ${config_string}
 make -j${num_cpus}
-${sudo_cmd_install} make install
+make install

@@ -29,7 +29,7 @@ fi
 
 ../src/configure ${config_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install
 
 if [ "${custom_python}" == "false" ]; then
   exit 0
@@ -38,7 +38,7 @@ fi
 export python_pip_version=21.1.2
 export python_setuptools_version=57.0.0
 
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
+mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
 
 cd ${build_prefix}
 tarball=setuptools-${python_setuptools_version}.tar.gz
@@ -50,7 +50,7 @@ fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd setuptools-${python_setuptools_version}
 python2 bootstrap.py
-${sudo_cmd_install} python2 setup.py install --prefix=${install_prefix}
+python2 setup.py install --prefix=${install_prefix}
 
 cd ${build_prefix}
 tarball=pip-${python_pip_version}.tar.gz
@@ -61,10 +61,10 @@ if [ ! -f ${dist_dir}/misc/${tarball} ]; then
 fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd pip-${python_pip_version}
-${sudo_cmd_install} python2 setup.py install --prefix=${install_prefix}
+python2 setup.py install --prefix=${install_prefix}
 
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"
 for pack in ${python_packs}; do
-  ${sudo_cmd_install} pip2 install --prefix=${install_prefix} --upgrade ${pack}
+  pip2 install --prefix=${install_prefix} --upgrade ${pack}
 done

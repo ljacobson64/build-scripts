@@ -19,10 +19,10 @@ silo_dir=${install_dir}/silo-${silo_version}
 
 setup_string="--prefix=${install_prefix}"
 
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
+mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
 PYTHONPATH=${install_prefix}/lib/python${python2_version_major}/site-packages
-${sudo_cmd_install} python2 setup.py install ${setup_string}
+python2 setup.py install ${setup_string}
 
-${sudo_cmd_install} mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
+mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
 PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages
-${sudo_cmd_install} python3 setup.py install ${setup_string}
+python3 setup.py install ${setup_string}

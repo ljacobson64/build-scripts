@@ -29,7 +29,7 @@ fi
 
 ../src/configure ${config_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install
 
 if [ "${custom_python}" == "false" ]; then
   exit 0
@@ -38,5 +38,5 @@ fi
 cd ${build_prefix}
 python_packs="pip setuptools numpy scipy cython tables nose"
 for pack in ${python_packs}; do
-  ${sudo_cmd_install} pip3 install --prefix=${install_prefix} --upgrade ${pack}
+  pip3 install --prefix=${install_prefix} --upgrade ${pack}
 done

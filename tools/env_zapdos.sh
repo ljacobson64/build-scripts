@@ -18,8 +18,6 @@ export scale_data_dir=${native_dir}/SCALE/data  # SCALE
 
 # Miscellaneous environment variables
 export num_cpus=`grep -c processor /proc/cpuinfo`
-export sudo_cmd_install=sudo
-export sudo_cmd_native=sudo
 export custom_boost=false
 export custom_eigen=false
 export custom_exnihilo_packs=false

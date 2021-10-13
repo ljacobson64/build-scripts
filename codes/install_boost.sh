@@ -46,4 +46,4 @@ b2_string+=" runtime-link=shared"
 b2_string+=" linkflags=-Wl,-rpath,${rpath_dirs}"
 b2_string+=" -j${num_cpus}"
 
-${sudo_cmd_install} ./b2 ${b2_string} install
+./b2 ${b2_string} install

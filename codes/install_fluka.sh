@@ -5,27 +5,20 @@ set -e
 install_prefix=${install_dir}/fluka-${fluka_version}
 
 if [[ "${fluka_version}" == "20"* ]]; then
-  ${sudo_cmd_install} rm -rfv ${install_prefix}
-  ${sudo_cmd_install} mkdir -pv ${install_prefix}/bin
+  rm -rfv ${install_prefix}
+  mkdir -pv ${install_prefix}/bin
   cd ${install_prefix}/bin
   tarball=fluka${fluka_version}-linux-gfor64bit-9.3-AA.tar.gz
-  ${sudo_cmd_install} tar -xzvf ${dist_dir}/fluka/${tarball}
-
+  tar -xzvf ${dist_dir}/fluka/${tarball}
   export FLUFOR=$(basename $FC)
   export FLUPRO=${PWD}
-  if [ -z "${sudo_cmd_install}" ]; then
-    ${sudo_cmd_install} make
-  else
-    ${sudo_cmd_install} --preserve-env=FLUFOR,FLUPRO make
-  fi
+  make
 else  # Fluka 4
-  ${sudo_cmd_install} rm -rfv ${install_prefix}
-  ${sudo_cmd_install} mkdir -pv ${install_prefix}
+  rm -rfv ${install_prefix}
+  mkdir -pv ${install_prefix}
   cd ${install_prefix}
   tarball=fluka-${fluka_version}.Linux-gfor9.tgz
-  ${sudo_cmd_install} tar -xzvf ${dist_dir}/fluka/${tarball} --strip-components=1
-
-  # Note: make will not find any custom compilers if sudo is being used
+  tar -xzvf ${dist_dir}/fluka/${tarball} --strip-components=1
   cd src
-  ${sudo_cmd_install} make -j${num_cpus}
+  make -j${num_cpus}
 fi

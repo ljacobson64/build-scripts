@@ -47,9 +47,9 @@ fi
 if [ "${install_fludag}" == "true" ]; then
   if [ ! -f ${fluka_dir}/bin/flutil/rfluka.orig ]; then
     if [ "${fluka_version}" == "2011.2x" ] || [ "${fluka_version}" == "2020.0" ]; then
-      ${sudo_cmd_install} patch -Nb ${fluka_dir}/bin/flutil/rfluka src/fluka/rfluka.patch
+      patch -Nb ${fluka_dir}/bin/flutil/rfluka src/fluka/rfluka.patch
     else  # Fluka 4
-      ${sudo_cmd_install} patch -Nb ${fluka_dir}/bin/rfluka src/fluka/rfluka.patch
+      patch -Nb ${fluka_dir}/bin/rfluka src/fluka/rfluka.patch
     fi
   fi
 fi
@@ -92,4 +92,4 @@ fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install

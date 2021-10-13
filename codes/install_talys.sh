@@ -38,11 +38,11 @@ fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_native} make -j${num_cpus} install
+make -j${num_cpus} install
 
 cd ../talys
-${sudo_cmd_native} mkdir -p ${install_prefix}/talys
-${sudo_cmd_native} cp -rpv LOG README doc samples source ${install_prefix}/talys/
+mkdir -p ${install_prefix}/talys
+cp -rpv LOG README doc samples source ${install_prefix}/talys/
 
 cd ${install_prefix}
-${sudo_cmd_native} tar -xzvf ${dist_dir}/talys/${tarball_data}
+tar -xzvf ${dist_dir}/talys/${tarball_data}

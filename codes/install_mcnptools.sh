@@ -20,16 +20,16 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_native} make -j${num_cpus} install
+make -j${num_cpus} install
 
 cd ../Source/python
 
 python2 setup.py build
-${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
+mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
 PYTHONPATH=${install_prefix}/lib/python${python2_version_major}/site-packages
-${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python2 setup.py install --prefix=${install_prefix}
+python2 setup.py install --prefix=${install_prefix}
 
 python3 setup.py build
-${sudo_cmd_native} mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
+mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
 PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages
-${sudo_cmd_native} PYTHONPATH=${PYTHONPATH} python3 setup.py install --prefix=${install_prefix}
+python3 setup.py install --prefix=${install_prefix}

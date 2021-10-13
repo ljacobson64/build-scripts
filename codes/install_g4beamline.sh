@@ -83,13 +83,10 @@ export ROOTSYS=${root_dir}
 
 cmake ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install
 
 v1=$(echo ${geant4_version} | cut -f1,1 -d'.')
 v2=$(echo ${geant4_version} | cut -f2,2 -d'.')
 v3=$(echo ${geant4_version} | cut -f3,3 -d'.')
 geant4_version_mod=${v1}.$((${v2})).$((${v3/p/}))
-export geant4_dir
-export geant4_version_mod
-export install_prefix
-${sudo_cmd_install} --preserve-env=geant4_dir,geant4_version_mod,install_prefix sh -c 'echo ${geant4_dir}/share/Geant4-${geant4_version_mod}/data > ${install_prefix}/.data'
+echo ${geant4_dir}/share/Geant4-${geant4_version_mod}/data > ${install_prefix}/.data

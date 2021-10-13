@@ -18,8 +18,6 @@ export scale_data_dir=${native_dir}/SCALE/data  # SCALE
 
 # Miscellaneous environment variables
 export num_cpus=3
-export sudo_cmd_install=
-export sudo_cmd_native=
 export custom_boost=true
 export custom_eigen=true
 export custom_exnihilo_packs=true

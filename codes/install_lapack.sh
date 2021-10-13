@@ -32,8 +32,8 @@ cmake_string_shared+=" -DBUILD_SHARED_LIBS=ON"
 
 ${CMAKE} ../src ${cmake_string_static}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install
 cd ..; rm -rfv bld; mkdir -pv bld; cd bld
 ${CMAKE} ../src ${cmake_string_shared}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install

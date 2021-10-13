@@ -54,4 +54,4 @@ fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install

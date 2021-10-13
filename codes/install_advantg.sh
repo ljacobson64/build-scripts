@@ -30,9 +30,9 @@ cd advantg
 sed -i "s/ADVANTG CXX Fortran/ADVANTG C CXX Fortran/" CMakeLists.txt
 sed -i "s/find_package(PythonInterp)/find_package(PythonInterp 2)/" cmake/config.cmake
 
-${sudo_cmd_install} mkdir -p ${install_prefix}/mgxs
+mkdir -p ${install_prefix}/mgxs
 cd ${install_prefix}/mgxs
-${sudo_cmd_install} tar -xzvf ${dist_dir}/advantg/mgxs.tar.gz
+tar -xzvf ${dist_dir}/advantg/mgxs.tar.gz
 
 cd ${build_prefix}/bld
 
@@ -62,4 +62,4 @@ cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install

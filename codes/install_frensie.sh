@@ -80,6 +80,6 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 rm -f install.log
-/usr/bin/time -v ${CMAKE} ../src ${cmake_string}                         2>&1 | tee -a install.log
-/usr/bin/time -v make -j${num_cpus_frensie}                              2>&1 | tee -a install.log
-/usr/bin/time -v ${sudo_cmd_install} make -j${num_cpus_frensie} install  2>&1 | tee -a install.log
+/usr/bin/time -v ${CMAKE} ../src ${cmake_string}     2>&1 | tee -a install.log
+/usr/bin/time -v make -j${num_cpus_frensie}          2>&1 | tee -a install.log
+/usr/bin/time -v make -j${num_cpus_frensie} install  2>&1 | tee -a install.log

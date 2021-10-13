@@ -23,4 +23,4 @@ cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
 ${CMAKE} ../src ${cmake_string}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install

@@ -31,4 +31,4 @@ chmod +x configure_scale_mpi.sh
 
 ./configure_scale_mpi.sh ../src
 make -j${num_cpus}
-${sudo_cmd_install} make -j${num_cpus} install
+make -j${num_cpus} install
