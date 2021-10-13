@@ -10,6 +10,7 @@ export dakota_version=6.14.0
 export drosg2000_version=12.01
 export eigen_version=3.3.9
 export exnihilo_version=5.4.0
+export flair_version=3.1-13
 export fluka_version=2020.0
 export g4beamline_version=3.06
 export gcc_version=11.1.0
