@@ -35,8 +35,8 @@ if [ "${custom_python}" == "false" ]; then
   exit 0
 fi
 
-export python_pip_version=21.1.2
-export python_setuptools_version=57.0.0
+export python_pip_version=21.3
+export python_setuptools_version=58.2.0
 
 mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
 

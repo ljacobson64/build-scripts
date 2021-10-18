@@ -6,18 +6,31 @@ export geant4_version=10.05.p01
 
 build_prefix=${build_dir}/DAGMC-moab-${moab_version}
 install_prefix=${install_dir}/DAGMC-moab-${moab_version}
+if [ "${compiler}" == "intel" ]; then
+  build_prefix+=-intel
+  install_prefix+=-intel
+fi
 
 eigen_dir=${install_dir}/eigen-${eigen_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
 moab_dir=${install_dir}/moab-${moab_version}
 fluka_dir=${install_dir}/fluka-${fluka_version}
 geant4_dir=${install_dir}/geant4-${geant4_version}
+if [ "${compiler}" == "intel" ]; then
+  hdf5_dir+=-intel
+  moab_dir+=-intel
+  fluka_dir+=-intel
+  geant4_dir+=-intel
+fi
 
 if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
   module load openmpi/4.0.5-gcc930
   openmpi_dir=${EBROOTOPENMPI}
 else
   openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+  if [ "${compiler}" == "intel" ]; then
+    openmpi_dir+=-intel
+  fi
 fi
 CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++

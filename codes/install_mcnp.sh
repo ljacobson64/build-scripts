@@ -4,12 +4,19 @@ set -e
 
 build_prefix=${build_dir}/MCNP
 install_prefix=${install_dir}/MCNP
+if [ "${compiler}" == "intel" ]; then
+  build_prefix+=-intel
+  install_prefix+=-intel
+fi
 
 if [ "$(hostname -s)" == "hpclogin2" ] && [ "${compiler}" == "gcc-9" ]; then
   module load openmpi/4.0.5-gcc930
   openmpi_dir=${EBROOTOPENMPI}
 else
   openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+  if [ "${compiler}" == "intel" ]; then
+    openmpi_dir+=-intel
+  fi
 fi
 CC=${openmpi_dir}/bin/mpicc
 CXX=${openmpi_dir}/bin/mpic++

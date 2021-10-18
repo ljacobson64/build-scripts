@@ -5,16 +5,15 @@ source versions.sh
 
 # Important directories
 export dist_dir=/home/lucas/dist
-export build_dir=/home/lucas/build/${compiler}
-export install_dir=/opt/software_${compiler}
-export native_dir=/opt/software_misc
+export build_dir=/home/lucas/build
+export install_dir=/opt/software
 export local_dir=/home/lucas/.local
 
 # Miscellaneous directories
-export lapack_dir=/usr/lib/x86_64-linux-gnu     # SCALE
-export mcnp_exe=${native_dir}/MCNP/bin/mcnp5    # LAVA, ADVANTG
-export DATAPATH=${native_dir}/MCNP/MCNP_DATA    # FRENSIE
-export scale_data_dir=${native_dir}/SCALE/data  # SCALE
+export lapack_dir=/usr/lib/x86_64-linux-gnu            # SCALE
+export mcnp_exe=${install_dir}/MCNP620/bin/mcnp5       # LAVA, ADVANTG
+export DATAPATH=${install_dir}/MCNP620/MCNP_DATA       # FRENSIE
+export scale_data_dir=${install_dir}/SCALE-6.2.3/data  # SCALE
 
 # Miscellaneous environment variables
 export num_cpus=`grep -c processor /proc/cpuinfo`
@@ -51,6 +50,9 @@ elif [ "${compiler}" == "intel" ]; then
   export FC=${intel_dir}/compiler/latest/linux/bin/intel64/ifort
   export compiler_rpath_dirs=${intel_dir}/compiler/latest/linux/compiler/lib/intel64
 fi
+
+# Add java compilers to path
+export PATH=/usr/lib/jvm/jdk/bin:${PATH}
 
 # Control which versions of MCNP/DAGMC are built
 if [ "${compiler}" == "native" ]; then

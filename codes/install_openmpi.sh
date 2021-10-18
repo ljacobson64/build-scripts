@@ -4,6 +4,10 @@ set -e
 
 build_prefix=${build_dir}/openmpi-${openmpi_version}
 install_prefix=${install_dir}/openmpi-${openmpi_version}
+if [ "${compiler}" == "intel" ]; then
+  build_prefix+=-intel
+  install_prefix+=-intel
+fi
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -24,7 +28,7 @@ config_string+=" --enable-mpi-cxx"
 config_string+=" --enable-mpi-fortran"
 if [ "${system_has_java}" == "true" ]; then
   config_string+=" --enable-mpi-java"
-  config_string+=" --with-jdk-dir=${native_dir}/jdk"
+  config_string+=" --with-jdk-dir=/usr/lib/jvm/jdk"
 fi
 config_string+=" --with-pmi"
 config_string+=" --with-pmix"

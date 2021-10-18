@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/DROSG2000-${drosg2000_version}
-install_prefix=${native_dir}/DROSG2000-${drosg2000_version}
+install_prefix=${install_dir}/DROSG2000-${drosg2000_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld

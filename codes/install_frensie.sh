@@ -28,7 +28,7 @@ fi
 distro_version="$(lsb_release -i -s)"-"$(lsb_release -r -s)"
 
 # Reduce number of CPUS so there is at least 5 GB of memory per CPU
-mem=`grep MemTotal /proc/meminfo`
+mem=$(grep MemTotal /proc/meminfo)
 arr=(${mem})
 mem=${arr[1]}
 num_cpus_frensie=$((mem / 5242880))

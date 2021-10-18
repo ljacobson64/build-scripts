@@ -5,7 +5,7 @@ set -e
 build_prefix=${build_dir}/cgm-${cgm_version}
 install_prefix=${install_dir}/cgm-${cgm_version}
 
-cubit_dir=${native_dir}/cubit-${cgm_version}
+cubit_dir=${install_dir}/cubit-${cgm_version}
 
 if [ "${cgm_version}" == "14.0" ]; then
   repo=https://bitbucket.org/makeclean/cgm

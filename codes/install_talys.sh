@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/TALYS-${talys_version}
-install_prefix=${native_dir}/TALYS-${talys_version}
+install_prefix=${install_dir}/TALYS-${talys_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld

@@ -11,7 +11,7 @@ build_prefix=${build_dir}/mcnp2cad-cgm-${cgm_version}
 install_prefix=${install_dir}/mcnp2cad-cgm-${cgm_version}
 
 armadillo_dir=${install_dir}/armadillo-${armadillo_version}
-cubit_dir=${native_dir}/cubit-${cgm_version}
+cubit_dir=${install_dir}/cubit-${cgm_version}
 cgm_dir=${install_dir}/cgm-${cgm_version}
 
 if [ "${cgm_version}" == "14.0" ]; then

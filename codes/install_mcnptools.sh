@@ -3,7 +3,7 @@
 set -e
 
 build_prefix=${build_dir}/MCNPTOOLS-${mcnptools_version}
-install_prefix=${native_dir}/MCNPTOOLS-${mcnptools_version}
+install_prefix=${install_dir}/MCNPTOOLS-${mcnptools_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld

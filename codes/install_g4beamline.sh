@@ -7,9 +7,9 @@ export geant4_version=10.05.p01
 build_prefix=${build_dir}/G4beamline-${g4beamline_version}
 install_prefix=${install_dir}/G4beamline-${g4beamline_version}
 
-openmpi_dir=/opt/software_native/openmpi-${openmpi_version}
-geant4_dir=/opt/software_native/geant4-${geant4_version}
-root_dir=/opt/software_native/root-${root_version}
+openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+geant4_dir=${install_dir}/geant4-${geant4_version}
+root_dir=${install_dir}/root-${root_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -21,10 +21,10 @@ tar -xzvf ${dist_dir}/geant4/${tarball}
 ln -sv G4beamline-${g4beamline_version}-source src
 cd G4beamline-${g4beamline_version}-source
 
-mv -v g4bl/CMakelists.txt     g4bl/CMakeLists.txt    
+mv -v     g4bl/CMakelists.txt     g4bl/CMakeLists.txt
 mv -v g4bldata/CMakelists.txt g4bldata/CMakeLists.txt
-mv -v g4blgui/CMakelists.txt  g4blgui/CMakeLists.txt 
-mv -v g4blmpi/CMakelists.txt  g4blmpi/CMakeLists.txt 
+mv -v  g4blgui/CMakelists.txt  g4blgui/CMakeLists.txt
+mv -v  g4blmpi/CMakelists.txt  g4blmpi/CMakeLists.txt
 mv -v g4bltest/CMakelists.txt g4bltest/CMakeLists.txt
 
 rm -fv MPI.cmake

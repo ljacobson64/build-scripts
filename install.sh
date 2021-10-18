@@ -4,7 +4,7 @@ set -e
 export compiler=$1
 shift
 packages="$@"
-source tools/env_`hostname -s`.sh
+source tools/env_$(hostname -s).sh
 export script_dir=${PWD}
 
 if [ ! -e "${CC}"    ]; then echo "Error: C compiler not found at ${CC}"       && exit 1; fi
@@ -28,6 +28,8 @@ ${CMAKE} --version
 echo
 sleep 1
 
+intel_allowed="hdf5 moab openmpi mcnp dagmc"
+
 for package in ${packages}; do
   if [[ "${package}" == *"-"* ]]; then
     name=$(cut -d '-' -f1  <<< "${package}")
@@ -39,6 +41,10 @@ for package in ${packages}; do
     eval version=${!temp}
   fi
   export ${name}_version
+  if [ "${compiler}" == "intel" ] && ! echo "${intel_allowed}" | grep -w -q "${name}"; then
+    echo "Error: cannot build package ${name} with intel compiler"
+    exit 1
+  fi
   echo "Building ${name} version ${version}"
   codes/install_${name}.sh
 done

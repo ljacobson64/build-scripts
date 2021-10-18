@@ -9,7 +9,7 @@ rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}
 cd ${build_prefix}
 tarball=pyvisfile-${pyvisfile_version}.tar.gz
-url=https://files.pythonhosted.org/packages/e5/6b/80f49e1eb35cab2c1236ec81d3782e54829bd52ac1862ef153be27ee5a77/${tarball}
+url=https://files.pythonhosted.org/packages/8f/3a/98fd38baf9bb1f37a7258a722841370cac7a110c1a73813a8056d7c28a42/${tarball}
 if [ ! -f ${dist_dir}/misc/${tarball} ]; then wget ${url} -P ${dist_dir}/misc/; fi
 tar -xzvf ${dist_dir}/misc/${tarball}
 cd pyvisfile-${pyvisfile_version}

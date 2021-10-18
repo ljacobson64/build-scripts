@@ -5,16 +5,15 @@ export python3_version=3.6.10
 
 # Important directories
 export dist_dir=/home/ljjacobson/dist
-export build_dir=/scratch/local/ljjacobson/build/${compiler}
-export install_dir=/software/groups/dagmc/opt/${compiler}
-export native_dir=/software/groups/dagmc/opt/misc
+export build_dir=/scratch/local/ljjacobson/build
+export install_dir=/software/groups/dagmc/opt/software
 export local_dir=/home/ljjacobson/.local
 
 # Miscellaneous directories
-export lapack_dir=/usr/lib64                    # SCALE
-export mcnp_exe=${native_dir}/MCNP/bin/mcnp5    # lava, ADVANTG
-export DATAPATH=${native_dir}/MCNP/MCNP_DATA    # FRENSIE
-export scale_data_dir=${native_dir}/SCALE/data  # SCALE
+export lapack_dir=/usr/lib64                           # SCALE
+export mcnp_exe=${install_dir}/MCNP620/bin/mcnp5       # LAVA, ADVANTG
+export DATAPATH=${install_dir}/MCNP620/MCNP_DATA       # FRENSIE
+export scale_data_dir=${install_dir}/SCALE-6.2.3/data  # SCALE
 
 # Miscellaneous environment variables
 export num_cpus=3
@@ -28,7 +27,7 @@ export system_has_latex=false
 export system_has_x11=false
 
 # Specify location of CMake
-export CMAKE=${native_dir}/cmake/bin/cmake
+export CMAKE=${install_dir}/cmake-3.16.3/bin/cmake
 
 # Specify paths to compilers
 if [ "${compiler}" == "native" ]; then
@@ -51,6 +50,9 @@ elif [ "${compiler}" == "intel" ]; then
   export FC=${intel_dir}/compiler/latest/linux/bin/intel64/ifort
   export compiler_rpath_dirs=${intel_dir}/compiler/latest/linux/compiler/lib/intel64
 fi
+
+
+
 
 # Control which versions of MCNP/DAGMC are built
 if [ "${compiler}" == "native" ]; then

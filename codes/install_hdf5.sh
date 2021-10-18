@@ -4,6 +4,10 @@ set -e
 
 build_prefix=${build_dir}/hdf5-${hdf5_version}
 install_prefix=${install_dir}/hdf5-${hdf5_version}
+if [ "${compiler}" == "intel" ]; then
+  build_prefix+=-intel
+  install_prefix+=-intel
+fi
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld

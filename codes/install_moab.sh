@@ -4,6 +4,10 @@ set -e
 
 build_prefix=${build_dir}/moab-${moab_version}
 install_prefix=${install_dir}/moab-${moab_version}
+if [ "${compiler}" == "intel" ]; then
+  build_prefix+=-intel
+  install_prefix+=-intel
+fi
 
 if [ "${install_pymoab}" == "true" ] && [ "${custom_python}" == "true" ]; then
   load_python3
@@ -11,6 +15,9 @@ fi
 
 eigen_dir=${install_dir}/eigen-${eigen_version}
 hdf5_dir=${install_dir}/hdf5-${hdf5_version}
+if [ "${compiler}" == "intel" ]; then
+  hdf5_dir+=-intel
+fi
 
 if [ "${moab_version}" == "master" ]; then
   branch=master
