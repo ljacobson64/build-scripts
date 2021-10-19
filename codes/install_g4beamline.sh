@@ -81,7 +81,7 @@ cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 export ROOTSYS=${root_dir}
 
-cmake ../src ${cmake_string}
+${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
 

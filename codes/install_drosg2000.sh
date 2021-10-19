@@ -35,6 +35,6 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
-cmake ../src ${cmake_string}
+${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
