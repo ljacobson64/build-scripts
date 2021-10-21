@@ -17,7 +17,11 @@ else  # Fluka 4
   rm -rfv ${install_prefix}
   mkdir -pv ${install_prefix}
   cd ${install_prefix}
-  tarball=fluka-${fluka_version}.Linux-gfor9.tgz
+  if [[ "${fluka_version}" == "4-2"* ]]; then
+    tarball=fluka-${fluka_version}.x86-Linux-gfor9.tgz
+  else
+    tarball=fluka-${fluka_version}.Linux-gfor9.tgz
+  fi
   tar -xzvf ${dist_dir}/fluka/${tarball} --strip-components=1
   cd src
   make -j${num_cpus}
