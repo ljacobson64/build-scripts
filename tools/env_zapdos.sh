@@ -7,7 +7,6 @@ source versions.sh
 export dist_dir=/home/lucas/dist
 export build_dir=/home/lucas/build
 export install_dir=/opt/software
-export local_dir=/home/lucas/.local
 
 # Miscellaneous directories
 export lapack_dir=/usr/lib/x86_64-linux-gnu            # SCALE
@@ -50,9 +49,6 @@ elif [ "${compiler}" == "intel" ]; then
   export FC=${intel_dir}/compiler/latest/linux/bin/intel64/ifort
   export compiler_rpath_dirs=${intel_dir}/compiler/latest/linux/compiler/lib/intel64
 fi
-
-# Add java compilers to path
-export PATH=/usr/lib/jvm/jdk/bin:${PATH}
 
 # Control which versions of MCNP/DAGMC are built
 if [ "${compiler}" == "native" ]; then

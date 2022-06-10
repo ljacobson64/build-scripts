@@ -30,7 +30,6 @@ if [ -n "${compiler_rpath_dirs}" ]; then
 fi
 
 setup_string_1=
-setup_string_1+=" -DDEPS_ROOT_DIR=${local_dir}/bin"
 setup_string_1+=" -DCMAKE_BUILD_TYPE=Release"
 setup_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 setup_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
@@ -48,14 +47,10 @@ setup_string_2+=" -j${num_cpus}"
 
 mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
 
-PATH=${local_dir}/bin:${PATH}
-PATH=${install_prefix}/bin:${PATH}
-PYTHONPATH=${local_dir}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
 PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages:${PYTHONPATH}
 
 python3 setup.py ${setup_string_1} install ${setup_string_2}
 
 LD_LIBRARY_PATH=${install_prefix}/lib:${LD_LIBRARY_PATH}
 
-cd ..
-nuc_data_make
+scripts/nuc_data_make

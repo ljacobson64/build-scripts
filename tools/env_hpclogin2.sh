@@ -7,7 +7,6 @@ export python3_version=3.6.10
 export dist_dir=/home/ljjacobson/dist
 export build_dir=/scratch/local/ljjacobson/build
 export install_dir=/software/groups/dagmc/opt/software
-export local_dir=/home/ljjacobson/.local
 
 # Miscellaneous directories
 export lapack_dir=/usr/lib64                           # SCALE
