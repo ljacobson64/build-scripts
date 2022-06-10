@@ -19,21 +19,24 @@ if [ "${compiler}" == "intel" ]; then
   hdf5_dir+=-intel
 fi
 
-if [ "${moab_version}" == "master" ]; then
-  branch=master
-else
-  branch=Version${moab_version}
-fi
-
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://bitbucket.org/fathomteam/moab -b ${branch} --single-branch
-ln -sv moab src
-cd moab
+tarball=moab-${moab_version}.tar.gz
+url=https://bitbucket.org/fathomteam/moab/get/${moab_version}.tar.gz
+if [ ! -f ${dist_dir}/sigma/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/sigma/
+  mv -v ${dist_dir}/sigma/${moab_version}.tar.gz ${dist_dir}/sigma/${tarball}
+fi
+tar -xzvf ~/dist/sigma/${tarball}
+mv fathomteam-moab-* moab-${moab_version}
+ln -sv moab-${moab_version} src
+cd moab-${moab_version}
 autoreconf -fi
-sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTet.cpp
-sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTri.cpp
+if [[ "${moab_version}" == "4"* ]]; then
+  sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTet.cpp
+  sed -i "s/HUGE/HUGE_VAL/" src/LocalDiscretization/LinearTri.cpp
+fi
 cd ../bld
 
 if [[ "${moab_version}" == "5"* ]] && [ "$(basename $FC)" != "ifort" ]; then
