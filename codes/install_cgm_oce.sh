@@ -9,15 +9,20 @@ install_prefix=${install_dir}/cgm-${cgm_version}-oce-${oce_version}
 
 oce_dir=${install_dir}/oce-${oce_version}
 
-repo=https://bitbucket.org/fathomteam/cgm
-branch=master
-
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone ${repo} -b ${branch} --single-branch
-ln -sv cgm src
-cd cgm
+
+tarball=cgm-${cgm_version}.tar.gz
+url=https://bitbucket.org/fathomteam/cgm/get/${cgm_version}.tar.gz
+if [ ! -f ${dist_dir}/sigma/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/sigma/
+  mv -v ${dist_dir}/sigma/${cgm_version}.tar.gz ${dist_dir}/sigma/${tarball}
+fi
+tar -xzvf ~/dist/sigma/${tarball}
+mv fathomteam-cgm-* cgm-${cgm_version}
+ln -sv cgm-${cgm_version} src
+cd cgm-${cgm_version}
 autoreconf -fi
 cd ../bld
 

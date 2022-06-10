@@ -7,20 +7,20 @@ install_prefix=${install_dir}/cgm-${cgm_version}
 
 cubit_dir=${install_dir}/cubit-${cgm_version}
 
-if [ "${cgm_version}" == "14.0" ]; then
-  repo=https://bitbucket.org/makeclean/cgm
-  branch=add_torus_14
-else
-  repo=https://bitbucket.org/fathomteam/cgm
-  branch=cgm${cgm_version}
-fi
-
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone ${repo} -b ${branch} --single-branch
-ln -sv cgm src
-cd cgm
+
+tarball=cgm-${cgm_version}.tar.gz
+url=https://bitbucket.org/fathomteam/cgm/get/${cgm_version}.tar.gz
+if [ ! -f ${dist_dir}/sigma/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/sigma/
+  mv -v ${dist_dir}/sigma/${cgm_version}.tar.gz ${dist_dir}/sigma/${tarball}
+fi
+tar -xzvf ~/dist/sigma/${tarball}
+mv fathomteam-cgm-* cgm-${cgm_version}
+ln -sv cgm-${cgm_version} src
+cd cgm-${cgm_version}
 autoreconf -fi
 cd ../bld
 
