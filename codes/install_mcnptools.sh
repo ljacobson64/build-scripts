@@ -24,12 +24,11 @@ make -j${num_cpus} install
 
 cd ../Source/python
 
-python2 setup.py build
-mkdir -pv ${install_prefix}/lib/python${python2_version_major}/site-packages
-PYTHONPATH=${install_prefix}/lib/python${python2_version_major}/site-packages
-python2 setup.py install --prefix=${install_prefix}
-
+mcnptools_pythonpath=${install_prefix}/lib/python${python3_version_major}/site-packages
 python3 setup.py build
-mkdir -pv ${install_prefix}/lib/python${python3_version_major}/site-packages
-PYTHONPATH=${install_prefix}/lib/python${python3_version_major}/site-packages
+mkdir -pv ${mcnptools_pythonpath}
+PYTHONPATH=${mcnptools_pythonpath}
 python3 setup.py install --prefix=${install_prefix}
+d=$(cat ${mcnptools_pythonpath}/easy-install.pth)
+d=$(basename ${d})
+ln -sv ${d}/mcnptools ${mcnptools_pythonpath}/mcnptools
