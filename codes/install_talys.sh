@@ -8,9 +8,8 @@ install_prefix=${install_dir}/TALYS-${talys_version}
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-tarball_code=talys${talys_version}_code.tar.gz
-tarball_data=talys${talys_version}_data.tar.gz
-tar -xzvf ${dist_dir}/talys/${tarball_code}
+tarball=talys-${talys_version}-source.tgz
+tar -xzvf ${dist_dir}/talys/${tarball}
 ln -sv talys/source src
 
 talyspath=`echo ${install_prefix}/ | sed 's/\//\\\\\//g'`
@@ -40,9 +39,9 @@ ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
 
-cd ../talys
 mkdir -p ${install_prefix}/talys
-cp -rpv LOG README doc samples source ${install_prefix}/talys/
+cp -rpv ../talys/* ${install_prefix}/talys/
 
 cd ${install_prefix}
-tar -xzvf ${dist_dir}/talys/${tarball_data}
+tar -xzvf ${dist_dir}/talys/talys-${talys_version}-samples.tgz
+tar -xzvf ${dist_dir}/talys/talys-${talys_version}-data.tgz
