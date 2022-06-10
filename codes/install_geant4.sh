@@ -8,11 +8,20 @@ install_prefix=${install_dir}/geant4-${geant4_version}
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-tarball=geant4.${geant4_version}.tar.gz
+geant4_version_major=$(echo ${geant4_version} | cut -f1 -d'.')
+if (( "${geant4_version_major}" > 10 )); then
+  tarball=geant4-v${geant4_version}.tar.gz
+else
+  tarball=geant4.${geant4_version}.tar.gz
+fi
 url=http://cern.ch/geant4-data/releases/${tarball}
 if [ ! -f ${dist_dir}/geant4/${tarball} ]; then wget ${url} -P ${dist_dir}/geant4/; fi
 tar -xzvf ${dist_dir}/geant4/${tarball}
-ln -sv geant4.${geant4_version} src
+if (( "${geant4_version_major}" > 10 )); then
+  ln -sv geant4-v${geant4_version} src
+else
+  ln -sv geant4.${geant4_version} src
+fi
 cd bld
 
 rpath_dirs=${install_prefix}/lib
