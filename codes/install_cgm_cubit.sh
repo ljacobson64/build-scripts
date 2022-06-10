@@ -2,15 +2,17 @@
 
 set -e
 
-build_prefix=${build_dir}/cgm-${cgm_version}
-install_prefix=${install_dir}/cgm-${cgm_version}
+export cgm_version=16.0
+export cubit_version=14.0
 
-cubit_dir=${install_dir}/cubit-${cgm_version}
+build_prefix=${build_dir}/cgm-${cgm_version}-cubit-${cubit_version}
+install_prefix=${install_dir}/cgm-${cgm_version}-cubit-${cubit_version}
+
+cubit_dir=${install_dir}/cubit-${cubit_version}
 
 rm -rfv ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-
 tarball=cgm-${cgm_version}.tar.gz
 url=https://bitbucket.org/fathomteam/cgm/get/${cgm_version}.tar.gz
 if [ ! -f ${dist_dir}/sigma/${tarball} ]; then
@@ -20,23 +22,24 @@ fi
 tar -xzvf ~/dist/sigma/${tarball}
 mv fathomteam-cgm-* cgm-${cgm_version}
 ln -sv cgm-${cgm_version} src
-cd cgm-${cgm_version}
-autoreconf -fi
-cd ../bld
+cd bld
 
-config_string=
-config_string+=" --enable-shared"
-config_string+=" --enable-optimize"
-config_string+=" --disable-debug"
-config_string+=" --with-cubit=${cubit_dir}"
-config_string+=" --prefix=${install_prefix}"
-config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
+rpath_dirs=${cubit_dir}/bin:${install_prefix}/lib
 if [ -n "${compiler_rpath_dirs}" ]; then
-  config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}:${cubit_dir}/bin"
-else
-  config_string+=" LDFLAGS=-Wl,-rpath,${cubit_dir}/bin"
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
 fi
 
-../src/configure ${config_string}
+cmake_string=
+cmake_string+=" -DENABLE_CUBIT=ON"
+cmake_string+=" -DCUBIT_DIR=${cubit_dir}"
+cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
+cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
+cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
+cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+
+${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
+
+sed -i "s/#include \"CGMIGeomConfigure.h\"/#include \"cgm\/CGMIGeomConfigure.h\"/" ${install_prefix}/include/iGeom.h

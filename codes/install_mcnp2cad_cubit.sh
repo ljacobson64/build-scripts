@@ -2,43 +2,29 @@
 
 set -e
 
-if [[ "${mcnp2cad_version}" == *"cgm-"* ]]; then
-  cgm_version=$(cut -d '-' -f2  <<< "${mcnp2cad_version}")
-  mcnp2cad_version=
-fi
+export cgm_version=16.0
+export cubit_version=14.0
 
-build_prefix=${build_dir}/mcnp2cad-cgm-${cgm_version}
-install_prefix=${install_dir}/mcnp2cad-cgm-${cgm_version}
+build_prefix=${build_dir}/mcnp2cad-cgm-${cgm_version}-cubit-${cubit_version}
+install_prefix=${install_dir}/mcnp2cad-cgm-${cgm_version}-cubit-${cubit_version}
 
-armadillo_dir=${install_dir}/armadillo-${armadillo_version}
-cubit_dir=${install_dir}/cubit-${cgm_version}
-cgm_dir=${install_dir}/cgm-${cgm_version}
-
-if [ "${cgm_version}" == "14.0" ]; then
-  branch=sns_gq_updates
-else
-  branch=master
-fi
+cubit_dir=${install_dir}/cubit-${cubit_version}
+cgm_dir=${install_dir}/cgm-${cgm_version}-cubit-${cubit_version}
 
 rm -rfv ${build_prefix}
-mkdir -pv ${build_prefix}
+mkdir -pv ${build_prefix}/bld
 cd ${build_prefix}
-git clone https://github.com/svalinn/mcnp2cad -b ${branch} --single-branch
-cd mcnp2cad
-sed -i 's/LDFLAGS = ${IGEOM_LIBS}/LDFLAGS += ${IGEOM_LIBS}/' Makefile
+git clone https://github.com/svalinn/mcnp2cad -b master --single-branch
+ln -sv mcnp2cad src
+cd bld
 
-make_string=
-if [ ! -f /usr/lib/libarmadillo.so ]; then
-  make_string+=" ARMADILLO_BASE_DIR=${armadillo_dir}"
-fi
-make_string+=" CGM_BASE_DIR=${cgm_dir}"
-make_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_rpath_dirs}" ]; then
-  make_string_pre="LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}:${cubit_dir}/bin:${cgm_dir}/lib"
-else
-  make_string_pre="LDFLAGS=-Wl,-rpath,:${cubit_dir}/bin:${cgm_dir}/lib"
-fi
+cmake_string=
+cmake_string+=" -DIGEOM_DIR=${cgm_dir}"
+cmake_string+=" -DCMAKE_BUILD_TYPE=Debug"
+cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
+cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
+cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 
-eval ${make_string_pre} make -j${num_cpus} ${make_string}
-mkdir -pv ${install_prefix}/bin
-cp -pv mcnp2cad ${install_prefix}/bin
+${CMAKE} ../src ${cmake_string}
+make -j${num_cpus}
+make -j${num_cpus} install
