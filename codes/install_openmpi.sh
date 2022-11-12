@@ -28,7 +28,6 @@ config_string+=" --enable-mpi-cxx"
 config_string+=" --enable-mpi-fortran"
 if [ "${system_has_java}" == "true" ]; then
   config_string+=" --enable-mpi-java"
-  config_string+=" --with-jdk-dir=/usr/lib/jvm/jdk"
 fi
 config_string+=" --with-pmi"
 config_string+=" --with-pmix"
