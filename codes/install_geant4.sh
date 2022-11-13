@@ -22,6 +22,9 @@ if (( "${geant4_version_major}" > 10 )); then
 else
   ln -sv geant4.${geant4_version} src
 fi
+
+sed -i "s/GEANT4_INSTALL_DATA_TIMEOUT 1500/GEANT4_INSTALL_DATA_TIMEOUT 3000/" src/cmake/Modules/G*4InstallData.cmake
+
 cd bld
 
 rpath_dirs=${install_prefix}/lib
