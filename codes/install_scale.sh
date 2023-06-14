@@ -22,7 +22,7 @@ cd ${scale_tar_dir}/Trilinos/packages/anasazi/src
 sed -i "s/ASSERT_DEFINED(Anasazi/#ASSERT_DEFINED(Anasazi/" CMakeLists.txt
 cd ${build_prefix}/bld
 
-cp ../src/script/configure_scale_mpi.sh .
+cp -pv ../src/script/configure_scale_mpi.sh .
 sed -i "s/export INSTALL_PATH=/#export INSTALL_PATH=/;
         s/DATA=/#DATA=/;
         s/MPI=/#MPI=/;
