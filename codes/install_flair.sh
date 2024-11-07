@@ -5,15 +5,17 @@ set -e
 build_prefix=${build_dir}/flair-${flair_version}
 install_prefix=${install_dir}/flair-${flair_version}
 
-rm -rfv ${build_prefix}
+rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}
-cd ${build_prefix}
+cd        ${build_prefix}
 tarball=flair-${flair_version}.tgz
 url=https://flair.web.cern.ch/flair/download/${tarball}
-if [ ! -f ${dist_dir}/fluka/${tarball} ]; then wget ${url} -P ${dist_dir}/fluka/; fi
-tar -xzvf ${dist_dir}/fluka/${tarball}
+if [ ! -f ${dist_dir}/${tarball} ]; then wget ${url} -P ${dist_dir}/; fi
+tar -xzvf ${dist_dir}/${tarball}
 flair_version_major=$(echo ${flair_version} | cut -f1 -d'-')
 cd flair-${flair_version_major}
+
+sed -i "s/install: install-files install-bin install-manual install-completions install-mime/install: install-files install-bin install-manual/" makefile
 
 make -j${num_cpus}
 make -j${num_cpus} install DESTDIR=${install_prefix}
@@ -21,8 +23,8 @@ make -j${num_cpus} install DESTDIR=${install_prefix}
 cd ..
 tarball=flair-geoviewer-${flair_version}.tgz
 url=https://flair.web.cern.ch/flair/download/${tarball}
-if [ ! -f ${dist_dir}/fluka/${tarball} ]; then wget ${url} -P ${dist_dir}/fluka/; fi
-tar -xzvf ${dist_dir}/fluka/${tarball}
+if [ ! -f ${dist_dir}/${tarball} ]; then wget ${url} -P ${dist_dir}/; fi
+tar -xzvf ${dist_dir}/${tarball}
 cd flair-geoviewer-${flair_version_major}
 
 make -j${num_cpus}

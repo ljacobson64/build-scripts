@@ -28,7 +28,7 @@ ${CMAKE} --version
 echo
 sleep 1
 
-intel_allowed="hdf5 moab openmpi mcnp dagmc"
+intel_allowed="openmpi mcnp"
 
 for package in ${packages}; do
   if [[ "${package}" == *"-"* ]]; then
