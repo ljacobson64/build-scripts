@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export     acetk_version=master
+export     acetk_version=main
 export     dagmc_version=develop
 export drosg2000_version=12.01
 export     flair_version=3.3-1

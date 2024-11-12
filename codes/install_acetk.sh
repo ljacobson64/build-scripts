@@ -21,11 +21,4 @@ ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
 mkdir -pv ${install_prefix}/lib
-cp -pv ACEtk.cpython-312-x86_64-linux-gnu.so ${install_prefix}/lib/
-
-cd ${install_prefix}
-dirs="include lib share/cmake"
-for d in ${dirs}; do
-  mkdir -pv ${python_dir}/${d}
-  ln -svf ${install_prefix}/${d}/* ${python_dir}/${d}/
-done
+cp -pv python/ACEtk.cpython-312-x86_64-linux-gnu.so ${install_prefix}/lib/
