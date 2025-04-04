@@ -20,9 +20,9 @@ export CMAKE=/usr/bin/cmake
 
 # Specify paths to compilers
 if [ "${compiler}" == "native" ]; then
-  export     CC=/usr/bin/gcc
-  export    CXX=/usr/bin/g++
-  export     FC=/usr/bin/gfortran
+  export  CC=$(which gcc)
+  export CXX=$(which g++)
+  export  FC=$(which gfortran)
   export compiler_rpath_dirs=
 elif [ "${compiler}" == "intel" ]; then
   source /opt/intel/oneapi/setvars.sh
