@@ -8,8 +8,14 @@ install_prefix=${install_dir}/NJOY-${njoy_version}
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd        ${build_prefix}
-git clone https://github.com/njoy/NJOY2016 -b ${njoy_version} --single-branch
-ln -sv NJOY2016 src
+tarball=njoy-${njoy_version}.tar.gz
+url=https://github.com/njoy/NJOY2016/archive/refs/tags/${njoy_version}.tar.gz
+if [ ! -f ${dist_dir}/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/
+  mv -v ${dist_dir}/${njoy_version}.tar.gz ${dist_dir}/${tarball}
+fi
+tar -xzvf ${dist_dir}/${tarball}
+ln -sv NJOY2016-${njoy_version} src
 cd bld
 
 rpath_dirs=${install_prefix}/lib

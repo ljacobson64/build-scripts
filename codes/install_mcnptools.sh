@@ -8,8 +8,14 @@ install_prefix=${install_dir}/MCNPTOOLS-${mcnptools_version}
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd        ${build_prefix}
-git clone https://github.com/lanl/mcnptools -b v${mcnptools_version} --single-branch
-ln -sv mcnptools src
+tarball=mcnptools-${mcnptools_version}.tar.gz
+url=https://github.com/lanl/mcnptools/archive/refs/tags/v${mcnptools_version}.tar.gz
+if [ ! -f ${dist_dir}/${tarball} ]; then
+  wget ${url} -P ${dist_dir}/
+  mv -v ${dist_dir}/v${mcnptools_version}.tar.gz ${dist_dir}/${tarball}
+fi
+tar -xzvf ${dist_dir}/${tarball}
+ln -sv mcnptools-${mcnptools_version} src
 cd bld
 
 cmake_string=

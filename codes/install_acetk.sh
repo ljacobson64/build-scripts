@@ -8,7 +8,7 @@ install_prefix=${install_dir}/ACEtk-${acetk_version}
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd        ${build_prefix}
-git clone https://github.com/njoy/ACEtk -b ${acetk_version} --single-branch
+git clone https://github.com/njoy/ACEtk -b v${acetk_version} --single-branch
 ln -sv ACEtk src
 cd bld
 
