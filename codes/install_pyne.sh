@@ -35,8 +35,15 @@ dirs="bin include lib/python3.12/site-packages"
 files="lib/*.so"
 for d in ${dirs}; do
   mkdir -pv ${python_dir}/${d}
-  ln -svf ${install_prefix}/${d}/* ${python_dir}/${d}
+  for f in ${install_prefix}/${d}/*; do
+    f=$(basename $f)
+    if [ ! -e ${python_dir}/${d}/${f} ]; then
+      ln -svf ${install_prefix}/${d}/${f} ${python_dir}/${d}/${f}
+    fi
+  done
 done
 for f in ${files}; do
-  ln -svf ${install_prefix}/${f} ${python_dir}/${f}
+  if [ ! -e ${python_dir}/${f} ]; then
+    ln -svf ${install_prefix}/${f} ${python_dir}/${f}
+  fi
 done

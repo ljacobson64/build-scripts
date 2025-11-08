@@ -19,7 +19,7 @@ cd bld
 cmake_string=
 cmake_string+=" -DOPENMC_USE_OPENMP=ON"
 cmake_string+=" -DOPENMC_USE_MPI=ON"
-cmake_string+=" -DHDF5_PREFER_PARALLEL=OFF"
+cmake_string+=" -DHDF5_PREFER_PARALLEL=ON"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${MPICC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"
@@ -37,8 +37,15 @@ dirs="bin include lib/cmake lib/pkgconfig lib/python3.12/site-packages share/doc
 files="lib/*.a lib/*.so"
 for d in ${dirs}; do
   mkdir -pv ${python_dir}/${d}
-  ln -svf ${install_prefix}/${d}/* ${python_dir}/${d}
+  for f in ${install_prefix}/${d}/*; do
+    f=$(basename $f)
+    if [ ! -e ${python_dir}/${d}/${f} ]; then
+      ln -svf ${install_prefix}/${d}/${f} ${python_dir}/${d}/${f}
+    fi
+  done
 done
 for f in ${files}; do
-  ln -svf ${install_prefix}/${f} ${python_dir}/${f}
+  if [ ! -e ${python_dir}/${f} ]; then
+    ln -svf ${install_prefix}/${f} ${python_dir}/${f}
+  fi
 done
