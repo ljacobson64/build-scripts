@@ -6,6 +6,7 @@ export drosg2000_version=12.01
 export     flair_version=3.4-3
 export     fluka_version=4-5.1
 export    geant4_version=11.3.2
+export      hdf5_version=1.14.6
 export       isc_version=2.1.0
 export mcnptools_version=5.3.1
 export      moab_version=5.5.1

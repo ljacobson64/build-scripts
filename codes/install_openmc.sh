@@ -9,6 +9,8 @@ openmpi_dir=${install_dir}/openmpi-${openmpi_version}-gcc
 MPICC=${openmpi_dir}/bin/mpicc
 MPICXX=${openmpi_dir}/bin/mpic++
 
+hdf5_dir=/opt/software/hdf5-${hdf5_version}-parallel
+
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd        ${build_prefix}
@@ -20,6 +22,7 @@ cmake_string=
 cmake_string+=" -DOPENMC_USE_OPENMP=ON"
 cmake_string+=" -DOPENMC_USE_MPI=ON"
 cmake_string+=" -DHDF5_PREFER_PARALLEL=ON"
+cmake_string+=" -DHDF5_ROOT=${hdf5_dir}"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${MPICC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"
