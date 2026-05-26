@@ -4,10 +4,7 @@ set -e
 
 build_prefix=${build_dir}/openmpi-${openmpi_version}
 install_prefix=${install_dir}/openmpi-${openmpi_version}
-if [ "${compiler}" == "native" ]; then
-  build_prefix+=-gcc
-  install_prefix+=-gcc
-elif [ "${compiler}" == "intel" ]; then
+if [ "${compiler}" == "intel" ]; then
   build_prefix+=-intel
   install_prefix+=-intel
 fi
@@ -29,7 +26,6 @@ config_string+=" --enable-shared"
 config_string+=" --enable-static"
 config_string+=" --enable-mpi-cxx"
 config_string+=" --enable-mpi-fortran"
-config_string+=" --enable-mpi-java"
 config_string+=" --with-pmi"
 config_string+=" --with-pmix"
 config_string+=" --with-slurm"

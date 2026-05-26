@@ -15,16 +15,17 @@ if [ ! -f ${dist_dir}/${tarball} ]; then
   mv -v ${dist_dir}/${njoy_version}.tar.gz ${dist_dir}/${tarball}
 fi
 tar -xzvf ${dist_dir}/${tarball}
+echo "install(TARGETS njoy_executable DESTINATION bin)" >> NJOY2016-${njoy_version}/CMakeLists.txt
 ln -sv NJOY2016-${njoy_version} src
 cd bld
-
-rpath_dirs=${install_prefix}/lib
 
 cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

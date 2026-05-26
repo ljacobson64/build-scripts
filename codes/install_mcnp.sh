@@ -13,8 +13,7 @@ elif [ "${compiler}" == "intel" ]; then
 fi
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
-if   [ "${compiler}" == "native" ]; then openmpi_dir+=-gcc
-elif [ "${compiler}" == "intel"  ]; then openmpi_dir+=-intel; fi
+if [ "${compiler}" == "intel"  ]; then openmpi_dir+=-intel; fi
 MPICC=${openmpi_dir}/bin/mpicc
 MPICXX=${openmpi_dir}/bin/mpic++
 MPIFC=${openmpi_dir}/bin/mpifort

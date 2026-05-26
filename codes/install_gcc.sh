@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e
+
+build_prefix=${build_dir}/gcc-${gcc_version}
+install_prefix=${install_dir}/gcc-${gcc_version}
+
+rm -rfv   ${build_prefix}
+mkdir -pv ${build_prefix}/bld
+cd        ${build_prefix}
+tarball=gcc-${gcc_version}.tar.gz
+url=https://ftp.gnu.org/gnu/gcc/gcc-${gcc_version}/${tarball}
+if [ ! -f ${dist_dir}/${tarball} ]; then wget ${url} -P ${dist_dir}/; fi
+tar -xzvf ${dist_dir}/${tarball}
+ln -sv gcc-${gcc_version} src
+cd gcc-${gcc_version}
+
+gmp_version=6.3.0
+mpfr_version=4.2.1
+mpc_version=1.3.1
+gmp_tarball=gmp-${gmp_version}.tar.xz
+mpfr_tarball=mpfr-${mpfr_version}.tar.gz
+mpc_tarball=mpc-${mpc_version}.tar.gz
+gmp_url=https://ftp.gnu.org/gnu/gmp/${gmp_tarball}
+mpfr_url=https://ftp.gnu.org/gnu/mpfr/${mpfr_tarball}
+mpc_url=https://ftp.gnu.org/gnu/mpc/${mpc_tarball}
+if [ ! -f ${dist_dir}/${gmp_tarball}  ]; then wget ${gmp_url}  -P ${dist_dir}/; fi
+if [ ! -f ${dist_dir}/${mpfr_tarball} ]; then wget ${mpfr_url} -P ${dist_dir}/; fi
+if [ ! -f ${dist_dir}/${mpc_tarball}  ]; then wget ${mpc_url}  -P ${dist_dir}/; fi
+tar -xJvf ${dist_dir}/${gmp_tarball}
+tar -xzvf ${dist_dir}/${mpfr_tarball}
+tar -xzvf ${dist_dir}/${mpc_tarball}
+ln -sv gmp-${gmp_version}   gmp
+ln -sv mpfr-${mpfr_version} mpfr
+ln -sv mpc-${mpc_version}   mpc
+
+cd ../bld
+
+pkgversion="Custom Build - $(date +"%F %T")"
+config_string=()
+config_string+=("--enable-languages=c,c++,fortran")
+config_string+=("--with-pkgversion=${pkgversion}")
+config_string+=("--prefix=${install_prefix}")
+
+../src/configure "${config_string[@]}"
+env -i PATH=/bin:/usr/bin make -j${num_cpus}
+make -j${num_cpus} install

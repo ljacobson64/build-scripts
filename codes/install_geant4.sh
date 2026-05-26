@@ -5,10 +5,6 @@ set -e
 build_prefix=${build_dir}/geant4-${geant4_version}
 install_prefix=${install_dir}/geant4-${geant4_version}
 
-openmpi_dir=${install_dir}/openmpi-${openmpi_version}-gcc
-MPICC=${openmpi_dir}/bin/mpicc
-MPICXX=${openmpi_dir}/bin/mpic++
-
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
 cd        ${build_prefix}
@@ -45,29 +41,5 @@ cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 ${CMAKE} ../src ${cmake_string}
-make -j${num_cpus}
-make -j${num_cpus} install
-
-cd ..
-mkdir bld-mpi
-cd    bld-mpi
-
-rpath_dirs=${rpath_dirs}:${openmpi_dir}/lib
-
-cmake_string=
-cmake_string+=" -DGeant4_DIR=${install_prefix}/lib/Geant4-${geant4_version}"
-cmake_string+=" -DCMAKE_C_COMPILER=${MPICC}"
-cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"
-cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
-
-${CMAKE} ../src/examples/extended/parallel/MPI/source ${cmake_string}
-make -j${num_cpus}
-make -j${num_cpus} install
-
-cmake_string+=" -DBUILD_SHARED_LIBS=OFF"
-cmake_string+=" -DBUILD_STATIC_LIBS=ON"
-
-${CMAKE} ../src/examples/extended/parallel/MPI/source ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install

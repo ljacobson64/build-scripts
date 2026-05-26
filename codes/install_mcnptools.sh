@@ -2,8 +2,10 @@
 
 set -e
 
-build_prefix=${build_dir}/MCNPTOOLS-${mcnptools_version}
-install_prefix=${install_dir}/MCNPTOOLS-${mcnptools_version}
+build_prefix=${build_dir}/mcnptools-${mcnptools_version}
+install_prefix=${install_dir}/mcnptools-${mcnptools_version}
+
+export HDF5_DIR=/opt/software/hdf5-${hdf5_version}
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -18,31 +20,19 @@ tar -xzvf ${dist_dir}/${tarball}
 ln -sv mcnptools-${mcnptools_version} src
 cd bld
 
+rpath_dirs=${HDF5_DIR}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
+fi
+
 cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -Dmcnptools.python_install=Prefix"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
-
-cd ${install_prefix}
-dirs="bin include lib/cmake lib/pkgconfig lib/python3.12/site-packages share/cmake"
-files="lib/*.a"
-for d in ${dirs}; do
-  mkdir -pv ${python_dir}/${d}
-  for f in ${install_prefix}/${d}/*; do
-    f=$(basename $f)
-    if [ ! -e ${python_dir}/${d}/${f} ]; then
-      ln -svf ${install_prefix}/${d}/${f} ${python_dir}/${d}/${f}
-    fi
-  done
-done
-for f in ${files}; do
-  if [ ! -e ${python_dir}/${f} ]; then
-    ln -svf ${install_prefix}/${f} ${python_dir}/${f}
-  fi
-done

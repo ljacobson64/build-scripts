@@ -23,27 +23,9 @@ setup_string_1+=" --no_spatial_solvers"
 setup_string_2+=" --prefix=${install_prefix}"
 setup_string_2+=" -j${num_cpus}"
 
-python setup.py ${setup_string_1} install ${setup_string_2}
+python3 setup.py ${setup_string_1} install ${setup_string_2}
 
 PYTHONPATH=${install_prefix}/lib/python3.12/site-packages
 DATAPATH=
 cd ..
 ${install_prefix}/bin/nuc_data_make
-
-cd ${install_prefix}
-dirs="bin include lib/python3.12/site-packages"
-files="lib/*.so"
-for d in ${dirs}; do
-  mkdir -pv ${python_dir}/${d}
-  for f in ${install_prefix}/${d}/*; do
-    f=$(basename $f)
-    if [ ! -e ${python_dir}/${d}/${f} ]; then
-      ln -svf ${install_prefix}/${d}/${f} ${python_dir}/${d}/${f}
-    fi
-  done
-done
-for f in ${files}; do
-  if [ ! -e ${python_dir}/${f} ]; then
-    ln -svf ${install_prefix}/${f} ${python_dir}/${f}
-  fi
-done

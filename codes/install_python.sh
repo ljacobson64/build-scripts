@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+python_version_major=$(echo ${python_version} | cut -f1,2 -d'.')
+build_prefix=${build_dir}/python-${python_version_major}
+install_prefix=${install_dir}/python-${python_version_major}
+
+rm -rfv   ${build_prefix}
+mkdir -pv ${build_prefix}/bld
+cd        ${build_prefix}
+tarball=Python-${python_version}.tgz
+url=https://www.python.org/ftp/python/${python_version}/${tarball}
+if [ ! -f ${dist_dir}/${tarball} ]; then wget ${url} -P ${dist_dir}/; fi
+tar -xzvf ${dist_dir}/${tarball}
+ln -sv Python-${python_version} src
+cd bld
+
+config_string=
+config_string+=" --enable-shared"
+config_string+=" --prefix=${install_prefix}"
+config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
+config_string+=" LDFLAGS=-Wl,-rpath,${install_prefix}/lib"
+
+../src/configure ${config_string}
+make -j${num_cpus}
+make -j${num_cpus} install

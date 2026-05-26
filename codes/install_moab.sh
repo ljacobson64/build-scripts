@@ -42,21 +42,3 @@ make -j${num_cpus} install
 ${CMAKE} ../src ${cmake_string_2}
 make -j${num_cpus}
 make -j${num_cpus} install
-
-cd ${install_prefix}
-dirs="bin include lib/cmake lib/pkgconfig lib/python3.12/site-packages share/doc share/man/man1"
-files="lib/*.a lib/libMOAB.so* lib/moab.make"
-for d in ${dirs}; do
-  mkdir -pv ${python_dir}/${d}
-  for f in ${install_prefix}/${d}/*; do
-    f=$(basename $f)
-    if [ ! -e ${python_dir}/${d}/${f} ]; then
-      ln -svf ${install_prefix}/${d}/${f} ${python_dir}/${d}/${f}
-    fi
-  done
-done
-for f in ${files}; do
-  if [ ! -e ${python_dir}/${f} ]; then
-    ln -svf ${install_prefix}/${f} ${python_dir}/${f}
-  fi
-done

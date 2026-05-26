@@ -2,8 +2,13 @@
 
 set -e
 
-build_prefix=${build_dir}/hdf5-${hdf5_version}
-install_prefix=${install_dir}/hdf5-${hdf5_version}
+build_prefix=${build_dir}/hdf5-${hdf5_version}-parallel
+install_prefix=${install_dir}/hdf5-${hdf5_version}-parallel
+
+openmpi_dir=${install_dir}/openmpi-${openmpi_version}
+MPICC=${openmpi_dir}/bin/mpicc
+MPICXX=${openmpi_dir}/bin/mpic++
+MPIFC=${openmpi_dir}/bin/mpifort
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -25,6 +30,7 @@ cmake_string+=" -DHDF5_BUILD_FORTRAN=ON"
 cmake_string+=" -DHDF5_BUILD_HL_LIB=ON"
 cmake_string+=" -DHDF5_BUILD_TOOLS=ON"
 cmake_string+=" -DHDF5_BUILD_HL_GIF_TOOLS=ON"
+cmake_string+=" -DHDF5_ENABLE_PARALLEL=ON"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${MPICC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"

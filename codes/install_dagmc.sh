@@ -5,7 +5,7 @@ set -e
 build_prefix=${build_dir}/DAGMC-${dagmc_version}
 install_prefix=${install_dir}/DAGMC-${dagmc_version}
 
-openmpi_dir=${install_dir}/openmpi-${openmpi_version}-gcc
+openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 MPICC=${openmpi_dir}/bin/mpicc
 MPICXX=${openmpi_dir}/bin/mpic++
 MPIFC=${openmpi_dir}/bin/mpifort

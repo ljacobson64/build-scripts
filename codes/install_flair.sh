@@ -15,8 +15,6 @@ tar -xzvf ${dist_dir}/${tarball}
 flair_version_major=$(echo ${flair_version} | cut -f1 -d'-')
 cd flair-${flair_version_major}
 
-sed -i "s/install: install-files install-bin install-manual install-completions install-mime/install: install-files install-bin install-manual/" makefile
-
 make -j${num_cpus}
 make -j${num_cpus} install DESTDIR=${install_prefix}
 
