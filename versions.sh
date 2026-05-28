@@ -15,5 +15,5 @@ export      njoy_version=2016.79
 export    openmc_version=0.15.3
 export   openmpi_version=4.1.8
 export      pyne_version=develop
-export    python_version=3.12.3
+export    python_version=3.12.13
 export     talys_version=2.2

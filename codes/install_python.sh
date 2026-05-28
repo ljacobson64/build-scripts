@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/python-${python_version_major}
-install_prefix=${install_dir}/python-${python_version_major}
+build_prefix=${build_dir}/python-${python_version}
+install_prefix=${install_dir}/python-${python_version}
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
