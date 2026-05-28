@@ -2,7 +2,6 @@
 
 set -e
 
-python_version_major=$(echo ${python_version} | cut -f1,2 -d'.')
 build_prefix=${build_dir}/python-${python_version_major}
 install_prefix=${install_dir}/python-${python_version_major}
 

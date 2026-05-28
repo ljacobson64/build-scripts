@@ -28,7 +28,7 @@ setup_string_2+=" -j${num_cpus}"
 
 python3 setup.py ${setup_string_1} install ${setup_string_2}
 
-PYTHONPATH=${install_prefix}/lib/python3.12/site-packages
+PYTHONPATH=${install_prefix}/lib/python${python_version_major}/site-packages
 DATAPATH=
 cd ..
 ${install_prefix}/bin/nuc_data_make

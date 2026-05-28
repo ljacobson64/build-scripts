@@ -24,4 +24,4 @@ ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
 make -j${num_cpus} install
 mkdir -pv ${install_prefix}/lib
-cp -pv python/ACEtk.cpython-312-x86_64-linux-gnu.so ${install_prefix}/lib/
+cp -pv python/ACEtk.cpython-${python_version_major/.}-x86_64-linux-gnu.so ${install_prefix}/lib/

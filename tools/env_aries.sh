@@ -6,11 +6,14 @@ source versions.sh
 export LD_LIBRARY_PATH=
 export LIBRARY_PATH=
 
+# Major python version
+export python_version_major=$(echo ${python_version} | cut -f1,2 -d'.')
+
 # Important directories
 export    dist_dir=/home/lucas/dist
 export   build_dir=/home/lucas/build
 export install_dir=/opt/software
-export  python_dir=/opt/software/python-3.12
+export  python_dir=/opt/software/python-${python_version_major}
 
 # Miscellaneous environment variables
 export num_cpus=`grep -c processor /proc/cpuinfo`
