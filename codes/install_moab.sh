@@ -18,11 +18,6 @@ tar -xzvf ${dist_dir}/${tarball}
 ln -sv fathomteam-moab-* src
 cd bld
 
-rpath_dirs=${install_prefix}/lib
-if [ -n "${compiler_rpath_dirs}" ]; then
-  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
-fi
-
 cmake_string_1=
 cmake_string_1+=" -DENABLE_HDF5=ON"
 cmake_string_1+=" -DENABLE_NETCDF=ON"
@@ -31,7 +26,7 @@ cmake_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string_1+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string_1+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string_1+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+cmake_string_1+=" -DCMAKE_INSTALL_RPATH=${install_prefix}/lib"
 cmake_string_2=${cmake_string_1}
 cmake_string_1+=" -DENABLE_PYMOAB=OFF"
 cmake_string_1+=" -DBUILD_SHARED_LIBS=OFF"

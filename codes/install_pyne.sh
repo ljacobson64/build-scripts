@@ -18,9 +18,6 @@ setup_string_1+=" -DCMAKE_BUILD_TYPE=Release"
 setup_string_1+=" -DCMAKE_C_COMPILER=${CC}"
 setup_string_1+=" -DCMAKE_CXX_COMPILER=${CXX}"
 setup_string_1+=" -DCMAKE_Fortran_COMPILER=${FC}"
-if [ -n "${compiler_rpath_dirs}" ]; then
-  setup_string_1+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
-fi
 setup_string_2=
 setup_string_2+=" --no_spatial_solvers"
 setup_string_2+=" --prefix=${install_prefix}"

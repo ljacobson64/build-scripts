@@ -26,10 +26,6 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${MPICC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_rpath_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
-  sed -i "s/set(CMAKE_INSTALL_RPATH \"/set(CMAKE_INSTALL_RPATH \"\${CMAKE_INSTALL_RPATH}:/" ../openmc/CMakeLists.txt
-fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

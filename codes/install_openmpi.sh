@@ -31,7 +31,7 @@ config_string+=" --with-pmix"
 config_string+=" --with-slurm"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-if [ -n "${compiler_rpath_dirs}" ]; then
+if [ "${compiler}" == "intel" ]; then
   config_string+=" LDFLAGS=-Wl,-rpath,${compiler_rpath_dirs}"
 fi
 

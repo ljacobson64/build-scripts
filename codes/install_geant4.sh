@@ -18,11 +18,6 @@ sed -i "s/GEANT4_INSTALL_DATA_TIMEOUT 1500/GEANT4_INSTALL_DATA_TIMEOUT 3000/" sr
 
 cd bld
 
-rpath_dirs=${install_prefix}/lib
-if [ -n "${compiler_rpath_dirs}" ]; then
-  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
-fi
-
 cmake_string=
 cmake_string+=" -DGEANT4_BUILD_MULTITHREADED=ON"
 cmake_string+=" -DGEANT4_BUILD_TLS_MODEL=global-dynamic"
@@ -41,7 +36,7 @@ cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
+cmake_string+=" -DCMAKE_INSTALL_RPATH=${install_prefix}/lib"
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

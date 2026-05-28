@@ -16,10 +16,6 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
-if [ -n "${compiler_rpath_dirs}" ]; then
-  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
-  sed -i "s/ INSTALL_RPATH \"/ INSTALL_RPATH \"\${CMAKE_INSTALL_RPATH}:/" ../ACEtk/python/CMakeLists.txt
-fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}
