@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/ACEtk-${acetk_version}
-install_prefix=${install_dir}/ACEtk-${acetk_version}
+build_prefix=${build_dir}/acetk-${acetk_version}
+install_prefix=${install_dir}/acetk-${acetk_version}
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -16,6 +16,9 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

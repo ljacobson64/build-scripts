@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/DAGMC-${dagmc_version}
-install_prefix=${install_dir}/DAGMC-${dagmc_version}
+build_prefix=${build_dir}/dagmc-${dagmc_version}
+install_prefix=${install_dir}/dagmc-${dagmc_version}
 
 openmpi_dir=${install_dir}/openmpi-${openmpi_version}
 MPICC=${openmpi_dir}/bin/mpicc
@@ -42,6 +42,9 @@ cmake_string+=" -DCMAKE_CXX_COMPILER=${MPICXX}"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${MPIFC}"
 cmake_string+=" -DCMAKE_Fortran_FLAGS=-fallow-argument-mismatch"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 

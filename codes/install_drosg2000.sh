@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/DROSG2000-${drosg2000_version}
-install_prefix=${install_dir}/DROSG2000-${drosg2000_version}
+build_prefix=${build_dir}/drosg2000-${drosg2000_version}
+install_prefix=${install_dir}/drosg2000-${drosg2000_version}
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
@@ -72,6 +72,9 @@ cmake_string=
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_Fortran_COMPILER=${FC}"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
+if [ -n "${compiler_rpath_dirs}" ]; then
+  cmake_string+=" -DCMAKE_INSTALL_RPATH=${compiler_rpath_dirs}"
+fi
 
 ${CMAKE} ../src ${cmake_string}
 make -j${num_cpus}

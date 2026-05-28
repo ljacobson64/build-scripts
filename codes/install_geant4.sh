@@ -19,6 +19,9 @@ sed -i "s/GEANT4_INSTALL_DATA_TIMEOUT 1500/GEANT4_INSTALL_DATA_TIMEOUT 3000/" sr
 cd bld
 
 rpath_dirs=${install_prefix}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
+fi
 
 cmake_string=
 cmake_string+=" -DGEANT4_BUILD_MULTITHREADED=ON"

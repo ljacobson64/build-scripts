@@ -16,11 +16,16 @@ tar -xzvf ${dist_dir}/${tarball}
 ln -sv Python-${python_version} src
 cd bld
 
+rpath_dirs=${install_prefix}/lib
+if [ -n "${compiler_rpath_dirs}" ]; then
+  rpath_dirs=${compiler_rpath_dirs}:${rpath_dirs}
+fi
+
 config_string=
 config_string+=" --enable-shared"
 config_string+=" --prefix=${install_prefix}"
 config_string+=" CC=${CC} CXX=${CXX} FC=${FC}"
-config_string+=" LDFLAGS=-Wl,-rpath,${install_prefix}/lib"
+config_string+=" LDFLAGS=-Wl,-rpath,${rpath_dirs}"
 
 ../src/configure ${config_string}
 make -j${num_cpus}

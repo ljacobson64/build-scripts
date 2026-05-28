@@ -26,10 +26,10 @@ if [ -n "${compiler_rpath_dirs}" ]; then
 fi
 
 cmake_string=
+cmake_string+=" -Dmcnptools.python_install=Prefix"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
 cmake_string+=" -DCMAKE_CXX_COMPILER=${CXX}"
-cmake_string+=" -Dmcnptools.python_install=Prefix"
 cmake_string+=" -DCMAKE_INSTALL_PREFIX=${install_prefix}"
 cmake_string+=" -DCMAKE_INSTALL_RPATH=${rpath_dirs}"
 

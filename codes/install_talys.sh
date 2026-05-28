@@ -39,7 +39,6 @@ make -j${num_cpus}
 make -j${num_cpus} install
 
 cd ..
-cp -rpv doc misc source LICENSE README.md code_build path_change ${install_prefix}/
 cp -rpv doc misc source LICENSE README.md code_build.bash install_talys.bash path_change.bash ${install_prefix}/
 
 cd ${install_prefix}

@@ -2,8 +2,8 @@
 
 set -e
 
-build_prefix=${build_dir}/NJOY-${njoy_version}
-install_prefix=${install_dir}/NJOY-${njoy_version}
+build_prefix=${build_dir}/njoy-${njoy_version}
+install_prefix=${install_dir}/njoy-${njoy_version}
 
 rm -rfv   ${build_prefix}
 mkdir -pv ${build_prefix}/bld
