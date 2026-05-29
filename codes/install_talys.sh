@@ -16,7 +16,7 @@ talyspath=`echo ${install_prefix}/ | sed 's/\//\\\\\//g'`
 cd source
 sed -i "s/\/Users\/koning\/talys\//${talyspath}/" machine.f90
 
-echo "cmake_minimum_required(VERSION 2.8)"      >> CMakeLists.txt
+echo "cmake_minimum_required(VERSION 3.5)"      >> CMakeLists.txt
 echo "project(talys Fortran)"                   >> CMakeLists.txt
 echo "set(CMAKE_BUILD_TYPE Release)"            >> CMakeLists.txt
 echo "set(CMAKE_Fortran_FLAGS_RELEASE \"-O1\")" >> CMakeLists.txt

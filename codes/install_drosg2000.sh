@@ -16,7 +16,7 @@ ln -sv pentiumpro src
 
 cd pentiumpro
 
-echo "cmake_minimum_required(VERSION 2.8)
+echo "cmake_minimum_required(VERSION 3.5)
 project(DROSG2000 Fortran)
 
 if (NOT CMAKE_BUILD_TYPE)

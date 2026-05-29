@@ -21,6 +21,7 @@ ln -sv mcnptools-${mcnptools_version} src
 cd bld
 
 cmake_string=
+cmake_string+=" -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 cmake_string+=" -Dmcnptools.python_install=Prefix"
 cmake_string+=" -DCMAKE_BUILD_TYPE=Release"
 cmake_string+=" -DCMAKE_C_COMPILER=${CC}"
